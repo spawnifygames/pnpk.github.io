@@ -961,6 +961,7 @@
 
     #btn-start,
     #btn-bonus-shift,
+    #btn-nightmare-shift,
     #btn-how-to,
     #btn-settings,
     #btn-how-to-close,
@@ -990,6 +991,14 @@
       animation: fadeInUp 1s ease-out 1.12s both, buttonPulse 2.3s ease-in-out 2s infinite;
     }
 
+    #btn-nightmare-shift {
+      display: none;
+      border-color: #ff6b6b;
+      color: #ff8f8f;
+      box-shadow: 0 0 18px rgba(255, 107, 107, 0.24);
+      animation: fadeInUp 1s ease-out 1.18s both, buttonPulse 2.1s ease-in-out 2.05s infinite;
+    }
+
     #btn-how-to {
       animation: fadeInUp 1s ease-out 1.05s both;
     }
@@ -1000,6 +1009,7 @@
 
     #btn-start:hover,
     #btn-bonus-shift:hover,
+    #btn-nightmare-shift:hover,
     #btn-how-to:hover,
     #btn-settings:hover,
     #btn-how-to-close:hover,
@@ -1011,6 +1021,7 @@
 
     #btn-start:active,
     #btn-bonus-shift:active,
+    #btn-nightmare-shift:active,
     #btn-how-to:active,
     #btn-settings:active,
     #btn-how-to-close:active,
@@ -1439,13 +1450,15 @@
       <div id="start-title">PIECAS NAKTIS</div>
       <div id="start-subtitle">PIE KLÄ†ā€˛Äā€Ā¬VA</div>
       <div id="start-text">
+        <padding-left: 50px>
         JÄ†ā€¦Ä€Ā«s tikko tikÄ†ā€˛Ä€Āt pieÄ†ā€¦Äā‚¬Ā emti darbÄ†ā€˛Ä€Ā "KlÄ†ā€˛Ä€Āva pieskatÄ†ā€˛Ä€Ā«Ä†ā€¦Ä¼Ā£Ā¼ana".
         JÄ†ā€¦Ä€Ā«su darbs ir sÄ†ā€˛Äā‚¬ĀdÄ†ā€˛Äā‚¬Āt ofisÄ†ā€˛Ä€Ā un uzraudzÄ†ā€˛Ä€Ā«t video kameras.
-        PÄ†ā€˛Ä€ĀrdzÄ†ā€˛Ä€Ā«vojiet piecas naktis bez notikumiem (if you know what i mean)... 
+        PÄ†ā€˛Ä€ĀrdzÄ†ā€˛Ä€Ā«vojiet piecas naktis bez notikumiem (if you know what i mean)... </padding-left: 50px>
       </div>
       <div id="start-actions">
         <button id="btn-start">SÄ†ā€˛Äā€Ā¬KT SPÄ†ā€˛Äā‚¬ā„¢LI</button>
         <button id="btn-bonus-shift">BONUS SHIFT</button>
+        <button id="btn-nightmare-shift">NIGHTMARE SHIFT</button>
         <button id="btn-how-to">How to play</button>
         <button id="btn-settings">Settings</button>
       </div>
@@ -1520,7 +1533,7 @@
     <div id="title">PIECAS NAKTIS PIE KLÄ†ā€˛Äā€Ā¬VA</div>
 
     <div id="hud">
-      <div><span id="hud-night-label">Nakts</span>: <span id="night">1</span>/5</div>
+      <div><span id="hud-night-label">Nakts</span>: <span id="night">1</span><span id="night-suffix">/5</span></div>
       <div><span id="hud-time-label">Laiks</span>: <span id="time">00:00</span></div>
       <div><span id="hud-power-label">EnerÄ†ā€˛Ä€Ā£ija</span>: <span id="power">100%</span></div>
     </div>
@@ -1652,6 +1665,7 @@ Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
     const pathToOffice = [0,1,2,3,5,6,9];
     const SETTINGS_STORAGE_KEY = "pnpk-settings";
     const BONUS_SHIFT_UNLOCK_KEY = "pnpk-bonus-shift-unlocked";
+    const NIGHTMARE_SHIFT_UNLOCK_KEY = "pnpk-nightmare-shift-unlocked";
     const ADMIN_ALLOWED_LOCAL_IP = "212.3.195.4";
     const detectedAdminIps = new Set();
     function svgSceneUrl(svg) {
@@ -2329,6 +2343,7 @@ Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
     const hudTimeLabelEl = document.getElementById("hud-time-label");
     const hudPowerLabelEl = document.getElementById("hud-power-label");
     const nightEl = document.getElementById("night");
+    const nightSuffixEl = document.getElementById("night-suffix");
     const timeEl = document.getElementById("time");
     const powerEl = document.getElementById("power");
     const screenText = document.getElementById("screen-text");
@@ -2401,6 +2416,7 @@ Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
     const btnNextNight = document.getElementById("btn-next-night");
     const btnStart = document.getElementById("btn-start");
     const btnBonusShift = document.getElementById("btn-bonus-shift");
+    const btnNightmareShift = document.getElementById("btn-nightmare-shift");
 
     const gameEl = document.getElementById("game");
     const congratsScreen = document.getElementById("congrats-screen");
@@ -3177,7 +3193,9 @@ Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
     let deathMessageState = null;
     const logEntries = [];
     let bonusShiftUnlocked = localStorage.getItem(BONUS_SHIFT_UNLOCK_KEY) === "true";
+    let nightmareShiftUnlocked = localStorage.getItem(NIGHTMARE_SHIFT_UNLOCK_KEY) === "true";
     let bonusMode = false;
+    let nightmareMode = false;
     let currentRunStartNight = 1;
     const BONUS_SHIFT_LABELS = {
       default: "BONUS SHIFT",
@@ -3187,6 +3205,15 @@ Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
       uk: "BONUS SHIFT",
       de: "BONUS SCHICHT",
       da: "BONUSVAGT"
+    };
+    const NIGHTMARE_SHIFT_LABELS = {
+      default: "NIGHTMARE SHIFT",
+      lv: "MURGA MAINA",
+      en: "NIGHTMARE SHIFT",
+      ru: "NIGHTMARE SHIFT",
+      uk: "NIGHTMARE SHIFT",
+      de: "NIGHTMARE SCHICHT",
+      da: "MARERIDTSVAGT"
     };
     const CAMERA_ROOM_NAME_OVERRIDES = {
       default: [
@@ -3276,10 +3303,19 @@ Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
       return BONUS_SHIFT_LABELS[currentLanguage] || BONUS_SHIFT_LABELS.default;
     }
 
+    function getNightmareShiftLabel() {
+      return NIGHTMARE_SHIFT_LABELS[currentLanguage] || NIGHTMARE_SHIFT_LABELS.default;
+    }
+
     function renderBonusShiftButton() {
-      if (!btnBonusShift) return;
-      btnBonusShift.textContent = getBonusShiftLabel();
-      btnBonusShift.style.display = bonusShiftUnlocked ? "inline-block" : "none";
+      if (btnBonusShift) {
+        btnBonusShift.textContent = getBonusShiftLabel();
+        btnBonusShift.style.display = bonusShiftUnlocked ? "inline-block" : "none";
+      }
+      if (btnNightmareShift) {
+        btnNightmareShift.textContent = getNightmareShiftLabel();
+        btnNightmareShift.style.display = nightmareShiftUnlocked ? "inline-block" : "none";
+      }
     }
 
     function unlockBonusShift() {
@@ -3287,6 +3323,59 @@ Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
       bonusShiftUnlocked = true;
       localStorage.setItem(BONUS_SHIFT_UNLOCK_KEY, "true");
       renderBonusShiftButton();
+    }
+
+    function unlockNightmareShift() {
+      if (nightmareShiftUnlocked) return;
+      nightmareShiftUnlocked = true;
+      localStorage.setItem(NIGHTMARE_SHIFT_UNLOCK_KEY, "true");
+      renderBonusShiftButton();
+    }
+
+    function getRunEndNight() {
+      if (nightmareMode) return 7;
+      if (bonusMode) return 6;
+      return 5;
+    }
+
+    function getNightDisplayText() {
+      if (nightmareMode) return getNightmareShiftLabel();
+      if (bonusMode) return getBonusShiftLabel();
+      return String(night);
+    }
+
+    function getSpecialWinCopy() {
+      if (nightmareMode) {
+        if (currentLanguage === "lv") {
+          return {
+            title: "MURGA MAINA PABEIGTA!",
+            subtitle: "TU PAVEICI VISU",
+            message: "Tu pieveici Murga maiņu. Klāvs vairs nevar tevi pārsteigt tik viegli."
+          };
+        }
+        return {
+          title: "NIGHTMARE SHIFT CLEARED!",
+          subtitle: "YOU CONQUERED IT",
+          message: "You beat Nightmare Shift. Klavs has nothing nastier left to throw at you."
+        };
+      }
+
+      if (bonusMode) {
+        if (currentLanguage === "lv") {
+          return {
+            title: "BONUSA MAINA PABEIGTA!",
+            subtitle: "ATSLEGTA MURGA MAINA",
+            message: "Tu pabeidzi Bonusa maiņu. Starta ekrānā tagad ir atslēgta Murga maiņa."
+          };
+        }
+        return {
+          title: "BONUS SHIFT CLEARED!",
+          subtitle: "NIGHTMARE SHIFT UNLOCKED",
+          message: "You cleared Bonus Shift. Nightmare Shift is now unlocked on the start screen."
+        };
+      }
+
+      return null;
     }
 
     function getCameraRoomName(id) {
@@ -3351,6 +3440,13 @@ Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
     }
 
     function renderSuperWinText() {
+      const specialCopy = getSpecialWinCopy();
+      if (specialCopy) {
+        superWinTitleEl.textContent = specialCopy.title;
+        superWinSubtitleEl.textContent = specialCopy.subtitle;
+        superWinMessageEl.innerHTML = specialCopy.message;
+        return;
+      }
       superWinTitleEl.textContent = getText("superWinTitle");
       superWinSubtitleEl.textContent = getText("superWinSubtitle");
       superWinMessageEl.innerHTML = getText("superWinMessage");
