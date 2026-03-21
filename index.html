@@ -1592,27 +1592,42 @@ Tu esi brīvs... Pagaidām...</div>
       const rightWall = options.rightWall || "#242d37";
       const backWall = options.backWall || "#11171d";
       const floor = options.floor || "#19120f";
-      const glow = options.glow || "rgba(215, 230, 255, 0.12)";
+      const glow = options.glow || "#d7e6ff";
       const lightCore = options.lightCore || "#e7edf8";
       const accent = options.accent || "#3f4d5d";
+      const stripeA = options.stripeA || "#7f1117";
+      const stripeB = options.stripeB || "#f0f0f0";
       const extra = options.extra || "";
 
       return svgSceneUrl(`
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'>
           <rect width='960' height='540' fill='${backWall}'/>
-          <polygon points='0,0 230,44 308,540 0,540' fill='${leftWall}'/>
-          <polygon points='960,0 730,44 652,540 960,540' fill='${rightWall}'/>
-          <rect x='230' y='44' width='500' height='286' fill='${backWall}'/>
-          <polygon points='308,540 652,540 580,378 380,378' fill='${floor}'/>
-          <rect x='70' y='120' width='110' height='250' rx='6' fill='#050608'/>
-          <rect x='780' y='120' width='110' height='250' rx='6' fill='#050608'/>
-          <circle cx='480' cy='112' r='22' fill='${lightCore}' opacity='0.9'/>
-          <circle cx='480' cy='112' r='78' fill='${glow}'/>
-          <rect x='438' y='74' width='84' height='16' rx='8' fill='${accent}' opacity='0.75'/>
-          <line x1='308' y1='540' x2='480' y2='152' stroke='rgba(255,255,255,0.07)' stroke-width='2'/>
-          <line x1='652' y1='540' x2='480' y2='152' stroke='rgba(255,255,255,0.07)' stroke-width='2'/>
-          <line x1='230' y1='44' x2='480' y2='152' stroke='rgba(255,255,255,0.05)' stroke-width='2'/>
-          <line x1='730' y1='44' x2='480' y2='152' stroke='rgba(255,255,255,0.05)' stroke-width='2'/>
+          <polygon points='0,0 228,44 312,540 0,540' fill='${leftWall}'/>
+          <polygon points='960,0 732,44 648,540 960,540' fill='${rightWall}'/>
+          <rect x='228' y='44' width='504' height='290' fill='${backWall}'/>
+          <polygon points='312,540 648,540 584,354 376,354' fill='${floor}'/>
+          <rect x='70' y='120' width='112' height='260' rx='6' fill='#050608'/>
+          <rect x='778' y='120' width='112' height='260' rx='6' fill='#050608'/>
+          <rect x='110' y='232' width='170' height='26' fill='${stripeA}'/>
+          <rect x='280' y='232' width='22' height='26' fill='${stripeB}'/>
+          <rect x='658' y='232' width='22' height='26' fill='${stripeB}'/>
+          <rect x='680' y='232' width='170' height='26' fill='${stripeA}'/>
+          <rect x='386' y='206' width='188' height='118' fill='#2a313a'/>
+          <rect x='414' y='228' width='132' height='70' fill='#0a0d11'/>
+          <circle cx='480' cy='108' r='22' fill='${lightCore}' fill-opacity='0.96'/>
+          <circle cx='480' cy='108' r='90' fill='${glow}' fill-opacity='0.14'/>
+          <rect x='438' y='72' width='84' height='16' rx='8' fill='${accent}' fill-opacity='0.82'/>
+          <polygon points='456,132 504,132 560,350 400,350' fill='${glow}' fill-opacity='0.05'/>
+          <g stroke='#eef4ff' stroke-opacity='0.09' stroke-width='2'>
+            <line x1='312' y1='540' x2='480' y2='152'/>
+            <line x1='648' y1='540' x2='480' y2='152'/>
+            <line x1='228' y1='44' x2='480' y2='152'/>
+            <line x1='732' y1='44' x2='480' y2='152'/>
+          </g>
+          <g stroke='#d9dce3' stroke-opacity='0.12' stroke-width='2'>
+            <path d='M80 128 C122 158 150 210 154 266'/>
+            <path d='M890 128 C846 166 820 218 816 276'/>
+          </g>
           ${extra}
         </svg>
       `);
@@ -1743,13 +1758,17 @@ Tu esi brīvs... Pagaidām...</div>
     function buildOfficeScene(options = {}) {
       const lights = !!options.lights;
       const doorClosed = !!options.doorClosed;
-      const roomFill = lights ? "#171b22" : "#0a0d10";
-      const sideWall = lights ? "#25303c" : "#14191f";
-      const backWall = lights ? "#2d3742" : "#171c22";
-      const deskTop = lights ? "#505a67" : "#2f3640";
-      const deskFront = lights ? "#2d2420" : "#1b1311";
-      const lampCore = lights ? "#fff2cb" : "#d8dde8";
-      const lampGlow = lights ? "rgba(255, 210, 120, 0.25)" : "rgba(215, 225, 245, 0.08)";
+      const roomFill = lights ? "#161c23" : "#090c0f";
+      const sideWall = lights ? "#26313d" : "#131920";
+      const backWall = lights ? "#313c47" : "#171d24";
+      const deskTop = lights ? "#626d79" : "#363d45";
+      const deskFront = lights ? "#2c211c" : "#1b1412";
+      const lampCore = lights ? "#fff1c8" : "#dde3ef";
+      const lampGlow = lights ? "#ffd58f" : "#d7e1f0";
+      const posterTone = lights ? "#8a614d" : "#664737";
+      const paperTone = lights ? "#d8ceb4" : "#998c73";
+      const floorA = lights ? "#b9b6b0" : "#8f8b84";
+      const floorB = lights ? "#252525" : "#171717";
       const shutter = doorClosed ? `
         <g opacity='0.86'>
           <rect x='88' y='104' width='116' height='286' fill='#737982'/>
@@ -1767,33 +1786,50 @@ Tu esi brīvs... Pagaidām...</div>
           <polygon points='960,0 772,40 712,540 960,540' fill='${sideWall}'/>
           <rect x='188' y='40' width='584' height='300' fill='${backWall}'/>
           <rect x='0' y='340' width='960' height='200' fill='#120d0c'/>
-          <g opacity='0.22' stroke='#d8d8d8' stroke-width='3'>
+          <g fill='${floorA}'>
+            <rect x='240' y='340' width='72' height='50'/><rect x='384' y='340' width='72' height='50'/><rect x='528' y='340' width='72' height='50'/><rect x='672' y='340' width='72' height='50'/>
+            <rect x='312' y='390' width='72' height='50'/><rect x='456' y='390' width='72' height='50'/><rect x='600' y='390' width='72' height='50'/>
+          </g>
+          <g fill='${floorB}'>
+            <rect x='312' y='340' width='72' height='50'/><rect x='456' y='340' width='72' height='50'/><rect x='600' y='340' width='72' height='50'/>
+            <rect x='240' y='390' width='72' height='50'/><rect x='384' y='390' width='72' height='50'/><rect x='528' y='390' width='72' height='50'/><rect x='672' y='390' width='72' height='50'/>
+          </g>
+          <g stroke='#d8d8d8' stroke-opacity='0.18' stroke-width='3'>
             <path d='M210 382 H750'/><path d='M180 434 H780'/>
             <path d='M226 340 L170 540'/><path d='M356 340 L332 540'/><path d='M486 340 L486 540'/><path d='M616 340 L640 540'/><path d='M746 340 L802 540'/>
           </g>
           <rect x='88' y='104' width='116' height='286' fill='#050608'/>
           <rect x='756' y='104' width='116' height='286' fill='#050608'/>
           ${shutter}
-          <rect x='362' y='110' width='236' height='132' fill='#7e5a49' opacity='0.88'/>
-          <text x='480' y='154' text-anchor='middle' font-size='34' font-family='monospace' fill='#f2d09a' opacity='0.95'>CELEBRATE</text>
-          <g fill='#b88a6d' opacity='0.72'>
-            <circle cx='428' cy='214' r='24'/><circle cx='480' cy='204' r='30'/><circle cx='534' cy='216' r='24'/>
+          <rect x='354' y='102' width='252' height='148' fill='${posterTone}' fill-opacity='0.96'/>
+          <rect x='376' y='124' width='208' height='26' fill='${paperTone}' fill-opacity='0.74'/>
+          <rect x='396' y='166' width='54' height='54' rx='6' fill='#7c5a48'/>
+          <rect x='454' y='154' width='64' height='68' rx='8' fill='#8c6a55'/>
+          <rect x='526' y='170' width='48' height='50' rx='6' fill='#7c5a48'/>
+          <g fill='#d4b27c' fill-opacity='0.78'>
+            <circle cx='423' cy='196' r='16'/><circle cx='486' cy='188' r='20'/><circle cx='548' cy='198' r='16'/>
           </g>
-          <circle cx='480' cy='48' r='18' fill='${lampCore}' opacity='0.95'/>
-          <circle cx='480' cy='48' r='82' fill='${lampGlow}'/>
-          <rect x='352' y='350' width='256' height='24' fill='${deskTop}'/>
-          <rect x='378' y='374' width='206' height='102' fill='${deskFront}'/>
-          <rect x='392' y='328' width='52' height='46' fill='#0d1116'/>
-          <rect x='448' y='320' width='60' height='54' fill='#0d1116'/>
-          <rect x='518' y='332' width='40' height='42' fill='#0d1116'/>
-          <circle cx='560' cy='360' r='30' fill='#707784'/>
-          <circle cx='560' cy='360' r='22' fill='#2b3138'/>
-          <g stroke='#818896' stroke-width='3'>
-            <path d='M560 330 L560 390'/><path d='M530 360 L590 360'/><path d='M540 340 L580 380'/><path d='M580 340 L540 380'/>
+          <circle cx='480' cy='48' r='18' fill='${lampCore}' fill-opacity='0.98'/>
+          <circle cx='480' cy='48' r='86' fill='${lampGlow}' fill-opacity='0.16'/>
+          <polygon points='450,70 510,70 598,344 362,344' fill='${lampGlow}' fill-opacity='0.07'/>
+          <rect x='344' y='348' width='272' height='28' fill='${deskTop}'/>
+          <rect x='368' y='376' width='224' height='108' fill='${deskFront}'/>
+          <rect x='382' y='324' width='58' height='52' fill='#0d1116'/>
+          <rect x='448' y='316' width='66' height='60' fill='#0d1116'/>
+          <rect x='526' y='330' width='42' height='46' fill='#0d1116'/>
+          <circle cx='562' cy='356' r='32' fill='#7d8593'/>
+          <circle cx='562' cy='356' r='23' fill='#2b3138'/>
+          <g stroke='#9098a6' stroke-width='3'>
+            <path d='M562 324 L562 388'/><path d='M530 356 L594 356'/><path d='M540 334 L584 378'/><path d='M584 334 L540 378'/>
           </g>
           <rect x='412' y='344' width='18' height='44' fill='#c6cbd6'/>
           <rect x='408' y='338' width='26' height='12' fill='#d24f4f'/>
-          <g stroke='rgba(255,255,255,0.12)' stroke-width='2'>
+          <g fill='#8b6b54' fill-opacity='0.92'>
+            <rect x='640' y='118' width='76' height='104' rx='4'/>
+            <rect x='660' y='144' width='36' height='12' fill='#d7c7ad'/>
+            <circle cx='682' cy='182' r='6' fill='#d7c7ad'/>
+          </g>
+          <g stroke='#ffffff' stroke-opacity='0.14' stroke-width='2'>
             <path d='M88 104 C124 132 144 178 146 226'/><path d='M204 104 C182 142 170 188 168 236'/>
             <path d='M756 104 C794 142 814 192 818 250'/><path d='M872 104 C842 142 828 198 826 260'/>
           </g>
