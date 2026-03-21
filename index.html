@@ -943,6 +943,7 @@
     }
 
     #btn-start,
+    #btn-bonus-shift,
     #btn-how-to,
     #btn-settings,
     #btn-how-to-close,
@@ -964,6 +965,14 @@
       animation: fadeInUp 1s ease-out 0.9s both, buttonPulse 2s ease-in-out 1.9s infinite;
     }
 
+    #btn-bonus-shift {
+      display: none;
+      border-color: #ffd166;
+      color: #ffd166;
+      box-shadow: 0 0 18px rgba(255, 209, 102, 0.24);
+      animation: fadeInUp 1s ease-out 1.12s both, buttonPulse 2.3s ease-in-out 2s infinite;
+    }
+
     #btn-how-to {
       animation: fadeInUp 1s ease-out 1.05s both;
     }
@@ -973,6 +982,7 @@
     }
 
     #btn-start:hover,
+    #btn-bonus-shift:hover,
     #btn-how-to:hover,
     #btn-settings:hover,
     #btn-how-to-close:hover,
@@ -983,6 +993,7 @@
     }
 
     #btn-start:active,
+    #btn-bonus-shift:active,
     #btn-how-to:active,
     #btn-settings:active,
     #btn-how-to-close:active,
@@ -1417,6 +1428,7 @@
       </div>
       <div id="start-actions">
         <button id="btn-start">SĀKT SPĒLI</button>
+        <button id="btn-bonus-shift">BONUS SHIFT</button>
         <button id="btn-how-to">How to play</button>
         <button id="btn-settings">Settings</button>
       </div>
@@ -1619,6 +1631,7 @@ Tu esi brīvs... Pagaidām...</div>
 
     const pathToOffice = [0,1,2,3,5,6,9];
     const SETTINGS_STORAGE_KEY = "pnpk-settings";
+    const BONUS_SHIFT_UNLOCK_KEY = "pnpk-bonus-shift-unlocked";
     const ADMIN_ALLOWED_LOCAL_IP = "212.3.195.4";
     const detectedAdminIps = new Set();
     function svgSceneUrl(svg) {
@@ -2366,6 +2379,7 @@ Tu esi brīvs... Pagaidām...</div>
     const btnRestart = document.getElementById("btn-restart");
     const btnNextNight = document.getElementById("btn-next-night");
     const btnStart = document.getElementById("btn-start");
+    const btnBonusShift = document.getElementById("btn-bonus-shift");
 
     const gameEl = document.getElementById("game");
     const congratsScreen = document.getElementById("congrats-screen");
@@ -3141,6 +3155,18 @@ Tu esi brīvs... Pagaidām...</div>
     let screenMessageState = { key: "officeIdle", params: {} };
     let deathMessageState = null;
     const logEntries = [];
+    let bonusShiftUnlocked = localStorage.getItem(BONUS_SHIFT_UNLOCK_KEY) === "true";
+    let bonusMode = false;
+    let currentRunStartNight = 1;
+    const BONUS_SHIFT_LABELS = {
+      default: "BONUS SHIFT",
+      lv: "BONUSA MAINA",
+      en: "BONUS SHIFT",
+      ru: "BONUS SHIFT",
+      uk: "BONUS SHIFT",
+      de: "BONUS SCHICHT",
+      da: "BONUSVAGT"
+    };
     const CAMERA_ROOM_NAME_OVERRIDES = {
       default: [
         "CAM 1A - MAIN STAGE",
@@ -3223,6 +3249,23 @@ Tu esi brīvs... Pagaidām...</div>
       const value = translations[currentLanguage][key];
       if (typeof value === "function") return value(params);
       return value ?? "";
+    }
+
+    function getBonusShiftLabel() {
+      return BONUS_SHIFT_LABELS[currentLanguage] || BONUS_SHIFT_LABELS.default;
+    }
+
+    function renderBonusShiftButton() {
+      if (!btnBonusShift) return;
+      btnBonusShift.textContent = getBonusShiftLabel();
+      btnBonusShift.style.display = bonusShiftUnlocked ? "inline-block" : "none";
+    }
+
+    function unlockBonusShift() {
+      if (bonusShiftUnlocked) return;
+      bonusShiftUnlocked = true;
+      localStorage.setItem(BONUS_SHIFT_UNLOCK_KEY, "true");
+      renderBonusShiftButton();
     }
 
     function getCameraRoomName(id) {
@@ -3415,7 +3458,7 @@ Tu esi brīvs... Pagaidām...</div>
     function adminSkipNight() {
       if (!adminAuthorized || gameOver) return;
 
-      if (night >= 5) {
+      if (!bonusMode && night >= 5) {
         if (timer) clearInterval(timer);
         showSuperWin();
         return;
@@ -3487,6 +3530,8 @@ Tu esi brīvs... Pagaidām...</div>
       seconds = 0;
       power = 100;
       gameOver = true;
+      bonusMode = false;
+      currentRunStartNight = 1;
       cameraOn = false;
       doorClosed = false;
       lightsOn = false;
@@ -3510,6 +3555,7 @@ Tu esi brīvs... Pagaidām...</div>
       setCameraOverlayOpen(false);
       setScreenMessage("officeIdle");
       updateUI();
+      renderBonusShiftButton();
       startScreen.style.display = "flex";
     }
 
@@ -3550,6 +3596,7 @@ Tu esi brīvs... Pagaidām...</div>
       hudTimeLabelEl.textContent = getText("hudTime");
       hudPowerLabelEl.textContent = getText("hudPower");
       btnStart.textContent = getText("btnStart");
+      renderBonusShiftButton();
       btnLight.textContent = getText("btnLight");
       btnCamera.textContent = getText("btnCamera");
       btnScream.textContent = getText("btnScream");
@@ -3842,7 +3889,7 @@ Tu esi brīvs... Pagaidām...</div>
         klavsCooldown = 0;
         clearInterval(timer);
 
-        if (night > 5) {
+        if (!bonusMode && night > 5) {
           showSuperWin();
           return;
         }
@@ -3923,8 +3970,8 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     btnReplay.onclick = () => {
-      superWinScreen.style.display = "none";
-      start();
+      playButtonSound();
+      returnToStartScreen();
     };
 
     // ===== KEYBOARD CONTROLS =====
@@ -4221,6 +4268,7 @@ Tu esi brīvs... Pagaidām...</div>
       gameOver = true;
       setCameraOverlayOpen(false);
       congratsScreen.style.display = "none";
+      unlockBonusShift();
       superWinScreen.style.display = "flex";
       renderSuperWinText();
     }
@@ -4253,7 +4301,7 @@ Tu esi brīvs... Pagaidām...</div>
         klavsCooldown = 0;
         clearInterval(timer);
 
-        if (night > 5) {
+        if (!bonusMode && night > 5) {
           showSuperWin();
           return;
         }
@@ -4269,8 +4317,10 @@ Tu esi brīvs... Pagaidām...</div>
       updateUI();
     }
 
-    function start() {
-      night = 1;
+    function start(startNight = currentRunStartNight, useBonusMode = bonusMode) {
+      currentRunStartNight = startNight;
+      bonusMode = !!useBonusMode;
+      night = startNight;
       seconds = 0;
       power = 100;
       gameOver = false;
@@ -4296,7 +4346,11 @@ Tu esi brīvs... Pagaidām...</div>
       closeAdminModal();
 
       renderLog();
-      setScreenMessage("officeIdle");
+      if (bonusMode) {
+        setScreenMessage("nightStart", { night });
+      } else {
+        setScreenMessage("officeIdle");
+      }
       updateUI();
 
       if (timer) clearInterval(timer);
@@ -4384,7 +4438,17 @@ Tu esi brīvs... Pagaidām...</div>
       closeSettingsModal();
       closeAdminModal();
       startScreen.style.display = "none";
-      start();
+      start(1, false);
+    };
+
+    btnBonusShift.onclick = () => {
+      if (!bonusShiftUnlocked) return;
+      playGameStartSound();
+      closeHowToModal();
+      closeSettingsModal();
+      closeAdminModal();
+      startScreen.style.display = "none";
+      start(6, true);
     };
 
     btnRestartDeath.onclick = () => {
@@ -4448,8 +4512,8 @@ Tu esi brīvs... Pagaidām...</div>
     };
 
     btnReplay.onclick = () => {
-      superWinScreen.style.display = "none";
-      start();
+      playButtonSound();
+      returnToStartScreen();
     };
 
     languageSelect.addEventListener("change", () => {
