@@ -1705,6 +1705,176 @@ Tu esi brīvs... Pagaidām...</div>
       `);
     }
 
+    function buildStageScene() {
+      return svgSceneUrl(`
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'>
+          <rect width='960' height='540' fill='#141119'/>
+          <rect x='0' y='0' width='960' height='330' fill='#241921'/>
+          <rect x='0' y='330' width='960' height='210' fill='#0b0c0f'/>
+          <path d='M0 0 L168 0 L230 330 L0 330 Z' fill='#6d1e2b'/>
+          <path d='M960 0 L792 0 L730 330 L960 330 Z' fill='#6d1e2b'/>
+          <rect x='212' y='120' width='536' height='174' rx='6' fill='#18141a'/>
+          <rect x='248' y='100' width='464' height='20' fill='#8a6035' fill-opacity='0.78'/>
+          <g fill='#f4d268' fill-opacity='0.2'>
+            <circle cx='326' cy='98' r='12'/>
+            <circle cx='480' cy='90' r='16'/>
+            <circle cx='634' cy='98' r='12'/>
+          </g>
+          <g fill='#c9ae84' fill-opacity='0.88'>
+            <circle cx='330' cy='204' r='66'/>
+            <circle cx='480' cy='182' r='70'/>
+            <circle cx='628' cy='206' r='64'/>
+          </g>
+          <g fill='#343941'>
+            <rect x='286' y='286' width='88' height='96' rx='18'/>
+            <rect x='434' y='252' width='92' height='134' rx='18'/>
+            <rect x='588' y='294' width='86' height='94' rx='18'/>
+          </g>
+          <g fill='#eef3fb' fill-opacity='0.8'>
+            <circle cx='312' cy='190' r='10'/>
+            <circle cx='348' cy='190' r='10'/>
+            <circle cx='462' cy='166' r='11'/>
+            <circle cx='498' cy='166' r='11'/>
+            <circle cx='610' cy='194' r='10'/>
+            <circle cx='646' cy='194' r='10'/>
+          </g>
+          <g fill='#7f5f4a' fill-opacity='0.92'>
+            <rect x='352' y='128' width='258' height='18'/>
+            <rect x='340' y='150' width='280' height='32'/>
+          </g>
+          <g stroke='#f0d48b' stroke-opacity='0.3' stroke-width='3'>
+            <path d='M300 0 V124'/>
+            <path d='M480 0 V88'/>
+            <path d='M660 0 V128'/>
+          </g>
+          <circle cx='480' cy='88' r='24' fill='#fff0cf' fill-opacity='0.86'/>
+          <circle cx='480' cy='88' r='108' fill='#ffe0a0' fill-opacity='0.1'/>
+          <g stroke='#d4dbe8' stroke-opacity='0.16' stroke-width='3'>
+            <path d='M0 330 H960'/>
+            <path d='M132 330 L38 540'/>
+            <path d='M304 330 L244 540'/>
+            <path d='M480 330 L480 540'/>
+            <path d='M656 330 L716 540'/>
+            <path d='M828 330 L922 540'/>
+          </g>
+        </svg>
+      `);
+    }
+
+    function buildArcadeScene() {
+      return svgSceneUrl(`
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'>
+          <rect width='960' height='540' fill='#0f1218'/>
+          <rect x='0' y='0' width='960' height='320' fill='#181d24'/>
+          <rect x='0' y='320' width='960' height='220' fill='#090b0e'/>
+          <polygon points='0,0 196,56 278,540 0,540' fill='#202732'/>
+          <polygon points='960,0 764,56 682,540 960,540' fill='#202732'/>
+          <rect x='278' y='96' width='404' height='228' fill='#12171d'/>
+          <rect x='330' y='118' width='84' height='182' rx='8' fill='#4d2330'/>
+          <rect x='434' y='118' width='92' height='188' rx='8' fill='#264963'/>
+          <rect x='548' y='118' width='90' height='178' rx='8' fill='#5c4a2b'/>
+          <g fill='#dbe4f1' fill-opacity='0.76'>
+            <rect x='348' y='136' width='48' height='42' rx='4'/>
+            <rect x='454' y='136' width='52' height='46' rx='4'/>
+            <rect x='568' y='136' width='50' height='40' rx='4'/>
+          </g>
+          <g fill='#1a1f26'>
+            <rect x='350' y='204' width='42' height='60'/>
+            <rect x='458' y='210' width='44' height='64'/>
+            <rect x='572' y='202' width='42' height='58'/>
+          </g>
+          <g fill='#f05e7d' fill-opacity='0.86'>
+            <circle cx='348' cy='98' r='12'/>
+            <circle cx='612' cy='98' r='12'/>
+          </g>
+          <g fill='#48d4ff' fill-opacity='0.84'>
+            <circle cx='406' cy='92' r='10'/>
+            <circle cx='556' cy='92' r='10'/>
+          </g>
+          <rect x='188' y='160' width='56' height='130' rx='4' fill='#6a5541' fill-opacity='0.5'/>
+          <rect x='718' y='174' width='58' height='126' rx='4' fill='#32465d' fill-opacity='0.48'/>
+          <circle cx='480' cy='82' r='22' fill='#edf3ff' fill-opacity='0.84'/>
+          <circle cx='480' cy='82' r='84' fill='#dce6f5' fill-opacity='0.1'/>
+          <g stroke='#d8dde7' stroke-opacity='0.16' stroke-width='2'>
+            <path d='M278 96 L480 144'/>
+            <path d='M682 96 L480 144'/>
+            <path d='M322 540 L480 144'/>
+            <path d='M638 540 L480 144'/>
+          </g>
+        </svg>
+      `);
+    }
+
+    function buildWestHallScene() {
+      return svgSceneUrl(`
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'>
+          <rect width='960' height='540' fill='#11151b'/>
+          <polygon points='0,0 318,44 420,540 0,540' fill='#2a313a'/>
+          <polygon points='960,0 612,44 524,540 960,540' fill='#161b21'/>
+          <rect x='318' y='44' width='294' height='310' fill='#10151b'/>
+          <rect x='318' y='176' width='294' height='20' fill='#7a1820' fill-opacity='0.92'/>
+          <g fill='#f0f0f0' fill-opacity='0.92'>
+            <rect x='336' y='176' width='22' height='20'/><rect x='380' y='176' width='22' height='20'/><rect x='424' y='176' width='22' height='20'/>
+            <rect x='468' y='176' width='22' height='20'/><rect x='512' y='176' width='22' height='20'/><rect x='556' y='176' width='22' height='20'/>
+          </g>
+          <polygon points='420,540 524,540 500,356 442,356' fill='#17110e'/>
+          <rect x='86' y='122' width='170' height='260' rx='6' fill='#050608'/>
+          <rect x='112' y='140' width='118' height='224' rx='4' fill='#717983'/>
+          <g stroke='#525962' stroke-width='4'>
+            <path d='M112 172 H230'/><path d='M112 206 H230'/><path d='M112 240 H230'/><path d='M112 274 H230'/><path d='M112 308 H230'/>
+          </g>
+          <rect x='630' y='126' width='146' height='232' rx='6' fill='#080a0d'/>
+          <rect x='654' y='148' width='94' height='58' fill='#2f3945'/>
+          <rect x='670' y='220' width='62' height='94' fill='#6a533f' fill-opacity='0.72'/>
+          <rect x='680' y='160' width='44' height='12' fill='#d9cdb2' fill-opacity='0.72'/>
+          <circle cx='466' cy='110' r='22' fill='#eef3ff' fill-opacity='0.9'/>
+          <circle cx='466' cy='110' r='90' fill='#dce6f5' fill-opacity='0.12'/>
+          <polygon points='444,132 488,132 520,356 412,356' fill='#dce6f5' fill-opacity='0.05'/>
+          <g stroke='#dde5f2' stroke-opacity='0.1' stroke-width='2'>
+            <path d='M318 44 L466 154'/>
+            <path d='M612 44 L466 154'/>
+            <path d='M420 540 L466 154'/>
+            <path d='M524 540 L466 154'/>
+          </g>
+        </svg>
+      `);
+    }
+
+    function buildEastHallScene() {
+      return svgSceneUrl(`
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'>
+          <rect width='960' height='540' fill='#11161d'/>
+          <polygon points='0,0 348,44 436,540 0,540' fill='#171c22'/>
+          <polygon points='960,0 642,44 540,540 960,540' fill='#2c353f'/>
+          <rect x='348' y='44' width='294' height='310' fill='#13181f'/>
+          <rect x='348' y='172' width='294' height='20' fill='#871720' fill-opacity='0.92'/>
+          <g fill='#efe7d7' fill-opacity='0.94'>
+            <rect x='366' y='172' width='22' height='20'/><rect x='410' y='172' width='22' height='20'/><rect x='454' y='172' width='22' height='20'/>
+            <rect x='498' y='172' width='22' height='20'/><rect x='542' y='172' width='22' height='20'/><rect x='586' y='172' width='22' height='20'/>
+          </g>
+          <polygon points='436,540 540,540 520,354 458,354' fill='#17100d'/>
+          <rect x='708' y='122' width='170' height='260' rx='6' fill='#050608'/>
+          <rect x='734' y='140' width='118' height='224' rx='4' fill='#717983'/>
+          <g stroke='#525962' stroke-width='4'>
+            <path d='M734 172 H852'/><path d='M734 206 H852'/><path d='M734 240 H852'/><path d='M734 274 H852'/><path d='M734 308 H852'/>
+          </g>
+          <rect x='188' y='130' width='146' height='228' rx='6' fill='#090b0e'/>
+          <rect x='214' y='156' width='86' height='124' fill='#324253' fill-opacity='0.7'/>
+          <rect x='234' y='174' width='46' height='14' fill='#d8ccb0' fill-opacity='0.7'/>
+          <circle cx='496' cy='108' r='22' fill='#eef3ff' fill-opacity='0.9'/>
+          <circle cx='496' cy='108' r='92' fill='#dce6f5' fill-opacity='0.12'/>
+          <polygon points='472,132 520,132 552,354 442,354' fill='#dce6f5' fill-opacity='0.05'/>
+          <g stroke='#dde5f2' stroke-opacity='0.1' stroke-width='2'>
+            <path d='M348 44 L496 154'/>
+            <path d='M642 44 L496 154'/>
+            <path d='M436 540 L496 154'/>
+            <path d='M540 540 L496 154'/>
+          </g>
+          <path d='M186 140 C224 176 248 230 254 294' stroke='#dde5f2' stroke-opacity='0.12' stroke-width='2'/>
+        </svg>
+      `);
+    }
+
     function buildDiningScene() {
       return svgSceneUrl(`
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 960 540'>
@@ -2044,50 +2214,13 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     const CAMERA_BACKGROUND_PRESETS = {
-      0: buildHallScene({
-        leftWall: "#18212b",
-        rightWall: "#24303b",
-        backWall: "#11161d",
-        floor: "#18100e",
-        glow: "rgba(228, 236, 248, 0.12)",
-        stripeA: "#8c151d",
-        stripeB: "#e7e0d0",
-        extra: "<rect x='248' y='210' width='92' height='112' rx='4' fill='#6f5c49' fill-opacity='0.38'/><rect x='620' y='204' width='74' height='124' rx='4' fill='#364a60' fill-opacity='0.34'/><rect x='420' y='228' width='120' height='68' fill='#0a0d11' fill-opacity='0.54'/><circle cx='292' cy='246' r='18' fill='#d8ccac' fill-opacity='0.2'/><path d='M664 154 C694 188 710 226 712 282' stroke='#d7dae2' stroke-opacity='0.12' stroke-width='3'/>"
-      }),
-      1: buildHallScene({
-        leftWall: "#10161d",
-        rightWall: "#1a242d",
-        backWall: "#0b1016",
-        floor: "#120d0d",
-        glow: "rgba(196, 215, 255, 0.09)",
-        lightCore: "#d7ddeb",
-        stripeA: "#5f1c25",
-        stripeB: "#d9d2c2",
-        extra: "<rect x='286' y='190' width='84' height='138' rx='4' fill='#4a2930' fill-opacity='0.46'/><rect x='584' y='186' width='60' height='126' rx='4' fill='#32465d' fill-opacity='0.42'/><rect x='172' y='234' width='38' height='82' fill='#090b0e' fill-opacity='0.72'/><circle cx='188' cy='214' r='12' fill='#d2c4a7' fill-opacity='0.16'/><path d='M766 170 C742 206 730 242 728 306' stroke='#dde5f3' stroke-opacity='0.1' stroke-width='3'/>"
-      }),
+      0: buildStageScene(),
+      1: buildArcadeScene(),
       2: buildKitchenScene(),
       3: buildDiningScene(),
       4: buildEntryScene(),
-      5: buildHallScene({
-        leftWall: "#141921",
-        rightWall: "#28323d",
-        backWall: "#10151b",
-        floor: "#17110d",
-        glow: "rgba(220, 235, 255, 0.11)",
-        stripeA: "#6b2327",
-        stripeB: "#ddd4bf",
-        extra: "<rect x='124' y='214' width='62' height='94' rx='4' fill='#2d3845' fill-opacity='0.5'/><rect x='666' y='208' width='92' height='122' rx='4' fill='#3f2f34' fill-opacity='0.38'/><rect x='520' y='330' width='76' height='18' fill='#4b372b' fill-opacity='0.7'/><rect x='536' y='290' width='44' height='42' fill='#4b372b' fill-opacity='0.6'/><path d='M154 160 C178 190 194 224 202 272' stroke='#dde4ef' stroke-opacity='0.12' stroke-width='2'/>"
-      }),
-      6: buildHallScene({
-        leftWall: "#1d252f",
-        rightWall: "#313b46",
-        backWall: "#12181f",
-        floor: "#15100d",
-        glow: "rgba(225, 235, 255, 0.12)",
-        stripeA: "#7e1820",
-        stripeB: "#efe7d7",
-        extra: "<rect x='176' y='206' width='96' height='130' rx='4' fill='#44363e' fill-opacity='0.36'/><rect x='738' y='214' width='60' height='94' rx='4' fill='#304253' fill-opacity='0.52'/><rect x='606' y='170' width='70' height='34' fill='#7b5c41' fill-opacity='0.62'/><rect x='620' y='180' width='42' height='10' fill='#d7c9a4' fill-opacity='0.66'/><path d='M258 158 C284 194 300 238 304 300' stroke='#e2e7f0' stroke-opacity='0.1' stroke-width='3'/>"
-      }),
+      5: buildWestHallScene(),
+      6: buildEastHallScene(),
       7: buildStorageScene(),
       8: buildBackstageScene(),
       9: buildOfficeScene()
@@ -3008,6 +3141,82 @@ Tu esi brīvs... Pagaidām...</div>
     let screenMessageState = { key: "officeIdle", params: {} };
     let deathMessageState = null;
     const logEntries = [];
+    const CAMERA_ROOM_NAME_OVERRIDES = {
+      default: [
+        "CAM 1A - MAIN STAGE",
+        "CAM 1B - ARCADE",
+        "CAM 2A - KITCHEN",
+        "CAM 2B - DINING",
+        "CAM 3 - ENTRY",
+        "CAM 4A - LEFT HALL",
+        "CAM 4B - RIGHT HALL",
+        "CAM 5 - STORAGE",
+        "CAM 6 - BACKSTAGE",
+        "OFFICE"
+      ],
+      lv: [
+        "CAM 1A - GALVENA SKATUVE",
+        "CAM 1B - ARKADES STURIS",
+        "CAM 2A - VIRTUVE",
+        "CAM 2B - EDAMZALE",
+        "CAM 3 - PRIEKSTELPA",
+        "CAM 4A - KREISAIS KORIDORS",
+        "CAM 4B - LABAIS KORIDORS",
+        "CAM 5 - NOLIKTAVA",
+        "CAM 6 - AIZKULISES",
+        "OFISS"
+      ],
+      en: [
+        "CAM 1A - MAIN STAGE",
+        "CAM 1B - ARCADE",
+        "CAM 2A - KITCHEN",
+        "CAM 2B - DINING",
+        "CAM 3 - ENTRY",
+        "CAM 4A - LEFT HALL",
+        "CAM 4B - RIGHT HALL",
+        "CAM 5 - STORAGE",
+        "CAM 6 - BACKSTAGE",
+        "OFFICE"
+      ]
+    };
+    const CAMERA_BUTTON_TITLE_OVERRIDES = {
+      default: [
+        "Main Stage",
+        "Arcade",
+        "Kitchen",
+        "Dining",
+        "Entry",
+        "Left Hall",
+        "Right Hall",
+        "Storage",
+        "Backstage",
+        "Office"
+      ],
+      lv: [
+        "Galvena skatuve",
+        "Arkades sturis",
+        "Virtuve",
+        "Edamzale",
+        "Priekstelpa",
+        "Kreisais koridors",
+        "Labais koridors",
+        "Noliktava",
+        "Aizkulises",
+        "Ofiss"
+      ],
+      en: [
+        "Main Stage",
+        "Arcade",
+        "Kitchen",
+        "Dining",
+        "Entry",
+        "Left Hall",
+        "Right Hall",
+        "Storage",
+        "Backstage",
+        "Office"
+      ]
+    };
 
     // ===== PALĪGFUNKCIJAS =====
     function getText(key, params = {}) {
@@ -3017,7 +3226,13 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     function getCameraRoomName(id) {
-      return translations[currentLanguage].cameraRoomNames[id] || getText("cameraMonitorLabel");
+      const names = CAMERA_ROOM_NAME_OVERRIDES[currentLanguage] || CAMERA_ROOM_NAME_OVERRIDES.default;
+      return names[id] || translations[currentLanguage].cameraRoomNames[id] || getText("cameraMonitorLabel");
+    }
+
+    function getCameraButtonTitle(id) {
+      const titles = CAMERA_BUTTON_TITLE_OVERRIDES[currentLanguage] || CAMERA_BUTTON_TITLE_OVERRIDES.default;
+      return titles[id] || translations[currentLanguage].cameraButtonTitles[id] || "";
     }
 
     function setScreenMessage(key, params = {}) {
@@ -3058,7 +3273,7 @@ Tu esi brīvs... Pagaidām...</div>
     function renderCameraButtonTitles() {
       cameraButtons.forEach(btn => {
         const camId = parseInt(btn.dataset.cam, 10);
-        btn.title = translations[currentLanguage].cameraButtonTitles[camId] || "";
+        btn.title = getCameraButtonTitle(camId);
       });
     }
 
@@ -3465,19 +3680,7 @@ Tu esi brīvs... Pagaidām...</div>
     // ===== KAMERAS =====
     function setCameraRoom(id) {
       currentCameraRoom = id;
-      const names = [
-        "CAM 1A — KORIDORS",
-        "CAM 1B — KORIDORS",
-        "CAM 2A — VIRTUVE",
-        "CAM 2B — ISTABA",
-        "CAM 3 — PRIEKŠTELPA",
-        "CAM 4A — KREISĀ PUSE",
-        "CAM 4B — LABĀ PUSE",
-        "CAM 5 — TELPA",
-        "CAM 6 — TELPA",
-        "OFFICE"
-      ];
-      camLabel.textContent = names[id] || "CAM";
+      camLabel.textContent = getCameraRoomName(id);
       showCameraView();
       updateUI();
     }
@@ -3779,6 +3982,7 @@ Tu esi brīvs... Pagaidām...</div>
 
     function setCameraRoom(id) {
       currentCameraRoom = id;
+      camLabel.textContent = getCameraRoomName(id);
       showCameraView();
       updateUI();
     }
@@ -4301,3 +4505,4 @@ Tu esi brīvs... Pagaidām...</div>
   </script>
 </body>
 </html>
+
