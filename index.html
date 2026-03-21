@@ -89,7 +89,11 @@
       background-repeat: no-repeat;
       position: absolute;
       inset: 0;
-      background-image: url("https://static.wikia.nocookie.net/fivenightsatfreddys/images/6/68/39.png/revision/latest?cb=20140916011608");
+      background-image:
+        radial-gradient(circle at 50% 18%, rgba(210,220,235,0.14) 0 8%, transparent 12%),
+        linear-gradient(90deg, #0a0d12 0 16%, #252b33 16% 34%, #0d1116 34% 66%, #252b33 66% 84%, #0a0d12 84% 100%),
+        linear-gradient(180deg, transparent 0 70%, #050608 70% 100%),
+        linear-gradient(180deg, #161b22 0%, #050607 100%);
       z-index: 1;
     }
     
@@ -112,16 +116,70 @@
     }
 
     /* Vienkārši “telpu” toņi – vari nomainīt uz bildēm */
-    #bg-0 { background-image: url("https://i.redd.it/mqi6c27mf2ab1.jpg")}
-    #bg-1 { background-image: url("https://publish-01.obsidian.md/access/bf50f4430ccdd8e612232893b19cc02d/Images%20and%20Sounds/FNAF%201%20Dining%20Hall%20Empty.png")}
-    #bg-2 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/7/76/WestHallNoCamera.png/revision/latest?cb=20140825044030")}
-    #bg-3 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/7/73/Cam2B.png/revision/latest?cb=20140825044011")}
-    #bg-4 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/8/82/CAM_03.png/revision/latest?cb=20200825195018")}
-    #bg-5 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/e/e8/EastHallNoCamera.png/revision/latest?cb=20140825043727")}
-    #bg-6 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/f/fe/Cam4B.png/revision/latest?cb=20140825043718")}
-    #bg-7 { background-image: url("https://static.wikia.nocookie.net/fivenightsatfreddys/images/9/94/109.png/revision/latest?cb=20150727143211")}
-    #bg-8 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/7/7c/SpringtrapCam06ALights.png/revision/latest/scale-to-width-down/250?cb=20150307095136")}
-    #bg-9 { background-image: url("https://static.wikia.nocookie.net/fivenightsatfreddys/images/6/68/39.png/revision/latest?cb=20140916011608")}
+    #bg-0 {
+      background-image:
+        radial-gradient(circle at 50% 18%, rgba(220,230,245,0.16) 0 7%, transparent 11%),
+        linear-gradient(90deg, #07090d 0 18%, #2b3139 18% 30%, #101318 30% 70%, #2b3139 70% 82%, #07090d 82% 100%),
+        linear-gradient(180deg, transparent 0 72%, #040507 72% 100%),
+        linear-gradient(180deg, #151b22 0%, #050607 100%);
+    }
+    #bg-1 {
+      background-image:
+        linear-gradient(180deg, #232730 0 56%, #111419 56% 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 26px, rgba(0,0,0,0.05) 26px 52px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 26px, rgba(0,0,0,0.03) 26px 52px),
+        linear-gradient(180deg, transparent 0 66%, #050608 66% 100%);
+    }
+    #bg-2 {
+      background-image:
+        linear-gradient(180deg, #4e5863 0 42%, #252b33 42% 62%, #08090b 62% 100%),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 0 12%, transparent 12% 88%, rgba(255,255,255,0.1) 88% 100%),
+        radial-gradient(circle at 74% 22%, rgba(255,255,255,0.14) 0 9%, transparent 12%);
+    }
+    #bg-3 {
+      background-image:
+        linear-gradient(180deg, #2c2125 0 48%, #0f1014 48% 100%),
+        radial-gradient(circle at 26% 30%, rgba(255,220,170,0.16) 0 8%, transparent 12%),
+        radial-gradient(circle at 74% 30%, rgba(255,220,170,0.16) 0 8%, transparent 12%),
+        linear-gradient(90deg, rgba(100,24,28,0.5) 0 18%, transparent 18% 82%, rgba(100,24,28,0.5) 82% 100%);
+    }
+    #bg-4 {
+      background-image:
+        linear-gradient(180deg, #171b22 0 44%, #0b0d11 44% 100%),
+        linear-gradient(90deg, #0a0c10 0 22%, #20262e 22% 38%, #0f1217 38% 62%, #20262e 62% 78%, #0a0c10 78% 100%),
+        radial-gradient(circle at 50% 22%, rgba(220,230,245,0.12) 0 8%, transparent 11%);
+    }
+    #bg-5 {
+      background-image:
+        linear-gradient(90deg, #06080c 0 16%, #2a3038 16% 28%, #0f1319 28% 72%, #2a3038 72% 84%, #06080c 84% 100%),
+        linear-gradient(180deg, transparent 0 70%, #050608 70% 100%),
+        radial-gradient(circle at 30% 18%, rgba(220,230,245,0.1) 0 7%, transparent 12%);
+    }
+    #bg-6 {
+      background-image:
+        linear-gradient(90deg, #06080c 0 16%, #323942 16% 30%, #11151b 30% 70%, #323942 70% 84%, #06080c 84% 100%),
+        linear-gradient(180deg, transparent 0 70%, #050608 70% 100%),
+        radial-gradient(circle at 70% 18%, rgba(220,230,245,0.1) 0 7%, transparent 12%);
+    }
+    #bg-7 {
+      background-image:
+        linear-gradient(180deg, #20252e 0 52%, #0d0f13 52% 100%),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 0 10%, transparent 10% 90%, rgba(255,255,255,0.06) 90% 100%),
+        radial-gradient(circle at 60% 24%, rgba(220,230,245,0.12) 0 7%, transparent 10%);
+    }
+    #bg-8 {
+      background-image:
+        linear-gradient(180deg, #1c2018 0 46%, #0b0c0d 46% 100%),
+        radial-gradient(circle at 52% 30%, rgba(120,180,95,0.18) 0 10%, transparent 15%),
+        linear-gradient(90deg, rgba(40,55,30,0.55) 0 18%, transparent 18% 82%, rgba(40,55,30,0.55) 82% 100%);
+    }
+    #bg-9 {
+      background-image:
+        radial-gradient(circle at 50% 18%, rgba(210,220,235,0.14) 0 8%, transparent 12%),
+        linear-gradient(90deg, #0a0d12 0 16%, #252b33 16% 34%, #0d1116 34% 66%, #252b33 66% 84%, #0a0d12 84% 100%),
+        linear-gradient(180deg, transparent 0 70%, #050608 70% 100%),
+        linear-gradient(180deg, #161b22 0%, #050607 100%);
+    }
 
 
     /* Klāvs kamerās */
@@ -2823,13 +2881,13 @@ Tu esi brīvs... Pagaidām...</div>
       let bgImage;
       
       if (lightsOn && doorClosed) {
-        bgImage = 'url("https://media.sketchfab.com/models/5acfb6e741e34002aecd81a8b91b2a42/thumbnails/449641077ace4762ba91a9c605e05079/0995b85d336e40de987853cd1148e936.jpeg")';
+        bgImage = 'radial-gradient(circle at 50% 18%, rgba(255,247,220,0.34) 0 9%, transparent 13%), linear-gradient(90deg, #0b0f15 0 16%, #3a414a 16% 34%, #151920 34% 66%, #3a414a 66% 84%, #0b0f15 84% 100%), linear-gradient(180deg, transparent 0 70%, #070809 70% 100%), linear-gradient(180deg, #232932 0%, #070809 100%)';
       } else if (lightsOn) {
-        bgImage = 'url("https://i.imgur.com/7QeAWe6.jpg")';
+        bgImage = 'radial-gradient(circle at 50% 18%, rgba(255,248,230,0.26) 0 9%, transparent 13%), linear-gradient(90deg, #11161d 0 16%, #313841 16% 34%, #161a20 34% 66%, #313841 66% 84%, #11161d 84% 100%), linear-gradient(180deg, transparent 0 70%, #070809 70% 100%), linear-gradient(180deg, #1c222a 0%, #070809 100%)';
       } else if (doorClosed) {
-        bgImage = 'url("https://i.redd.it/ipsas8d23z4y.png")';
+        bgImage = 'radial-gradient(circle at 50% 18%, rgba(210,220,235,0.1) 0 8%, transparent 12%), linear-gradient(90deg, #090c10 0 16%, #2e2022 16% 34%, #111317 34% 66%, #2e2022 66% 84%, #090c10 84% 100%), linear-gradient(180deg, transparent 0 70%, #050607 70% 100%), linear-gradient(180deg, #171b22 0%, #050607 100%)';
       } else {
-        bgImage = 'url("https://static.wikia.nocookie.net/fivenightsatfreddys/images/6/68/39.png/revision/latest?cb=20140916011608")';
+        bgImage = 'radial-gradient(circle at 50% 18%, rgba(210,220,235,0.14) 0 8%, transparent 12%), linear-gradient(90deg, #0a0d12 0 16%, #252b33 16% 34%, #0d1116 34% 66%, #252b33 66% 84%, #0a0d12 84% 100%), linear-gradient(180deg, transparent 0 70%, #050608 70% 100%), linear-gradient(180deg, #161b22 0%, #050607 100%)';
       }
       
       officeBg.style.backgroundImage = bgImage;
