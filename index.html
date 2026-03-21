@@ -1,0 +1,3731 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <title>Piecas naktis pie Klāva</title>
+  <style>
+    :root {
+      --scene-brightness: 1;
+    }
+
+    body {
+      margin: 0;
+      background: #000;
+      color: #0fdfaf;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 20px;
+    }
+    
+    #game {
+      width: 960px;
+    }
+
+    #game,
+    #start-screen,
+    #congrats-screen,
+    #super-win-screen,
+    #death-screen {
+      filter: brightness(var(--scene-brightness));
+      transition: filter 0.25s ease;
+    }
+
+    #language-panel {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid #0fdfaf;
+      background: rgba(0,0,0,0.88);
+      z-index: 400;
+      box-shadow: 0 0 16px rgba(15,223,175,0.25);
+    }
+
+    #language-label {
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    #language-select {
+      background: #001a14;
+      border: 1px solid #0fdfaf;
+      color: #0fdfaf;
+      font-family: monospace;
+      font-size: 12px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    #title {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    #hud {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    #screen {
+      position: relative;
+      width: 960px;
+      height: 540px;
+      border: 3px solid #0fdfaf;
+      background: #000;
+      overflow: hidden;
+    }
+    /* Ofiss fonā */
+    #office-bg {
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: absolute;
+      inset: 0;
+      background-image: url("https://static.wikia.nocookie.net/fivenightsatfreddys/images/6/68/39.png/revision/latest?cb=20140916011608");
+      z-index: 1;
+    }
+    
+    /* Kameru foni virs ofisa */
+    .room-bg {
+      position: absolute;
+      inset: 0;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: none;
+      z-index: 2;
+      filter: brightness(1.3);
+    }
+
+
+    
+    .room-bg.active {
+      display: block;
+    }
+
+    /* Vienkārši “telpu” toņi – vari nomainīt uz bildēm */
+    #bg-0 { background-image: url("https://i.redd.it/mqi6c27mf2ab1.jpg")}
+    #bg-1 { background-image: url("https://publish-01.obsidian.md/access/bf50f4430ccdd8e612232893b19cc02d/Images%20and%20Sounds/FNAF%201%20Dining%20Hall%20Empty.png")}
+    #bg-2 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/7/76/WestHallNoCamera.png/revision/latest?cb=20140825044030")}
+    #bg-3 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/7/73/Cam2B.png/revision/latest?cb=20140825044011")}
+    #bg-4 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/8/82/CAM_03.png/revision/latest?cb=20200825195018")}
+    #bg-5 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/e/e8/EastHallNoCamera.png/revision/latest?cb=20140825043727")}
+    #bg-6 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/f/fe/Cam4B.png/revision/latest?cb=20140825043718")}
+    #bg-7 { background-image: url("https://static.wikia.nocookie.net/fivenightsatfreddys/images/9/94/109.png/revision/latest?cb=20150727143211")}
+    #bg-8 { background-image: url("https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/7/7c/SpringtrapCam06ALights.png/revision/latest/scale-to-width-down/250?cb=20150307095136")}
+    #bg-9 { background-image: url("https://static.wikia.nocookie.net/fivenightsatfreddys/images/6/68/39.png/revision/latest?cb=20140916011608")}
+
+
+    /* Klāvs kamerās */
+    #klavs-figure {
+      position: absolute;
+      width: 120px;
+      height: 220px;
+      background: #0fdfaf;
+      opacity: 0.8;
+      left: 50%;
+      top: 55%;
+      transform: translate(-50%, -50%);
+      display: none;
+      z-index: 3;
+    }
+
+    /* Kameru overlay */
+    #camera-overlay {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      width: 320px;
+      max-width: calc(100% - 28px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(0,26,20,0.94) 100%);
+      border: 2px solid #0fdfaf;
+      border-radius: 8px;
+      display: block;
+      z-index: 6;
+      padding: 10px;
+      overflow: hidden;
+      box-sizing: border-box;
+      box-shadow: 0 0 24px rgba(15,223,175,0.45);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate(88px, 56px) scale(0.62) rotate(-9deg);
+      transform-origin: bottom right;
+      transition:
+        opacity 180ms ease,
+        transform 340ms cubic-bezier(0.18, 0.9, 0.24, 1.2),
+        visibility 0s linear 340ms;
+      will-change: transform, opacity;
+    }
+
+    #camera-overlay.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      transition:
+        opacity 180ms ease,
+        transform 340ms cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear 0s;
+    }
+
+    #camera-feed {
+      position: relative;
+      height: 170px;
+      margin-bottom: 10px;
+      border: 2px solid #0fdfaf;
+      background: #000;
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.85);
+      transform: translateY(16px) scale(0.97);
+      transition: transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #camera-feed-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: brightness(1.15);
+    }
+
+    #camera-feed::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.4) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #camera-feed-klavs {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      width: 70px;
+      height: 130px;
+      background: rgba(15,223,175,0.82);
+      box-shadow: 0 0 18px rgba(15,223,175,0.55);
+      transform: translateX(-50%);
+      display: none;
+      z-index: 2;
+    }
+
+    #camera-map-fnaf {
+      position: relative;
+      width: 280px;
+      max-width: 100%;
+      height: 200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+      border: 2px solid #0fdfaf;
+      border-radius: 6px;
+      box-shadow: 0 0 30px #0fdfaf, inset 0 0 20px rgba(0,0,0,0.8);
+      z-index: 10;
+      overflow: visible;
+      transform: translateY(22px);
+      transition: transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #camera-overlay.open #camera-feed,
+    #camera-overlay.open #camera-map-fnaf {
+      transform: translateY(0) scale(1);
+    }
+
+    #camera-map-fnaf::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(0deg, rgba(15,223,175,0.02) 0px, rgba(15,223,175,0.02) 1px, transparent 1px, transparent 2px),
+        repeating-linear-gradient(90deg, rgba(15,223,175,0.02) 0px, rgba(15,223,175,0.02) 1px, transparent 1px, transparent 2px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #camera-map-fnaf::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(15,223,175,0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #camera-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .fnaf-cam-btn {
+      position: absolute;
+      width: 50px;
+      height: 38px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #fff;
+      font-family: monospace;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.2s;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 6px rgba(0,0,0,0.8), inset 0 0 3px rgba(0,0,0,0.5);
+      z-index: 2;
+    }
+
+    .fnaf-cam-btn:hover {
+      border-color: #0fdfaf;
+      box-shadow: 0 0 12px rgba(15,223,175,0.4), inset 0 0 4px rgba(0,0,0,0.5);
+      background: #222;
+    }
+
+    .fnaf-cam-btn.selected {
+      background: #0fdfaf;
+      color: #000;
+      border-color: #0fdfaf;
+      box-shadow: 0 0 20px #0fdfaf, inset 0 0 8px rgba(255,255,255,0.3);
+      font-weight: bold;
+      z-index: 3;
+    }
+
+    /* Camera positions on facility map */
+    .fnaf-cam-btn[data-cam="0"] { top: 145px; left: 12px; }
+    .fnaf-cam-btn[data-cam="1"] { top: 145px; left: 64px; }
+    .fnaf-cam-btn[data-cam="2"] { top: 145px; left: 116px; }
+    .fnaf-cam-btn[data-cam="3"] { top: 145px; left: 168px; }
+    .fnaf-cam-btn[data-cam="4"] { top: 95px; left: 115px; }
+    .fnaf-cam-btn[data-cam="5"] { top: 110px; left: 12px; }
+    .fnaf-cam-btn[data-cam="6"] { top: 110px; left: 218px; }
+    .fnaf-cam-btn[data-cam="7"] { top: 110px; left: 64px; }
+    .fnaf-cam-btn[data-cam="8"] { top: 110px; left: 168px; }
+    .fnaf-cam-btn[data-cam="9"] { top: 68px; left: 115px; }
+    
+    #camera-label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 4px 8px;
+      border: 1px solid #0fdfaf;
+      background: rgba(0,0,0,0.8);
+      font-size: 12px;
+      z-index: 4;
+    }
+
+    /* Camera Schematic */
+
+    #camera-static {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        transparent 0px,
+        transparent 2px,
+        rgba(15,223,175,0.25) 3px
+      );
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .cam-node::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(15,223,175,0.05) 0px,
+        rgba(15,223,175,0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+    }
+    .cam-node:hover {
+      background: rgba(15,223,175,0.1);
+      box-shadow: inset 0 0 10px rgba(15,223,175,0.2), 0 0 10px rgba(15,223,175,0.3);
+      transform: scale(1.02);
+    }
+    .cam-node.active {
+      background: #0fdfaf;
+      color: #001a14;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 0 15px #0fdfaf;
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    /* Teksts ekrānā */
+    #screen-text {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      padding: 4px 8px;
+      background: rgba(0,0,0,0.8);
+      border: 1px solid #0fdfaf;
+      max-width: 60%;
+      font-size: 13px;
+      z-index: 5;
+    }
+
+    /* Kontroles */
+    #controls {
+      margin-top: 6px;
+      display: flex;
+      gap: 8px;
+    }
+    #controls button {
+      background: #001a14;
+      border: 1px solid #0fdfaf;
+      color: #0fdfaf;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    #controls button:hover {
+      background: #003326;
+    }
+
+    #btn-admin {
+      display: none;
+    }
+
+    /* Log */
+    #log {
+      margin-top: 6px;
+      height: 120px;
+      border: 1px solid #0fdfaf;
+      padding: 4px;
+      overflow-y: auto;
+      font-size: 11px;
+    }
+
+    /* Apsveikuma ekrāns */
+    #congrats-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(15,150,100,0.2) 50%, rgba(0,0,0,0.95) 100%);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      animation: waveBackground 3s ease-in-out infinite;
+    }
+
+    @keyframes waveBackground {
+      0%, 100% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(15,150,100,0.2) 50%, rgba(0,0,0,0.95) 100%);
+      }
+      50% {
+        background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(15,200,150,0.3) 50%, rgba(0,0,0,0.95) 100%);
+      }
+    }
+
+    @keyframes starsSparkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    #congrats-screen::before,
+    #congrats-screen::after {
+      content: '★';
+      position: fixed;
+      font-size: 60px;
+      color: #0fdfaf;
+      animation: starsSparkle 1.5s ease-in-out infinite;
+      pointer-events: none;
+      text-shadow: 0 0 10px #0fdfaf;
+    }
+
+    #congrats-screen::before {
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    #congrats-screen::after {
+      top: 10%;
+      right: 10%;
+      animation-delay: 0.5s;
+    }
+
+    #congrats-box {
+      background: linear-gradient(135deg, #001a14 0%, #002a20 100%);
+      border: 4px solid #0fdfaf;
+      padding: 50px 60px;
+      text-align: center;
+      box-shadow: 0 0 40px #0fdfaf, inset 0 0 30px rgba(15,223,175,0.1);
+      position: relative;
+      animation: congratsScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes congratsScale {
+      from {
+        transform: scale(0) rotateZ(-10deg);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) rotateZ(0deg);
+        opacity: 1;
+      }
+    }
+
+    #congrats-title {
+      font-size: 48px;
+      margin-bottom: 15px;
+      text-shadow: 0 0 20px #0fdfaf, 0 0 40px #0fdfaf;
+      color: #0fdfaf;
+      letter-spacing: 2px;
+      font-weight: bold;
+      animation: titlePulseWin 2s ease-in-out infinite;
+    }
+
+    @keyframes titlePulseWin {
+      0%, 100% {
+        text-shadow: 0 0 20px #0fdfaf, 0 0 40px #0fdfaf;
+        transform: scale(1);
+      }
+      50% {
+        text-shadow: 0 0 30px #0fdfaf, 0 0 60px #0fdfaf;
+        transform: scale(1.05);
+      }
+    }
+
+    #congrats-text {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: #0fdfaf;
+      opacity: 0.9;
+      line-height: 1.6;
+      animation: textFadeIn 1s ease-out 0.3s both;
+    }
+
+    @keyframes textFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 0.9;
+        transform: translateY(0);
+      }
+    }
+
+    #btn-next-night {
+      background: linear-gradient(135deg, transparent 0%, rgba(15,223,175,0.1) 100%);
+      border: 3px solid #0fdfaf;
+      color: #0fdfaf;
+      padding: 15px 50px;
+      font-size: 20px;
+      cursor: pointer;
+      font-family: monospace;
+      font-weight: bold;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px #0fdfaf;
+      animation: buttonPulseWin 2s ease-in-out infinite 0.6s;
+    }
+
+    @keyframes buttonPulseWin {
+      0%, 100% {
+        box-shadow: 0 0 15px #0fdfaf;
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 30px #0fdfaf, inset 0 0 10px rgba(15,223,175,0.3);
+        transform: scale(1.03);
+      }
+    }
+
+    #btn-next-night:hover {
+      background: rgba(15,223,175,0.15);
+      box-shadow: 0 0 40px #0fdfaf, inset 0 0 20px rgba(15,223,175,0.3);
+      transform: scale(1.08);
+    }
+
+    #btn-next-night:active {
+      transform: scale(0.95);
+    }
+
+    /* Super Win Screen */
+    @keyframes confetti {
+      0% {
+        transform: translateY(-100vh) rotateZ(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotateZ(720deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes superWinScale {
+      0% {
+        transform: scale(0) rotateZ(-20deg);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.1) rotateZ(5deg);
+      }
+      100% {
+        transform: scale(1) rotateZ(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes rainbowGlow {
+      0% {
+        text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+        color: #ff0000;
+      }
+      16% {
+        text-shadow: 0 0 20px #ff7700, 0 0 40px #ff7700;
+        color: #ff7700;
+      }
+      32% {
+        text-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00;
+        color: #ffff00;
+      }
+      48% {
+        text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+        color: #00ff00;
+      }
+      64% {
+        text-shadow: 0 0 20px #0000ff, 0 0 40px #0000ff;
+        color: #0000ff;
+      }
+      80% {
+        text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+        color: #ff00ff;
+      }
+      100% {
+        text-shadow: 0 0 20px #0fdfaf, 0 0 40px #0fdfaf;
+        color: #0fdfaf;
+      }
+    }
+
+    @keyframes superPulse {
+      0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 30px #0fdfaf, 0 0 60px #0fdfaf;
+      }
+      50% {
+        transform: scale(1.08);
+        text-shadow: 0 0 50px #0fdfaf, 0 0 100px #0fdfaf, 0 0 150px #0fdfaf;
+      }
+    }
+
+    #super-win-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(45deg, #000, #001a14, #000033, #001a14, #000);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      overflow: hidden;
+    }
+
+    #super-win-screen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255,0,0,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(0,0,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 0%, rgba(0,255,0,0.1) 0%, transparent 50%);
+      animation: waveAnimation 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes waveAnimation {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+    }
+
+    #super-win-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      animation: superWinScale 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #super-win-title {
+      font-size: 80px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      animation: rainbowGlow 3s ease-in-out infinite, superPulse 2s ease-in-out infinite;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    #super-win-subtitle {
+      font-size: 36px;
+      color: #0fdfaf;
+      margin-bottom: 30px;
+      text-shadow: 0 0 20px #0fdfaf;
+      animation: titlePulseWin 2s ease-in-out infinite;
+      letter-spacing: 2px;
+    }
+
+    #super-win-message {
+      font-size: 20px;
+      color: #0fdfaf;
+      max-width: 600px;
+      margin-bottom: 40px;
+      line-height: 2;
+      opacity: 0.95;
+      animation: textFadeIn 1s ease-out 0.5s both;
+    }
+
+    #super-win-stats {
+      background: rgba(15,223,175,0.1);
+      border: 3px solid #0fdfaf;
+      padding: 20px;
+      margin-bottom: 40px;
+      font-size: 16px;
+      display: inline-block;
+      animation: textFadeIn 1s ease-out 0.8s both;
+      box-shadow: 0 0 20px #0fdfaf;
+    }
+
+    .stat-line {
+      margin: 8px 0;
+      color: #0fdfaf;
+      font-weight: bold;
+    }
+
+    #btn-replay {
+      background: linear-gradient(135deg, rgba(15,223,175,0.2), rgba(15,223,175,0.05));
+      border: 4px solid #0fdfaf;
+      color: #0fdfaf;
+      padding: 20px 60px;
+      font-size: 24px;
+      cursor: pointer;
+      font-family: monospace;
+      font-weight: bold;
+      letter-spacing: 3px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 30px #0fdfaf;
+      animation: buttonPulseWin 2s ease-in-out infinite 1.1s;
+      text-transform: uppercase;
+    }
+
+    #btn-replay:hover {
+      background: rgba(15,223,175,0.2);
+      box-shadow: 0 0 60px #0fdfaf, inset 0 0 30px rgba(15,223,175,0.4);
+      transform: scale(1.1);
+    }
+
+    #btn-replay:active {
+      transform: scale(0.9);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: inset 0 0 10px rgba(15,223,175,0.2), 0 0 5px #0fdfaf; }
+      50% { box-shadow: inset 0 0 15px rgba(15,223,175,0.4), 0 0 15px #0fdfaf; }
+    }
+
+    /* Start Screen */
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 0 0 10px #0fdfaf, 0 0 20px #0fdfaf; }
+      50% { text-shadow: 0 0 20px #0fdfaf, 0 0 40px #0fdfaf, 0 0 60px #0fdfaf; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% { 
+        box-shadow: 0 0 10px #0fdfaf, inset 0 0 10px rgba(15,223,175,0.2);
+      }
+      50% { 
+        box-shadow: 0 0 30px #0fdfaf, inset 0 0 20px rgba(15,223,175,0.4);
+      }
+    }
+
+    @keyframes scanlines {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(10px); }
+    }
+
+    #start-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #000 0%, #001a14 50%, #000 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      overflow: hidden;
+    }
+
+    #start-screen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(15,223,175,0.03) 0px,
+        rgba(15,223,175,0.03) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      animation: scanlines 8s linear infinite;
+      pointer-events: none;
+    }
+
+    #start-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    #start-title {
+      font-size: 64px;
+      font-weight: bold;
+      color: #0fdfaf;
+      margin-bottom: 10px;
+      letter-spacing: 3px;
+      animation: titleGlow 3s ease-in-out infinite, fadeInUp 1s ease-out;
+      text-shadow: 0 0 15px #0fdfaf;
+    }
+
+    #start-subtitle {
+      font-size: 24px;
+      color: #0fdfaf;
+      margin-bottom: 40px;
+      opacity: 0.8;
+      animation: fadeInUp 1s ease-out 0.3s both;
+      letter-spacing: 2px;
+    }
+
+    #start-text {
+      font-size: 14px;
+      color: #0fdfaf;
+      max-width: 500px;
+      line-height: 1.8;
+      margin-bottom: 50px;
+      margin-left: 50px;
+      opacity: 0.7;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    #start-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    #btn-start,
+    #btn-how-to,
+    #btn-settings,
+    #btn-how-to-close,
+    #btn-settings-close {
+      background: transparent;
+      border: 2px solid #0fdfaf;
+      color: #0fdfaf;
+      padding: 15px 40px;
+      font-size: 20px;
+      cursor: pointer;
+      font-family: monospace;
+      font-weight: bold;
+      animation: fadeInUp 1s ease-out 0.9s both, buttonPulse 2s ease-in-out 1.9s infinite;
+      transition: all 0.3s ease;
+      letter-spacing: 2px;
+    }
+
+    #btn-start {
+      animation: fadeInUp 1s ease-out 0.9s both, buttonPulse 2s ease-in-out 1.9s infinite;
+    }
+
+    #btn-how-to {
+      animation: fadeInUp 1s ease-out 1.05s both;
+    }
+
+    #btn-settings {
+      animation: fadeInUp 1s ease-out 1.2s both;
+    }
+
+    #btn-start:hover,
+    #btn-how-to:hover,
+    #btn-settings:hover,
+    #btn-how-to-close:hover,
+    #btn-settings-close:hover {
+      background: rgba(15,223,175,0.1);
+      box-shadow: 0 0 30px #0fdfaf, inset 0 0 20px rgba(15,223,175,0.3);
+      transform: scale(1.05);
+    }
+
+    #btn-start:active,
+    #btn-how-to:active,
+    #btn-settings:active,
+    #btn-how-to-close:active,
+    #btn-settings-close:active {
+      transform: scale(0.95);
+    }
+
+    #how-to-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,0.86);
+      z-index: 340;
+    }
+
+    #how-to-modal.open {
+      display: flex;
+    }
+
+    #how-to-box {
+      width: min(760px, 100%);
+      max-height: min(82vh, 900px);
+      overflow-y: auto;
+      padding: 28px 30px;
+      border: 2px solid #0fdfaf;
+      background: linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(0,26,20,0.95) 100%);
+      box-shadow: 0 0 32px rgba(15,223,175,0.28);
+      text-align: left;
+    }
+
+    #how-to-title {
+      font-size: 32px;
+      margin-bottom: 18px;
+      color: #0fdfaf;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(15,223,175,0.4);
+    }
+
+    #how-to-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(15,223,175,0.92);
+      margin-bottom: 24px;
+    }
+
+    #how-to-text strong {
+      color: #0fdfaf;
+    }
+
+    #how-to-text ul {
+      margin: 12px 0 0 20px;
+      padding: 0;
+    }
+
+    #settings-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,0.86);
+      z-index: 345;
+    }
+
+    #settings-modal.open {
+      display: flex;
+    }
+
+    #settings-box {
+      width: min(680px, 100%);
+      max-height: min(82vh, 900px);
+      overflow-y: auto;
+      padding: 28px 30px;
+      border: 2px solid #0fdfaf;
+      background: linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(0,26,20,0.95) 100%);
+      box-shadow: 0 0 32px rgba(15,223,175,0.28);
+      text-align: left;
+    }
+
+    #settings-title {
+      font-size: 32px;
+      margin-bottom: 18px;
+      color: #0fdfaf;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(15,223,175,0.4);
+    }
+
+    #settings-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .settings-row {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+      padding: 14px 16px;
+      border: 1px solid rgba(15,223,175,0.28);
+      background: rgba(0, 24, 19, 0.72);
+    }
+
+    .settings-label {
+      color: #0fdfaf;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .settings-control {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    #settings-language-select,
+    #settings-effects-select {
+      width: 100%;
+      background: rgba(0,0,0,0.92);
+      color: #0fdfaf;
+      border: 1px solid #0fdfaf;
+      padding: 10px 12px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    #settings-volume,
+    #settings-brightness {
+      flex: 1;
+      accent-color: #0fdfaf;
+    }
+
+    #settings-volume-value,
+    #settings-brightness-value {
+      min-width: 54px;
+      text-align: right;
+      color: rgba(15,223,175,0.85);
+      font-size: 14px;
+    }
+
+    #settings-note {
+      font-size: 12px;
+      line-height: 1.7;
+      color: rgba(15,223,175,0.72);
+      margin-bottom: 24px;
+    }
+
+    #admin-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,0.88);
+      z-index: 350;
+    }
+
+    #admin-modal.open {
+      display: flex;
+    }
+
+    #admin-box {
+      width: min(720px, 100%);
+      max-height: min(82vh, 900px);
+      overflow-y: auto;
+      padding: 28px 30px;
+      border: 2px solid #ff6a3d;
+      background: linear-gradient(180deg, rgba(17,0,0,0.97) 0%, rgba(42,10,0,0.95) 100%);
+      box-shadow: 0 0 34px rgba(255,106,61,0.3);
+      text-align: left;
+    }
+
+    #admin-title {
+      font-size: 32px;
+      margin-bottom: 12px;
+      color: #ff8a55;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255,106,61,0.35);
+    }
+
+    #admin-status,
+    #admin-detected {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,212,196,0.92);
+    }
+
+    #admin-status {
+      margin-bottom: 8px;
+    }
+
+    #admin-detected {
+      margin-bottom: 18px;
+      color: rgba(255,212,196,0.72);
+    }
+
+    #admin-controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .admin-action-btn,
+    #btn-admin-close {
+      background: rgba(30, 8, 0, 0.92);
+      border: 2px solid #ff6a3d;
+      color: #ffd4c4;
+      padding: 14px 16px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 15px;
+      letter-spacing: 1px;
+      transition: all 0.25s ease;
+    }
+
+    .admin-action-btn:hover,
+    #btn-admin-close:hover {
+      background: rgba(74, 18, 0, 0.96);
+      box-shadow: 0 0 24px rgba(255,106,61,0.3), inset 0 0 16px rgba(255,106,61,0.18);
+      transform: translateY(-1px);
+    }
+
+    .admin-action-btn:active,
+    #btn-admin-close:active {
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 700px) {
+      .settings-row {
+        grid-template-columns: 1fr;
+      }
+
+      .settings-control {
+        flex-wrap: wrap;
+      }
+
+      #settings-volume-value,
+      #settings-brightness-value {
+        text-align: left;
+      }
+
+      #admin-controls {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Death Screen */
+    @keyframes deathFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes deathTitlePulse {
+      0%, 100% { 
+        color: #ff4444;
+        text-shadow: 0 0 10px #ff4444, 0 0 20px #cc0000;
+      }
+      50% { 
+        color: #ff0000;
+        text-shadow: 0 0 20px #ff0000, 0 0 40px #ff4444;
+      }
+    }
+
+    #death-screen {
+      position: fixed;
+      inset: 0;
+      background: #c70000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 250;
+      animation: deathFadeIn 0.8s ease-out;
+    }
+
+    #death-content {
+      position: relative;
+      text-align: center;
+    }
+
+    #death-title {
+      font-size: 72px;
+      font-weight: bold;
+      color: #ff4444;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+      animation: deathTitlePulse 2s ease-in-out infinite;
+      text-shadow: 0 0 20px #ff0000, 0 0 40px #cc0000;
+    }
+
+    #death-message {
+      font-size: 18px;
+      color: #0fdfaf;
+      max-width: 500px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    #death-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    #btn-restart-death,
+    #btn-back-to-start {
+      background: transparent;
+      border: 3px solid #ff4444;
+      color: #ff4444;
+      padding: 15px 45px;
+      font-size: 20px;
+      cursor: pointer;
+      font-family: monospace;
+      font-weight: bold;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #ff4444;
+    }
+
+    #btn-restart-death:hover,
+    #btn-back-to-start:hover {
+      background: rgba(255,68,68,0.1);
+      box-shadow: 0 0 30px #ff4444, inset 0 0 20px rgba(255,68,68,0.3);
+      transform: scale(1.05);
+    }
+
+    #btn-restart-death:active,
+    #btn-back-to-start:active {
+      transform: scale(0.95);
+    }
+
+    /* Jumpscare */
+    @keyframes jumpscareScale {
+      0% {
+        transform: scale(0.3);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes jumpscareShake {
+      0%, 100% { transform: translateX(0) scale(1); }
+      10% { transform: translateX(-15px) scale(1.05); }
+      20% { transform: translateX(15px) scale(1.05); }
+      30% { transform: translateX(-10px) scale(1.02); }
+      40% { transform: translateX(10px) scale(1.02); }
+      50% { transform: translateX(-5px) scale(1); }
+      60% { transform: translateX(5px) scale(1); }
+      70%, 100% { transform: translateX(0) scale(1); }
+    }
+    
+    #jumpscare {
+      position: fixed;
+      inset: 0;
+      background: #c70000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      animation: jumpscareFlash 0.3s ease-in-out;
+    }
+    #jumpscare-face {
+      font-size: 400px;
+      color: #ff0000;
+      animation: jumpscareFlying 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
+      will-change: transform, opacity;
+      text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+    @keyframes jumpscareFlying {
+      0% {
+        transform: scale(0) translateX(-100vw) translateY(-100vh);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) translateX(0) translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes jumpscareFlash {
+      0% { background: #c70000; }
+      20% { background: #ff0000; }
+      40% { background: #c70000; }
+      60% { background: #ff0000; }
+      80% { background: #c70000; }
+      100% { background: #c70000; } }
+    
+
+
+  </style>
+</head>
+<body>
+  <div id="language-panel">
+    <label id="language-label" for="language-select">Language</label>
+    <select id="language-select">
+      <option value="lv">Latviešu</option>
+      <option value="en">English</option>
+      <option value="ru">Русский</option>
+      <option value="uk">Українська</option>
+      <option value="de">Deutsch</option>
+      <option value="da">Dansk</option>
+    </select>
+  </div>
+
+  <!-- Start Screen -->
+  <div id="start-screen">
+    <div id="start-content">
+      <div id="start-title">PIECAS NAKTIS</div>
+      <div id="start-subtitle">PIE KLĀVA</div>
+      <div id="start-text">
+        Jūs tikko tikāt pieņemti darbā "Klāva pieskatīšana".
+        Jūsu darbs ir sēdēt ofisā un uzraudzīt video kameras.
+        Pārdzīvojiet piecas naktis bez notikumiem (if you know what i mean)... 
+      </div>
+      <div id="start-actions">
+        <button id="btn-start">SĀKT SPĒLI</button>
+        <button id="btn-how-to">How to play</button>
+        <button id="btn-settings">Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="how-to-modal">
+    <div id="how-to-box">
+      <div id="how-to-title">How to play</div>
+      <div id="how-to-text"></div>
+      <button id="btn-how-to-close">Close</button>
+    </div>
+  </div>
+
+  <div id="settings-modal">
+    <div id="settings-box">
+      <div id="settings-title">Settings</div>
+      <div id="settings-controls">
+        <div class="settings-row">
+          <label class="settings-label" id="settings-language-label" for="settings-language-select">Language</label>
+          <div class="settings-control">
+            <select id="settings-language-select"></select>
+          </div>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label" id="settings-volume-label" for="settings-volume">Volume</label>
+          <div class="settings-control">
+            <input id="settings-volume" type="range" min="0" max="100" step="5" value="70">
+            <span id="settings-volume-value">70%</span>
+          </div>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label" id="settings-brightness-label" for="settings-brightness">Brightness</label>
+          <div class="settings-control">
+            <input id="settings-brightness" type="range" min="50" max="150" step="5" value="100">
+            <span id="settings-brightness-value">100%</span>
+          </div>
+        </div>
+        <div class="settings-row">
+          <label class="settings-label" id="settings-effects-label" for="settings-effects-select">Jumpscare effects</label>
+          <div class="settings-control">
+            <select id="settings-effects-select">
+              <option id="settings-effects-low" value="low">Low</option>
+              <option id="settings-effects-normal" value="normal">Normal</option>
+              <option id="settings-effects-high" value="high">High</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="settings-note">Settings save automatically.</div>
+      <button id="btn-settings-close">Close</button>
+    </div>
+  </div>
+
+  <div id="admin-modal">
+    <div id="admin-box">
+      <div id="admin-title">Admin Panel</div>
+      <div id="admin-status"></div>
+      <div id="admin-detected"></div>
+      <div id="admin-controls">
+        <button class="admin-action-btn" id="btn-admin-skip-night">Skip Night (+1)</button>
+        <button class="admin-action-btn" id="btn-admin-infinite-power">Infinite Power: OFF</button>
+        <button class="admin-action-btn" id="btn-admin-freeze-klavs">Freeze Klāvs: OFF</button>
+        <button class="admin-action-btn" id="btn-admin-fill-power">Fill Power</button>
+        <button class="admin-action-btn" id="btn-admin-reset-klavs">Reset Klāvs</button>
+      </div>
+      <button id="btn-admin-close">Close</button>
+    </div>
+  </div>
+
+  <div id="game">
+    <div id="title">PIECAS NAKTIS PIE KLĀVA</div>
+
+    <div id="hud">
+      <div><span id="hud-night-label">Nakts</span>: <span id="night">1</span>/5</div>
+      <div><span id="hud-time-label">Laiks</span>: <span id="time">00:00</span></div>
+      <div><span id="hud-power-label">Enerģija</span>: <span id="power">100%</span></div>
+    </div>
+
+    <div id="screen">
+      <!-- Ofiss fonā -->
+      <div id="office-bg"></div>
+
+      <!-- Kameru foni -->
+      <div id="bg-0" class="room-bg"></div>
+      <div id="bg-1" class="room-bg"></div>
+      <div id="bg-2" class="room-bg"></div>
+      <div id="bg-3" class="room-bg"></div>
+      <div id="bg-4" class="room-bg"></div>
+      <div id="bg-5" class="room-bg"></div>
+      <div id="bg-6" class="room-bg"></div>
+      <div id="bg-7" class="room-bg"></div>
+      <div id="bg-8" class="room-bg"></div>
+      <div id="bg-9" class="room-bg"></div>
+
+      <!-- Klāvs kamerās -->
+      <div id="klavs-figure"></div>
+
+      <!-- Kameru overlay -->
+      <div id="camera-overlay">
+        <div id="camera-feed">
+          <div id="camera-feed-bg"></div>
+          <div id="camera-label">SECURITY MONITOR</div>
+          <div id="camera-feed-klavs"></div>
+          <div id="camera-static"></div>
+        </div>
+        <div id="camera-map-fnaf">
+          <svg id="camera-lines" width="280" height="210" style="position: absolute; top: 0; left: 0;"></svg>
+          <button class="fnaf-cam-btn" data-cam="0" title="Hallway">1A</button>
+          <button class="fnaf-cam-btn" data-cam="1" title="Hallway">1B</button>
+          <button class="fnaf-cam-btn" data-cam="2" title="Kitchen">2A</button>
+          <button class="fnaf-cam-btn" data-cam="3" title="Dining">2B</button>
+          <button class="fnaf-cam-btn" data-cam="4" title="Entry">3</button>
+          <button class="fnaf-cam-btn" data-cam="5" title="West">4A</button>
+          <button class="fnaf-cam-btn" data-cam="6" title="East">4B</button>
+          <button class="fnaf-cam-btn" data-cam="7" title="Storage">5</button>
+          <button class="fnaf-cam-btn" data-cam="8" title="Backstage">6</button>
+          <button class="fnaf-cam-btn" data-cam="9" title="Office">OFF</button>
+        </div>
+
+      </div>
+
+      <div id="screen-text"></div>
+    </div>
+
+    <div id="controls">
+      <button id="btn-light">Gaisma</button>
+      <button id="btn-door">Durvis (atvērtas)</button>
+      <button id="btn-camera">Kameras</button>
+      <button id="btn-scream">Kliegt</button>
+      <button id="btn-admin">ADMIN</button>
+      <button id="btn-restart" style="display:none;">Restartēt</button>
+    </div>
+
+    <div id="log"></div>
+  </div>
+
+  <!-- Apsveikuma ekrāns -->
+  <div id="congrats-screen">
+    <div id="congrats-box">
+      <h1 id="congrats-title">Apsveicu!</h1>
+      <p id="congrats-text">Tu izdzīvoji nakti.</p>
+      <button id="btn-next-night">Play Night 2</button>
+    </div>
+  </div>
+
+  <!-- Super Win Screen -->
+  <div id="super-win-screen">
+    <div id="super-win-content">
+      <div id="super-win-title">JŪZĪVOJI!</div>
+      <div id="super-win-subtitle">VISAS PIECAS NAKTIS</div>
+      <div id="super-win-map">
+      </div>
+      <div id="super-win-message">Tu esi uzvarējis visas piecas naktis pie Klāva!
+Tu esi brīvs... Pagaidām...</div>
+      <button id="btn-replay">→ SPĒLĒT VĒLREIZ →</button>
+    </div>
+  </div>
+
+  <!-- Jumpscare -->
+  <div id="jumpscare">
+    <div id="jumpscare-face">■</div>
+  </div>
+
+  <!-- Death Screen -->
+  <div id="death-screen">
+    <div id="death-content">
+      <h1 id="death-title">NĀVE</h1>
+      <p id="death-message"></p>
+      <div id="death-actions">
+        <button id="btn-restart-death">MĒĢINĀT VĒLREIZ</button>
+        <button id="btn-back-to-start">ATPAKAĻ UZ SĀKUMU</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== MAINĪGIE =====
+    let night = 1;
+    let seconds = 0;
+    let power = 100;
+    let gameOver = false;
+    let timer = null;
+
+    let cameraOn = false;
+    let doorClosed = false;
+    let lightsOn = false;
+
+    let klavsRoom = 0;
+    let currentCameraRoom = 9;
+    let klavsCooldown = 0;
+    let klavsMoveTimer = 0;
+    let klavsDoorTimer = 0;
+    let klavsMovePressure = 0;
+    let klavsKillIntent = 0;
+    let adminAuthorized = false;
+    let adminAccessChecking = true;
+    let infinitePowerEnabled = false;
+    let freezeKlavsEnabled = false;
+
+    const pathToOffice = [0,1,2,3,5,6,9];
+    const SETTINGS_STORAGE_KEY = "pnpk-settings";
+    const ADMIN_ALLOWED_LOCAL_IP = "212.3.195.4";
+    const detectedAdminIps = new Set();
+    const jumpscareEffectPresets = {
+      low: {
+        flashDuration: "0.14s",
+        faceDuration: "0.18s",
+        faceSize: "280px",
+        soundMultiplier: 0.7
+      },
+      normal: {
+        flashDuration: "0.3s",
+        faceDuration: "0.3s",
+        faceSize: "400px",
+        soundMultiplier: 1
+      },
+      high: {
+        flashDuration: "0.46s",
+        faceDuration: "0.42s",
+        faceSize: "480px",
+        soundMultiplier: 1.28
+      }
+    };
+
+    // ===== ELEMENTI =====
+    const languageLabelEl = document.getElementById("language-label");
+    const languageSelect = document.getElementById("language-select");
+    const titleEl = document.getElementById("title");
+    const startTitleEl = document.getElementById("start-title");
+    const startSubtitleEl = document.getElementById("start-subtitle");
+    const startTextEl = document.getElementById("start-text");
+    const btnHowTo = document.getElementById("btn-how-to");
+    const btnSettings = document.getElementById("btn-settings");
+    const howToModal = document.getElementById("how-to-modal");
+    const howToTitleEl = document.getElementById("how-to-title");
+    const howToTextEl = document.getElementById("how-to-text");
+    const btnHowToClose = document.getElementById("btn-how-to-close");
+    const settingsModal = document.getElementById("settings-modal");
+    const settingsTitleEl = document.getElementById("settings-title");
+    const settingsLanguageLabelEl = document.getElementById("settings-language-label");
+    const settingsLanguageSelect = document.getElementById("settings-language-select");
+    const settingsVolumeLabelEl = document.getElementById("settings-volume-label");
+    const settingsVolumeEl = document.getElementById("settings-volume");
+    const settingsVolumeValueEl = document.getElementById("settings-volume-value");
+    const settingsBrightnessLabelEl = document.getElementById("settings-brightness-label");
+    const settingsBrightnessEl = document.getElementById("settings-brightness");
+    const settingsBrightnessValueEl = document.getElementById("settings-brightness-value");
+    const settingsEffectsLabelEl = document.getElementById("settings-effects-label");
+    const settingsEffectsSelect = document.getElementById("settings-effects-select");
+    const settingsEffectsLowEl = document.getElementById("settings-effects-low");
+    const settingsEffectsNormalEl = document.getElementById("settings-effects-normal");
+    const settingsEffectsHighEl = document.getElementById("settings-effects-high");
+    const settingsNoteEl = document.getElementById("settings-note");
+    const btnSettingsClose = document.getElementById("btn-settings-close");
+    const adminModal = document.getElementById("admin-modal");
+    const adminTitleEl = document.getElementById("admin-title");
+    const adminStatusEl = document.getElementById("admin-status");
+    const adminDetectedEl = document.getElementById("admin-detected");
+    const btnAdminSkipNight = document.getElementById("btn-admin-skip-night");
+    const btnAdminInfinitePower = document.getElementById("btn-admin-infinite-power");
+    const btnAdminFreezeKlavs = document.getElementById("btn-admin-freeze-klavs");
+    const btnAdminFillPower = document.getElementById("btn-admin-fill-power");
+    const btnAdminResetKlavs = document.getElementById("btn-admin-reset-klavs");
+    const btnAdminClose = document.getElementById("btn-admin-close");
+    const hudNightLabelEl = document.getElementById("hud-night-label");
+    const hudTimeLabelEl = document.getElementById("hud-time-label");
+    const hudPowerLabelEl = document.getElementById("hud-power-label");
+    const nightEl = document.getElementById("night");
+    const timeEl = document.getElementById("time");
+    const powerEl = document.getElementById("power");
+    const screenText = document.getElementById("screen-text");
+    const logDiv = document.getElementById("log");
+
+    // ===== SOUNDS =====
+    settingsLanguageSelect.innerHTML = languageSelect.innerHTML;
+
+    function playSound(frequency, duration, type = 'sine', volumeMultiplier = 1) {
+      const volume = Math.max(0, Math.min(1, ((gameSettings?.volume ?? 70) / 100) * volumeMultiplier));
+      if (volume <= 0) return;
+
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.value = frequency;
+      oscillator.type = type;
+      gainNode.gain.setValueAtTime(0.3 * volume, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(Math.max(0.0001, 0.01 * volume), audioContext.currentTime + duration);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + duration);
+    }
+
+    function playJumpscareSound() {
+      const effect = getJumpscareEffectConfig();
+      playSound(150, 0.3, 'square', effect.soundMultiplier);
+      setTimeout(() => playSound(80, 0.5, 'sine', effect.soundMultiplier), 100);
+    }
+
+    function playGameStartSound() {
+      playSound(440, 0.2, 'sine');
+      setTimeout(() => playSound(550, 0.2, 'sine'), 150);
+      setTimeout(() => playSound(660, 0.3, 'sine'), 300);
+    }
+
+    function playButtonSound() {
+      playSound(800, 0.1, 'square');
+    }
+
+    function playCameraSound() {
+      playSound(1200, 0.15, 'sine');
+    }
+
+    const camOverlay = document.getElementById("camera-overlay");
+    const camFeedBg = document.getElementById("camera-feed-bg");
+    const camFeedKlavs = document.getElementById("camera-feed-klavs");
+    const camLabel = document.getElementById("camera-label");
+    const camStatic = document.getElementById("camera-static");
+    const camMapFnaf = document.getElementById("camera-map-fnaf");
+
+    const jumpscare = document.getElementById("jumpscare");
+    const jumpscareFace = document.getElementById("jumpscare-face");
+    const roomBgs = Array.from(document.querySelectorAll(".room-bg"));
+    const klavsFigure = document.getElementById("klavs-figure");
+    const superWinScreen = document.getElementById("super-win-screen");
+    const btnReplay = document.getElementById("btn-replay");
+
+    const btnLight = document.getElementById("btn-light");
+    const btnDoor = document.getElementById("btn-door");
+    const btnCamera = document.getElementById("btn-camera");
+    const btnScream = document.getElementById("btn-scream");
+    const btnAdmin = document.getElementById("btn-admin");
+    const btnRestart = document.getElementById("btn-restart");
+    const btnNextNight = document.getElementById("btn-next-night");
+    const btnStart = document.getElementById("btn-start");
+
+    const gameEl = document.getElementById("game");
+    const congratsScreen = document.getElementById("congrats-screen");
+    const startScreen = document.getElementById("start-screen");
+    const deathScreen = document.getElementById("death-screen");
+    const deathTitleEl = document.getElementById("death-title");
+    const deathMessage = document.getElementById("death-message");
+    const btnRestartDeath = document.getElementById("btn-restart-death");
+    const btnBackToStart = document.getElementById("btn-back-to-start");
+    const congratsTitleEl = document.getElementById("congrats-title");
+    const congratsTextEl = document.getElementById("congrats-text");
+    const superWinTitleEl = document.getElementById("super-win-title");
+    const superWinSubtitleEl = document.getElementById("super-win-subtitle");
+    const superWinMessageEl = document.getElementById("super-win-message");
+
+    const cameraButtons = Array.from(document.querySelectorAll(".fnaf-cam-btn"));
+
+    const translations = {
+      lv: {
+        pageTitle: "Piecas naktis pie Klāva",
+        languageLabel: "Valoda",
+        startTitle: "PIECAS NAKTIS",
+        startSubtitle: "PIE KLĀVA",
+        startText: 'Jūs tikko tikāt pieņemti darbā "Klāva pieskatīšanā".<br>Jūsu darbs ir sēdēt ofisā un uzraudzīt video kameras.<br>Pārdzīvojiet piecas naktis bez notikumiem (if you know what I mean)...',
+        btnHowTo: "Kā spēlēt",
+        btnSettings: "Iestatījumi",
+        howToTitle: "Kā spēlēt",
+        howToClose: "Aizvērt",
+        settingsTitle: "Iestatījumi",
+        settingsVolume: "Skaļums",
+        settingsBrightness: "Spilgtums",
+        settingsEffects: "Jumpscare efekti",
+        settingsEffectsLow: "Zemi",
+        settingsEffectsNormal: "Normāli",
+        settingsEffectsHigh: "Spēcīgi",
+        settingsAutoSave: "Iestatījumi saglabājas automātiski.",
+        howToBody: '<strong>Mērķis:</strong> Izdzīvo līdz nakts beigām un pārvari visas piecas naktis.<br><br><strong>Vadība:</strong><ul><li><strong>Gaisma:</strong> pārbauda ofisu un samazina Klāva iespēju doties uz ofisu, bet tērē enerģiju.</li><li><strong>Durvis:</strong> aizver tās, kad Klāvs ir tuvu ofisam. Bloķēts uzbrukums tevi glābj, bet maksā enerģiju.</li><li><strong>Kameras:</strong> izmanto tās, lai izsekotu Klāvu. Skatīšanās viņu var palēnināt, bet kameras arī tērē enerģiju.</li><li><strong>Kliegt:</strong> uzreiz palaid jumpscare pogu.</li></ul><strong>Kā Klāvs medī:</strong><ul><li>Viņš kustas pa karti uz ofisu kā animatroniks.</li><li>Ja durvis ir vaļā un tu ilgi esi neaizsargāts, viņš kļūst agresīvāks.</li><li>Kad viņš ir pie durvīm, reaģē ātri: izmanto durvis un gaismu kopā.</li></ul><strong>Enerģijas padomi:</strong><ul><li>Gaisma, durvis un kameras patērē enerģiju.</li><li>Ja enerģija beidzas, tu esi lielās briesmās.</li></ul>',
+        gameTitle: "PIECAS NAKTIS PIE KLĀVA",
+        hudNight: "Nakts",
+        hudTime: "Laiks",
+        hudPower: "Enerģija",
+        cameraMonitorLabel: "DROŠĪBAS MONITORS",
+        cameraRoomNames: [
+          "CAM 1A — KORIDORS",
+          "CAM 1B — KORIDORS",
+          "CAM 2A — VIRTUVE",
+          "CAM 2B — ĒDAMZĀLE",
+          "CAM 3 — PRIEKŠTELPA",
+          "CAM 4A — KREISĀ PUSE",
+          "CAM 4B — LABĀ PUSE",
+          "CAM 5 — NOLIKTAVA",
+          "CAM 6 — AIZKULISES",
+          "OFISS"
+        ],
+        cameraButtonTitles: [
+          "Koridors",
+          "Koridors",
+          "Virtuve",
+          "Ēdamzāle",
+          "Priekštelpa",
+          "Kreisā puse",
+          "Labā puse",
+          "Noliktava",
+          "Aizkulises",
+          "Ofiss"
+        ],
+        btnStart: "SĀKT SPĒLI",
+        btnLight: "Gaisma",
+        btnDoorOpen: "Durvis (atvērtas)",
+        btnDoorClosed: "Durvis (aizvērtas)",
+        btnCamera: "Kameras",
+        btnScream: "Kliegt",
+        btnRestart: "Restartēt",
+        btnRestartDeath: "MĒĢINĀT VĒLREIZ",
+        btnBackToStart: "ATPAKAĻ UZ SĀKUMU",
+        btnReplay: "\u2192 SPĒLĒT VĒLREIZ \u2192",
+        congratsTitle: "NAKTS IZDZĪVOTA!",
+        congratsMessages: [
+          "Tu izdzīvoji pirmo nakti pie Klāva!",
+          "Vēl viena nakts aiz muguras. Jau tuvāk uzvarai!",
+          "Trīs naktis pārdzīvotas. Tu esi spēcīgs!",
+          "Tik tuvu galam... Esi lepns, tu esi stiprs!",
+          "Vēl tikai viena nakts... Tu to paveiksi!"
+        ],
+        nextNightButton: ({ night }) => `\u2192 NAKTS ${night} \u2192`,
+        congratsFallback: ({ night }) => `Tu izdzīvoji nakti ${night}!`,
+        superWinTitle: "IZDZĪVOJI!",
+        superWinSubtitle: "VISAS PIECAS NAKTIS",
+        superWinMessage: "Tu esi uzvarējis visas piecas naktis pie Klāva!<br>Tu esi brīvs... Pagaidām...",
+        deathTitle: "NĀVE",
+        cameraSeesKlavs: "Kamerā redzi Klāvu stāvam tumsā.",
+        cameraEmpty: "Kameras rāda tukšas telpas.",
+        cameraLowered: "Tu nolaid kameras un skaties ofisā.",
+        lightOn: "Tu ieslēdz gaismu.",
+        lightOff: "Tu izslēdz gaismu.",
+        nightStart: ({ night }) => `Nakts ${night} sākas.`,
+        officeIdle: "Tu sēdi ofisā. Klusums ir biedējošs.",
+        logDoorBlocked: "Durvis notur Klāvu ārā.",
+        logSomethingMoves: "Kaut kas pārvietojas tumsā...",
+        deathKlavs: "Klāvs ir ofisā. Tu neizdzīvoji šo nakti.",
+        deathPower: "Enerģija beigusies. Ofiss grimst tumsā."
+      },
+      en: {
+        pageTitle: "Five Nights at Klavs",
+        languageLabel: "Language",
+        startTitle: "FIVE NIGHTS",
+        startSubtitle: "AT KLAVS",
+        startText: 'You have just been hired for "Klāvs supervision".<br>Your job is to sit in the office and monitor the video cameras.<br>Survive five nights without incidents (if you know what I mean)...',
+        btnHowTo: "How to play",
+        btnSettings: "Settings",
+        howToTitle: "How to play",
+        howToClose: "Close",
+        settingsTitle: "Settings",
+        settingsVolume: "Volume",
+        settingsBrightness: "Brightness",
+        settingsEffects: "Jumpscare effects",
+        settingsEffectsLow: "Low",
+        settingsEffectsNormal: "Normal",
+        settingsEffectsHigh: "High",
+        settingsAutoSave: "Settings save automatically.",
+        howToBody: '<strong>Goal:</strong> Survive until the end of each night and clear all five nights.<br><br><strong>Controls:</strong><ul><li><strong>Light:</strong> checks the office and lowers Klāvs\' chance to commit to the office, but drains power.</li><li><strong>Door:</strong> close it when Klāvs is near. A blocked attack saves you, but costs power.</li><li><strong>Cameras:</strong> use them to track Klāvs. Watching him can slow him down, but cameras also drain power.</li><li><strong>Scream:</strong> fires the jumpscare button instantly.</li></ul><strong>How Klāvs hunts:</strong><ul><li>He moves across the map toward the office like an animatronic.</li><li>If the door stays open and you remain exposed, he becomes more aggressive.</li><li>When he reaches the doorway, react fast: use the door and the light together.</li></ul><strong>Power tips:</strong><ul><li>Lights, door, and cameras all consume power.</li><li>If power runs out, you are in serious danger.</li></ul>',
+        gameTitle: "FIVE NIGHTS AT KLAVS",
+        hudNight: "Night",
+        hudTime: "Time",
+        hudPower: "Power",
+        cameraMonitorLabel: "SECURITY MONITOR",
+        cameraRoomNames: [
+          "CAM 1A — HALLWAY",
+          "CAM 1B — HALLWAY",
+          "CAM 2A — KITCHEN",
+          "CAM 2B — DINING",
+          "CAM 3 — ENTRY",
+          "CAM 4A — WEST SIDE",
+          "CAM 4B — EAST SIDE",
+          "CAM 5 — STORAGE",
+          "CAM 6 — BACKSTAGE",
+          "OFFICE"
+        ],
+        cameraButtonTitles: [
+          "Hallway",
+          "Hallway",
+          "Kitchen",
+          "Dining",
+          "Entry",
+          "West Side",
+          "East Side",
+          "Storage",
+          "Backstage",
+          "Office"
+        ],
+        btnStart: "START GAME",
+        btnLight: "Light",
+        btnDoorOpen: "Door (open)",
+        btnDoorClosed: "Door (closed)",
+        btnCamera: "Cameras",
+        btnScream: "Scream",
+        btnRestart: "Restart",
+        btnRestartDeath: "TRY AGAIN",
+        btnBackToStart: "BACK TO START SCREEN",
+        btnReplay: "\u2192 PLAY AGAIN \u2192",
+        congratsTitle: "NIGHT SURVIVED!",
+        congratsMessages: [
+          "You survived the first night with Klāvs!",
+          "Another night behind you. Victory is getting closer!",
+          "Three nights down. You're getting stronger!",
+          "So close to the end... Be proud, you've got this!",
+          "Only one night left... You can do it!"
+        ],
+        nextNightButton: ({ night }) => `\u2192 NIGHT ${night} \u2192`,
+        congratsFallback: ({ night }) => `You survived night ${night}!`,
+        superWinTitle: "YOU SURVIVED!",
+        superWinSubtitle: "ALL FIVE NIGHTS",
+        superWinMessage: "You beat all five nights with Klāvs!<br>You are free... for now...",
+        deathTitle: "DEATH",
+        cameraSeesKlavs: "On the camera you see Klāvs standing in the dark.",
+        cameraEmpty: "The cameras show empty rooms.",
+        cameraLowered: "You lower the cameras and watch the office.",
+        lightOn: "You turn on the light.",
+        lightOff: "You turn off the light.",
+        nightStart: ({ night }) => `Night ${night} begins.`,
+        officeIdle: "You sit in the office. The silence is unsettling.",
+        logDoorBlocked: "The door keeps Klāvs outside.",
+        logSomethingMoves: "Something is moving in the dark...",
+        deathKlavs: "Klāvs is in the office. You did not survive the night.",
+        deathPower: "The power is gone. The office sinks into darkness."
+      },
+      ru: {
+        pageTitle: "Пять ночей у Клава",
+        languageLabel: "Язык",
+        startTitle: "ПЯТЬ НОЧЕЙ",
+        startSubtitle: "У КЛАВА",
+        startText: "Вас только что наняли на работу по \"наблюдению за Клавом\".<br>Ваша задача - сидеть в офисе и следить за видеокамерами.<br>Переживите пять ночей без происшествий (если вы понимаете, о чём я)...",
+        btnHowTo: "Как играть",
+        btnSettings: "Настройки",
+        howToTitle: "Как играть",
+        howToClose: "Закрыть",
+        settingsTitle: "Настройки",
+        settingsVolume: "Громкость",
+        settingsBrightness: "Яркость",
+        settingsEffects: "Эффекты скримера",
+        settingsEffectsLow: "Низкие",
+        settingsEffectsNormal: "Обычные",
+        settingsEffectsHigh: "Сильные",
+        settingsAutoSave: "Настройки сохраняются автоматически.",
+        howToBody: '<strong>Цель:</strong> Дожить до конца каждой ночи и пережить все пять ночей.<br><br><strong>Управление:</strong><ul><li><strong>Свет:</strong> помогает проверить офис и снижает шанс того, что Клав решится идти в офис, но тратит энергию.</li><li><strong>Дверь:</strong> закрывай её, когда Клав рядом. Заблокированная атака спасает тебя, но стоит энергии.</li><li><strong>Камеры:</strong> используй их, чтобы отслеживать Клава. Наблюдение может замедлить его, но камеры тоже тратят энергию.</li><li><strong>Крикнуть:</strong> сразу запускает кнопку jumpscare.</li></ul><strong>Как Клав охотится:</strong><ul><li>Он движется по карте к офису как аниматроник.</li><li>Если дверь открыта и ты долго остаёшься без защиты, он становится агрессивнее.</li><li>Когда он у двери, реагируй быстро: используй свет и дверь вместе.</li></ul><strong>Советы по энергии:</strong><ul><li>Свет, дверь и камеры расходуют энергию.</li><li>Если энергия закончится, ты окажешься в большой опасности.</li></ul>',
+        gameTitle: "ПЯТЬ НОЧЕЙ У КЛАВА",
+        hudNight: "Ночь",
+        hudTime: "Время",
+        hudPower: "Энергия",
+        cameraMonitorLabel: "МОНИТОР БЕЗОПАСНОСТИ",
+        cameraRoomNames: [
+          "CAM 1A - КОРИДОР",
+          "CAM 1B - КОРИДОР",
+          "CAM 2A - КУХНЯ",
+          "CAM 2B - СТОЛОВАЯ",
+          "CAM 3 - ВХОД",
+          "CAM 4A - ЛЕВАЯ СТОРОНА",
+          "CAM 4B - ПРАВАЯ СТОРОНА",
+          "CAM 5 - СКЛАД",
+          "CAM 6 - ЗАКУЛИСЬЕ",
+          "ОФИС"
+        ],
+        cameraButtonTitles: [
+          "Коридор",
+          "Коридор",
+          "Кухня",
+          "Столовая",
+          "Вход",
+          "Левая сторона",
+          "Правая сторона",
+          "Склад",
+          "Закулисье",
+          "Офис"
+        ],
+        btnStart: "НАЧАТЬ ИГРУ",
+        btnLight: "Свет",
+        btnDoorOpen: "Дверь (открыта)",
+        btnDoorClosed: "Дверь (закрыта)",
+        btnCamera: "Камеры",
+        btnScream: "Крикнуть",
+        btnRestart: "Перезапуск",
+        btnRestartDeath: "ПОПРОБОВАТЬ ЕЩЁ РАЗ",
+        btnBackToStart: "НАЗАД НА СТАРТОВЫЙ ЭКРАН",
+        btnReplay: "\u2192 ИГРАТЬ СНОВА \u2192",
+        congratsTitle: "НОЧЬ ПЕРЕЖИТА!",
+        congratsMessages: [
+          "Ты пережил первую ночь с Клавом!",
+          "Ещё одна ночь позади. Победа всё ближе!",
+          "Три ночи позади. Ты становишься сильнее!",
+          "Финиш уже близко... Гордись собой, ты справляешься!",
+          "Осталась всего одна ночь... Ты сможешь!"
+        ],
+        nextNightButton: ({ night }) => `\u2192 НОЧЬ ${night} \u2192`,
+        congratsFallback: ({ night }) => `Ты пережил ночь ${night}!`,
+        superWinTitle: "ТЫ ВЫЖИЛ!",
+        superWinSubtitle: "ВСЕ ПЯТЬ НОЧЕЙ",
+        superWinMessage: "Ты пережил все пять ночей у Клава!<br>Теперь ты свободен... пока что...",
+        deathTitle: "СМЕРТЬ",
+        cameraSeesKlavs: "На камере ты видишь Клава, стоящего во тьме.",
+        cameraEmpty: "Камеры показывают пустые комнаты.",
+        cameraLowered: "Ты опускаешь камеры и смотришь в офис.",
+        lightOn: "Ты включаешь свет.",
+        lightOff: "Ты выключаешь свет.",
+        nightStart: ({ night }) => `Ночь ${night} начинается.`,
+        officeIdle: "Ты сидишь в офисе. Тишина пугает.",
+        logDoorBlocked: "Дверь удерживает Клава снаружи.",
+        logSomethingMoves: "Что-то движется во тьме...",
+        deathKlavs: "Клав в офисе. Эту ночь ты не пережил.",
+        deathPower: "Энергия закончилась. Офис погружается во тьму."
+      },
+      uk: {
+        pageTitle: "П'ять ночей у Клава",
+        languageLabel: "Мова",
+        startTitle: "П'ЯТЬ НОЧЕЙ",
+        startSubtitle: "У КЛАВА",
+        startText: "Вас щойно найняли на роботу з \"нагляду за Клавом\".<br>Ваше завдання - сидіти в офісі та стежити за відеокамерами.<br>Переживіть п'ять ночей без пригод (якщо ви розумієте, про що я)...",
+        btnHowTo: "Як грати",
+        btnSettings: "Налаштування",
+        howToTitle: "Як грати",
+        howToClose: "Закрити",
+        settingsTitle: "Налаштування",
+        settingsVolume: "Гучність",
+        settingsBrightness: "Яскравість",
+        settingsEffects: "Ефекти скримеру",
+        settingsEffectsLow: "Низькі",
+        settingsEffectsNormal: "Звичайні",
+        settingsEffectsHigh: "Сильні",
+        settingsAutoSave: "Налаштування зберігаються автоматично.",
+        howToBody: '<strong>Мета:</strong> Дожити до кінця кожної ночі та пережити всі п\'ять ночей.<br><br><strong>Керування:</strong><ul><li><strong>Світло:</strong> допомагає перевірити офіс і зменшує шанс того, що Клав піде в офіс, але витрачає енергію.</li><li><strong>Двері:</strong> зачиняй їх, коли Клав поруч. Заблокована атака рятує тебе, але коштує енергії.</li><li><strong>Камери:</strong> використовуй їх, щоб стежити за Клавом. Спостереження може його сповільнити, але камери теж витрачають енергію.</li><li><strong>Крикнути:</strong> миттєво запускає кнопку jumpscare.</li></ul><strong>Як Клав полює:</strong><ul><li>Він рухається картою до офісу як аніматронік.</li><li>Якщо двері відкриті й ти довго лишаєшся без захисту, він стає агресивнішим.</li><li>Коли він біля дверей, реагуй швидко: використовуй світло й двері разом.</li></ul><strong>Поради щодо енергії:</strong><ul><li>Світло, двері й камери витрачають енергію.</li><li>Якщо енергія скінчиться, ти опинишся у великій небезпеці.</li></ul>',
+        gameTitle: "П'ЯТЬ НОЧЕЙ У КЛАВА",
+        hudNight: "Ніч",
+        hudTime: "Час",
+        hudPower: "Енергія",
+        cameraMonitorLabel: "МОНІТОР БЕЗПЕКИ",
+        cameraRoomNames: [
+          "CAM 1A - КОРИДОР",
+          "CAM 1B - КОРИДОР",
+          "CAM 2A - КУХНЯ",
+          "CAM 2B - ЇДАЛЬНЯ",
+          "CAM 3 - ВХІД",
+          "CAM 4A - ЛІВИЙ БІК",
+          "CAM 4B - ПРАВИЙ БІК",
+          "CAM 5 - СКЛАД",
+          "CAM 6 - ЗАКУЛІССЯ",
+          "ОФІС"
+        ],
+        cameraButtonTitles: [
+          "Коридор",
+          "Коридор",
+          "Кухня",
+          "Їдальня",
+          "Вхід",
+          "Лівий бік",
+          "Правий бік",
+          "Склад",
+          "Закулісся",
+          "Офіс"
+        ],
+        btnStart: "ПОЧАТИ ГРУ",
+        btnLight: "Світло",
+        btnDoorOpen: "Двері (відчинені)",
+        btnDoorClosed: "Двері (зачинені)",
+        btnCamera: "Камери",
+        btnScream: "Крикнути",
+        btnRestart: "Перезапуск",
+        btnRestartDeath: "СПРОБУВАТИ ЩЕ РАЗ",
+        btnBackToStart: "НАЗАД НА СТАРТОВИЙ ЕКРАН",
+        btnReplay: "\u2192 ГРАТИ ЗНОВУ \u2192",
+        congratsTitle: "НІЧ ПЕРЕЖИТО!",
+        congratsMessages: [
+          "Ти пережив першу ніч з Клавом!",
+          "Ще одна ніч позаду. Перемога вже ближче!",
+          "Три ночі позаду. Ти стаєш сильнішим!",
+          "Фініш уже близько... Пишайся собою, ти справляєшся!",
+          "Залишилася лише одна ніч... Ти зможеш!"
+        ],
+        nextNightButton: ({ night }) => `\u2192 НІЧ ${night} \u2192`,
+        congratsFallback: ({ night }) => `Ти пережив ніч ${night}!`,
+        superWinTitle: "ТИ ВИЖИВ!",
+        superWinSubtitle: "УСІ П'ЯТЬ НОЧЕЙ",
+        superWinMessage: "Ти пережив усі п'ять ночей у Клава!<br>Тепер ти вільний... поки що...",
+        deathTitle: "СМЕРТЬ",
+        cameraSeesKlavs: "На камері ти бачиш Клава, що стоїть у темряві.",
+        cameraEmpty: "Камери показують порожні кімнати.",
+        cameraLowered: "Ти опускаєш камери й дивишся в офіс.",
+        lightOn: "Ти вмикаєш світло.",
+        lightOff: "Ти вимикаєш світло.",
+        nightStart: ({ night }) => `Ніч ${night} починається.`,
+        officeIdle: "Ти сидиш в офісі. Тиша лякає.",
+        logDoorBlocked: "Двері стримують Клава зовні.",
+        logSomethingMoves: "Щось рухається в темряві...",
+        deathKlavs: "Клав в офісі. Цю ніч ти не пережив.",
+        deathPower: "Енергія скінчилася. Офіс занурюється в темряву."
+      },
+      de: {
+        pageTitle: "Fünf Nächte bei Klavs",
+        languageLabel: "Sprache",
+        startTitle: "FÜNF NÄCHTE",
+        startSubtitle: "BEI KLAVS",
+        startText: "Du wurdest gerade für die \"Klavs-Überwachung\" eingestellt.<br>Dein Job ist es, im Büro zu sitzen und die Überwachungskameras zu beobachten.<br>Überlebe fünf Nächte ohne Zwischenfälle (wenn du weißt, was ich meine)...",
+        btnHowTo: "So spielt man",
+        btnSettings: "Einstellungen",
+        howToTitle: "So spielt man",
+        howToClose: "Schließen",
+        settingsTitle: "Einstellungen",
+        settingsVolume: "Lautstärke",
+        settingsBrightness: "Helligkeit",
+        settingsEffects: "Jumpscare-Effekte",
+        settingsEffectsLow: "Niedrig",
+        settingsEffectsNormal: "Normal",
+        settingsEffectsHigh: "Hoch",
+        settingsAutoSave: "Einstellungen werden automatisch gespeichert.",
+        howToBody: '<strong>Ziel:</strong> Überlebe bis zum Ende jeder Nacht und schaffe alle fünf Nächte.<br><br><strong>Steuerung:</strong><ul><li><strong>Licht:</strong> überprüft das Büro und senkt Klavs\' Chance, sich ins Büro vorzuwagen, verbraucht aber Energie.</li><li><strong>Tür:</strong> schließe sie, wenn Klavs in der Nähe ist. Ein abgewehrter Angriff rettet dich, kostet aber Energie.</li><li><strong>Kameras:</strong> nutze sie, um Klavs zu verfolgen. Wenn du ihn beobachtest, kann ihn das verlangsamen, aber Kameras verbrauchen ebenfalls Energie.</li><li><strong>Schreien:</strong> löst sofort den Jumpscare-Knopf aus.</li></ul><strong>Wie Klavs jagt:</strong><ul><li>Er bewegt sich wie ein Animatronic über die Karte in Richtung Büro.</li><li>Wenn die Tür offen bleibt und du zu lange ungeschützt bist, wird er aggressiver.</li><li>Wenn er an der Tür ist, reagiere schnell: nutze Licht und Tür zusammen.</li></ul><strong>Energie-Tipps:</strong><ul><li>Licht, Tür und Kameras verbrauchen Energie.</li><li>Wenn die Energie ausgeht, bist du in großer Gefahr.</li></ul>',
+        gameTitle: "FÜNF NÄCHTE BEI KLAVS",
+        hudNight: "Nacht",
+        hudTime: "Zeit",
+        hudPower: "Energie",
+        cameraMonitorLabel: "SICHERHEITSMONITOR",
+        cameraRoomNames: [
+          "CAM 1A - FLUR",
+          "CAM 1B - FLUR",
+          "CAM 2A - KÜCHE",
+          "CAM 2B - SPEISESAAL",
+          "CAM 3 - EINGANG",
+          "CAM 4A - WESTSEITE",
+          "CAM 4B - OSTSEITE",
+          "CAM 5 - LAGER",
+          "CAM 6 - HINTERBÜHNE",
+          "BÜRO"
+        ],
+        cameraButtonTitles: [
+          "Flur",
+          "Flur",
+          "Küche",
+          "Speisesaal",
+          "Eingang",
+          "Westseite",
+          "Ostseite",
+          "Lager",
+          "Hinterbühne",
+          "Büro"
+        ],
+        btnStart: "SPIEL STARTEN",
+        btnLight: "Licht",
+        btnDoorOpen: "Tür (offen)",
+        btnDoorClosed: "Tür (geschlossen)",
+        btnCamera: "Kameras",
+        btnScream: "Schreien",
+        btnRestart: "Neustart",
+        btnRestartDeath: "NOCH EINMAL",
+        btnBackToStart: "ZURÜCK ZUM STARTBILDSCHIRM",
+        btnReplay: "\u2192 NOCHMAL SPIELEN \u2192",
+        congratsTitle: "NACHT ÜBERLEBT!",
+        congratsMessages: [
+          "Du hast die erste Nacht mit Klavs überlebt!",
+          "Noch eine Nacht geschafft. Der Sieg rückt näher!",
+          "Drei Nächte liegen hinter dir. Du wirst stärker!",
+          "Das Ende ist nah... Sei stolz auf dich, du schaffst das!",
+          "Nur noch eine Nacht... Du packst das!"
+        ],
+        nextNightButton: ({ night }) => `\u2192 NACHT ${night} \u2192`,
+        congratsFallback: ({ night }) => `Du hast Nacht ${night} überlebt!`,
+        superWinTitle: "DU HAST ÜBERLEBT!",
+        superWinSubtitle: "ALLE FÜNF NÄCHTE",
+        superWinMessage: "Du hast alle fünf Nächte bei Klavs überlebt!<br>Du bist frei... vorerst...",
+        deathTitle: "TOD",
+        cameraSeesKlavs: "Auf der Kamera siehst du Klavs im Dunkeln stehen.",
+        cameraEmpty: "Die Kameras zeigen leere Räume.",
+        cameraLowered: "Du senkst die Kameras und beobachtest das Büro.",
+        lightOn: "Du schaltest das Licht ein.",
+        lightOff: "Du schaltest das Licht aus.",
+        nightStart: ({ night }) => `Nacht ${night} beginnt.`,
+        officeIdle: "Du sitzt im Büro. Die Stille ist unheimlich.",
+        logDoorBlocked: "Die Tür hält Klavs draußen.",
+        logSomethingMoves: "Etwas bewegt sich in der Dunkelheit...",
+        deathKlavs: "Klavs ist im Büro. Du hast diese Nacht nicht überlebt.",
+        deathPower: "Die Energie ist aufgebraucht. Das Büro versinkt in Dunkelheit."
+      },
+      da: {
+        pageTitle: "Fem nætter hos Klavs",
+        languageLabel: "Sprog",
+        startTitle: "FEM NÆTTER",
+        startSubtitle: "HOS KLAVS",
+        startText: "Du er lige blevet ansat til \"Klavs-overvågning\".<br>Dit job er at sidde på kontoret og holde øje med overvågningskameraerne.<br>Overlev fem nætter uden uheld (hvis du ved, hvad jeg mener)...",
+        btnHowTo: "Sådan spiller du",
+        btnSettings: "Indstillinger",
+        howToTitle: "Sådan spiller du",
+        howToClose: "Luk",
+        settingsTitle: "Indstillinger",
+        settingsVolume: "Lydstyrke",
+        settingsBrightness: "Lysstyrke",
+        settingsEffects: "Jumpscare-effekter",
+        settingsEffectsLow: "Lav",
+        settingsEffectsNormal: "Normal",
+        settingsEffectsHigh: "Høj",
+        settingsAutoSave: "Indstillinger gemmes automatisk.",
+        howToBody: '<strong>Mål:</strong> Overlev til slutningen af hver nat og klar alle fem nætter.<br><br><strong>Styring:</strong><ul><li><strong>Lys:</strong> lader dig tjekke kontoret og sænker Klavs\' chance for at gå helt ind i kontoret, men bruger energi.</li><li><strong>Dør:</strong> luk den, når Klavs er tæt på. Et blokeret angreb redder dig, men koster energi.</li><li><strong>Kameraer:</strong> brug dem til at spore Klavs. At holde øje med ham kan sinke ham, men kameraer bruger også energi.</li><li><strong>Skrig:</strong> udløser jumpscare-knappen med det samme.</li></ul><strong>Sådan jager Klavs:</strong><ul><li>Han bevæger sig gennem kortet mod kontoret som en animatronic.</li><li>Hvis døren står åben, og du er udsat for længe, bliver han mere aggressiv.</li><li>Når han står ved døren, skal du reagere hurtigt: brug lys og dør sammen.</li></ul><strong>Energitips:</strong><ul><li>Lys, dør og kameraer bruger energi.</li><li>Hvis energien løber tør, er du i stor fare.</li></ul>',
+        gameTitle: "FEM NÆTTER HOS KLAVS",
+        hudNight: "Nat",
+        hudTime: "Tid",
+        hudPower: "Energi",
+        cameraMonitorLabel: "SIKKERHEDSMONITOR",
+        cameraRoomNames: [
+          "CAM 1A - GANG",
+          "CAM 1B - GANG",
+          "CAM 2A - KØKKEN",
+          "CAM 2B - SPISESAL",
+          "CAM 3 - INDGANG",
+          "CAM 4A - VENSTRE SIDE",
+          "CAM 4B - HØJRE SIDE",
+          "CAM 5 - LAGER",
+          "CAM 6 - BAGSCENE",
+          "KONTOR"
+        ],
+        cameraButtonTitles: [
+          "Gang",
+          "Gang",
+          "Køkken",
+          "Spisesal",
+          "Indgang",
+          "Venstre side",
+          "Højre side",
+          "Lager",
+          "Bagscene",
+          "Kontor"
+        ],
+        btnStart: "START SPIL",
+        btnLight: "Lys",
+        btnDoorOpen: "Dør (åben)",
+        btnDoorClosed: "Dør (lukket)",
+        btnCamera: "Kameraer",
+        btnScream: "Skrig",
+        btnRestart: "Genstart",
+        btnRestartDeath: "PRØV IGEN",
+        btnBackToStart: "TILBAGE TIL STARTSKÆRMEN",
+        btnReplay: "\u2192 SPIL IGEN \u2192",
+        congratsTitle: "NAT OVERLEVET!",
+        congratsMessages: [
+          "Du overlevede den første nat med Klavs!",
+          "Endnu en nat er bag dig. Sejren kommer tættere på!",
+          "Tre nætter er klaret. Du bliver stærkere!",
+          "Du er så tæt på slutningen... Vær stolt, du klarer det!",
+          "Der er kun én nat tilbage... Du kan godt!"
+        ],
+        nextNightButton: ({ night }) => `\u2192 NAT ${night} \u2192`,
+        congratsFallback: ({ night }) => `Du overlevede nat ${night}!`,
+        superWinTitle: "DU OVERLEVEDE!",
+        superWinSubtitle: "ALLE FEM NÆTTER",
+        superWinMessage: "Du klarede alle fem nætter hos Klavs!<br>Du er fri... indtil videre...",
+        deathTitle: "DØD",
+        cameraSeesKlavs: "På kameraet ser du Klavs stå i mørket.",
+        cameraEmpty: "Kameraerne viser tomme rum.",
+        cameraLowered: "Du sænker kameraerne og holder øje med kontoret.",
+        lightOn: "Du tænder lyset.",
+        lightOff: "Du slukker lyset.",
+        nightStart: ({ night }) => `Nat ${night} begynder.`,
+        officeIdle: "Du sidder på kontoret. Stilheden er uhyggelig.",
+        logDoorBlocked: "Døren holder Klavs ude.",
+        logSomethingMoves: "Noget bevæger sig i mørket...",
+        deathKlavs: "Klavs er på kontoret. Du overlevede ikke natten.",
+        deathPower: "Energien er opbrugt. Kontoret synker ned i mørket."
+      }
+    };
+
+    const adminTranslations = {
+      lv: {
+        adminButton: "Admin",
+        adminTitle: "Admin Panelis",
+        adminStatusChecking: "Pārbauda lokālā IP piekļuvi...",
+        adminStatusAllowed: ({ ip }) => `Admin piekļuve atbloķēta IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Admin aizslēgts. Atļautā IP: ${ip}.`,
+        adminDetected: ({ ips }) => `Atrastas adreses: ${ips}`,
+        adminNoIps: "nekas",
+        adminSkipNight: "Izlaist nakti (+1)",
+        adminInfinitePowerOn: "Bezgalīga enerģija: IESLĒGTA",
+        adminInfinitePowerOff: "Bezgalīga enerģija: IZSLĒGTA",
+        adminFreezeKlavsOn: "Iesaldēt Klāvu: IESLĒGTS",
+        adminFreezeKlavsOff: "Iesaldēt Klāvu: IZSLĒGTS",
+        adminFillPower: "Uzpildīt enerģiju",
+        adminResetKlavs: "Atmest Klāvu sākumā"
+      },
+      en: {
+        adminButton: "Admin",
+        adminTitle: "Admin Panel",
+        adminStatusChecking: "Checking local IP access...",
+        adminStatusAllowed: ({ ip }) => `Admin access unlocked for IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Admin locked. Allowed IP: ${ip}.`,
+        adminDetected: ({ ips }) => `Detected addresses: ${ips}`,
+        adminNoIps: "none",
+        adminSkipNight: "Skip Night (+1)",
+        adminInfinitePowerOn: "Infinite Power: ON",
+        adminInfinitePowerOff: "Infinite Power: OFF",
+        adminFreezeKlavsOn: "Freeze Klāvs: ON",
+        adminFreezeKlavsOff: "Freeze Klāvs: OFF",
+        adminFillPower: "Fill Power",
+        adminResetKlavs: "Reset Klāvs"
+      },
+      ru: {
+        adminButton: "Админ",
+        adminTitle: "Панель Админа",
+        adminStatusChecking: "Проверка доступа по локальному IP...",
+        adminStatusAllowed: ({ ip }) => `Доступ администратора открыт для IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Админ закрыт. Разрешённый IP: ${ip}.`,
+        adminDetected: ({ ips }) => `Найдены адреса: ${ips}`,
+        adminNoIps: "ничего",
+        adminSkipNight: "Пропустить ночь (+1)",
+        adminInfinitePowerOn: "Бесконечная энергия: ВКЛ",
+        adminInfinitePowerOff: "Бесконечная энергия: ВЫКЛ",
+        adminFreezeKlavsOn: "Заморозить Клава: ВКЛ",
+        adminFreezeKlavsOff: "Заморозить Клава: ВЫКЛ",
+        adminFillPower: "Заполнить энергию",
+        adminResetKlavs: "Вернуть Клава в начало"
+      },
+      uk: {
+        adminButton: "Адмін",
+        adminTitle: "Панель Адміна",
+        adminStatusChecking: "Перевірка доступу за локальним IP...",
+        adminStatusAllowed: ({ ip }) => `Доступ адміністратора відкрито для IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Адмін закритий. Дозволений IP: ${ip}.`,
+        adminDetected: ({ ips }) => `Знайдені адреси: ${ips}`,
+        adminNoIps: "нічого",
+        adminSkipNight: "Пропустити ніч (+1)",
+        adminInfinitePowerOn: "Нескінченна енергія: УВІМК",
+        adminInfinitePowerOff: "Нескінченна енергія: ВИМК",
+        adminFreezeKlavsOn: "Заморозити Клава: УВІМК",
+        adminFreezeKlavsOff: "Заморозити Клава: ВИМК",
+        adminFillPower: "Заповнити енергію",
+        adminResetKlavs: "Повернути Клава на старт"
+      },
+      de: {
+        adminButton: "Admin",
+        adminTitle: "Admin-Panel",
+        adminStatusChecking: "Prüfe lokalen IP-Zugang...",
+        adminStatusAllowed: ({ ip }) => `Admin-Zugang für IP ${ip} freigeschaltet.`,
+        adminStatusLocked: ({ ip }) => `Admin gesperrt. Erlaubte IP: ${ip}.`,
+        adminDetected: ({ ips }) => `Erkannte Adressen: ${ips}`,
+        adminNoIps: "keine",
+        adminSkipNight: "Nacht überspringen (+1)",
+        adminInfinitePowerOn: "Unendliche Energie: AN",
+        adminInfinitePowerOff: "Unendliche Energie: AUS",
+        adminFreezeKlavsOn: "Klavs einfrieren: AN",
+        adminFreezeKlavsOff: "Klavs einfrieren: AUS",
+        adminFillPower: "Energie auffüllen",
+        adminResetKlavs: "Klavs zurücksetzen"
+      },
+      da: {
+        adminButton: "Admin",
+        adminTitle: "Adminpanel",
+        adminStatusChecking: "Tjekker lokal IP-adgang...",
+        adminStatusAllowed: ({ ip }) => `Admin-adgang låst op for IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Admin låst. Tilladt IP: ${ip}.`,
+        adminDetected: ({ ips }) => `Fundne adresser: ${ips}`,
+        adminNoIps: "ingen",
+        adminSkipNight: "Spring nat over (+1)",
+        adminInfinitePowerOn: "Uendelig energi: TIL",
+        adminInfinitePowerOff: "Uendelig energi: FRA",
+        adminFreezeKlavsOn: "Frys Klavs: TIL",
+        adminFreezeKlavsOff: "Frys Klavs: FRA",
+        adminFillPower: "Fyld energi op",
+        adminResetKlavs: "Nulstil Klavs"
+      }
+    };
+
+    function getAdminText(key, params = {}) {
+      const dictionary = adminTranslations[currentLanguage] || adminTranslations.en;
+      const value = dictionary[key] ?? adminTranslations.en[key] ?? "";
+      if (typeof value === "function") return value(params);
+      return value;
+    }
+
+    function isValidIPv4(value) {
+      if (!/^\d{1,3}(?:\.\d{1,3}){3}$/.test(value)) return false;
+      return value.split(".").every(part => {
+        const num = Number(part);
+        return Number.isInteger(num) && num >= 0 && num <= 255;
+      });
+    }
+
+    function addDetectedAdminIp(candidate) {
+      const ip = String(candidate || "").trim();
+      if (!isValidIPv4(ip)) return;
+      detectedAdminIps.add(ip);
+    }
+
+    function collectDetectedAdminIps(text) {
+      const matches = String(text || "").match(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g) || [];
+      matches.forEach(addDetectedAdminIp);
+    }
+
+    async function fetchTextWithTimeout(url, timeoutMs = 2500) {
+      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timeoutId = setTimeout(() => {
+        if (controller) {
+          controller.abort();
+        }
+      }, timeoutMs);
+
+      try {
+        const response = await fetch(url, {
+          cache: "no-store",
+          signal: controller ? controller.signal : undefined
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed: ${response.status}`);
+        }
+
+        return await response.text();
+      } finally {
+        clearTimeout(timeoutId);
+      }
+    }
+
+    async function detectPublicAdminIp() {
+      const sources = [
+        {
+          url: "https://api.ipify.org?format=json",
+          parse: text => {
+            try {
+              const data = JSON.parse(text);
+              return data && data.ip ? String(data.ip) : "";
+            } catch (error) {
+              return "";
+            }
+          }
+        },
+        {
+          url: "https://api64.ipify.org?format=json",
+          parse: text => {
+            try {
+              const data = JSON.parse(text);
+              return data && data.ip ? String(data.ip) : "";
+            } catch (error) {
+              return "";
+            }
+          }
+        },
+        {
+          url: "https://ipv4.icanhazip.com/",
+          parse: text => String(text || "").trim()
+        }
+      ];
+
+      for (const source of sources) {
+        try {
+          const text = await fetchTextWithTimeout(source.url);
+          addDetectedAdminIp(source.parse(text));
+
+          if (detectedAdminIps.has(ADMIN_ALLOWED_LOCAL_IP)) {
+            return;
+          }
+        } catch (error) {
+          // Try the next public IP source.
+        }
+      }
+    }
+
+    function loadSettings() {
+      const fallback = {
+        volume: 70,
+        brightness: 100,
+        effects: "normal"
+      };
+
+      try {
+        const stored = JSON.parse(localStorage.getItem(SETTINGS_STORAGE_KEY) || "{}");
+        const volume = Number(stored.volume);
+        const brightness = Number(stored.brightness);
+        const effects = jumpscareEffectPresets[stored.effects] ? stored.effects : fallback.effects;
+
+        return {
+          volume: Number.isFinite(volume) ? Math.max(0, Math.min(100, Math.round(volume / 5) * 5)) : fallback.volume,
+          brightness: Number.isFinite(brightness) ? Math.max(50, Math.min(150, Math.round(brightness / 5) * 5)) : fallback.brightness,
+          effects
+        };
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function saveSettings() {
+      localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(gameSettings));
+    }
+
+    function getJumpscareEffectConfig() {
+      return jumpscareEffectPresets[gameSettings.effects] || jumpscareEffectPresets.normal;
+    }
+
+    function applySettings() {
+      const effect = getJumpscareEffectConfig();
+      const brightnessValue = String(gameSettings.brightness / 100);
+
+      settingsLanguageSelect.value = currentLanguage;
+      settingsVolumeEl.value = String(gameSettings.volume);
+      settingsVolumeValueEl.textContent = `${gameSettings.volume}%`;
+      settingsBrightnessEl.value = String(gameSettings.brightness);
+      settingsBrightnessValueEl.textContent = `${gameSettings.brightness}%`;
+      settingsEffectsSelect.value = gameSettings.effects;
+      document.documentElement.style.setProperty("--scene-brightness", brightnessValue);
+      gameEl.style.filter = `brightness(${brightnessValue})`;
+      startScreen.style.filter = `brightness(${brightnessValue})`;
+      congratsScreen.style.filter = `brightness(${brightnessValue})`;
+      superWinScreen.style.filter = `brightness(${brightnessValue})`;
+      deathScreen.style.filter = `brightness(${brightnessValue})`;
+
+      jumpscare.style.animation = `jumpscareFlash ${effect.flashDuration} ease-in-out`;
+      jumpscareFace.style.animation = `jumpscareFlying ${effect.faceDuration} cubic-bezier(0.4, 0, 1, 1) forwards`;
+      jumpscareFace.style.fontSize = effect.faceSize;
+    }
+
+    let gameSettings = loadSettings();
+    let currentLanguage = translations[localStorage.getItem("pnpk-language")] ? localStorage.getItem("pnpk-language") : "lv";
+    let screenMessageState = { key: "officeIdle", params: {} };
+    let deathMessageState = null;
+    const logEntries = [];
+
+    // ===== PALĪGFUNKCIJAS =====
+    function getText(key, params = {}) {
+      const value = translations[currentLanguage][key];
+      if (typeof value === "function") return value(params);
+      return value ?? "";
+    }
+
+    function getCameraRoomName(id) {
+      return translations[currentLanguage].cameraRoomNames[id] || getText("cameraMonitorLabel");
+    }
+
+    function setScreenMessage(key, params = {}) {
+      screenMessageState = { key, params };
+      screenText.textContent = getText(key, params);
+    }
+
+    function setDeathMessage(key, params = {}) {
+      deathMessageState = { key, params };
+      deathMessage.textContent = getText(key, params);
+    }
+
+    function renderLog() {
+      logDiv.textContent = "";
+
+      logEntries.forEach(entry => {
+        const p = document.createElement("div");
+        p.textContent = getText(entry.key, entry.params);
+        logDiv.appendChild(p);
+      });
+
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    function log(key, params = {}) {
+      logEntries.push({ key, params });
+      renderLog();
+    }
+
+    function renderDoorButton() {
+      btnDoor.textContent = doorClosed ? getText("btnDoorClosed") : getText("btnDoorOpen");
+    }
+
+    function renderCameraLabel() {
+      camLabel.textContent = getCameraRoomName(currentCameraRoom);
+    }
+
+    function renderCameraButtonTitles() {
+      cameraButtons.forEach(btn => {
+        const camId = parseInt(btn.dataset.cam, 10);
+        btn.title = translations[currentLanguage].cameraButtonTitles[camId] || "";
+      });
+    }
+
+    function renderCongrats() {
+      const completedNight = Math.max(1, night - 1);
+      const messages = translations[currentLanguage].congratsMessages;
+
+      congratsTitleEl.textContent = getText("congratsTitle");
+      congratsTextEl.textContent = messages[completedNight - 1] || getText("congratsFallback", { night: completedNight });
+      btnNextNight.textContent = getText("nextNightButton", { night });
+    }
+
+    function renderSuperWinText() {
+      superWinTitleEl.textContent = getText("superWinTitle");
+      superWinSubtitleEl.textContent = getText("superWinSubtitle");
+      superWinMessageEl.innerHTML = getText("superWinMessage");
+    }
+
+    function openHowToModal() {
+      closeSettingsModal();
+      howToModal.classList.add("open");
+    }
+
+    function closeHowToModal() {
+      howToModal.classList.remove("open");
+    }
+
+    function openSettingsModal() {
+      closeHowToModal();
+      settingsModal.classList.add("open");
+      applySettings();
+    }
+
+    function closeSettingsModal() {
+      settingsModal.classList.remove("open");
+    }
+
+    function renderAdminPanel() {
+      const detectedIpsText = detectedAdminIps.size
+        ? Array.from(detectedAdminIps).sort().join(", ")
+        : getAdminText("adminNoIps");
+
+      btnAdmin.style.display = adminAuthorized ? "inline-block" : "none";
+      adminTitleEl.textContent = getAdminText("adminTitle");
+      adminStatusEl.textContent = adminAccessChecking
+        ? getAdminText("adminStatusChecking")
+        : adminAuthorized
+          ? getAdminText("adminStatusAllowed", { ip: ADMIN_ALLOWED_LOCAL_IP })
+          : getAdminText("adminStatusLocked", { ip: ADMIN_ALLOWED_LOCAL_IP });
+      adminDetectedEl.textContent = getAdminText("adminDetected", { ips: detectedIpsText });
+      btnAdmin.textContent = getAdminText("adminButton");
+      btnAdminSkipNight.textContent = getAdminText("adminSkipNight");
+      btnAdminInfinitePower.textContent = getAdminText(infinitePowerEnabled ? "adminInfinitePowerOn" : "adminInfinitePowerOff");
+      btnAdminFreezeKlavs.textContent = getAdminText(freezeKlavsEnabled ? "adminFreezeKlavsOn" : "adminFreezeKlavsOff");
+      btnAdminFillPower.textContent = getAdminText("adminFillPower");
+      btnAdminResetKlavs.textContent = getAdminText("adminResetKlavs");
+      btnAdminClose.textContent = getText("howToClose");
+    }
+
+    function openAdminModal() {
+      if (!adminAuthorized) return;
+      closeHowToModal();
+      closeSettingsModal();
+      adminModal.classList.add("open");
+      renderAdminPanel();
+    }
+
+    function closeAdminModal() {
+      adminModal.classList.remove("open");
+    }
+
+    async function detectLocalAdminAccess() {
+      adminAccessChecking = true;
+      adminAuthorized = false;
+      detectedAdminIps.clear();
+      renderAdminPanel();
+
+      addDetectedAdminIp(window.location.hostname);
+
+      const RTCPeer = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+      if (RTCPeer) {
+        let peer = null;
+
+        try {
+          peer = new RTCPeer({ iceServers: [] });
+          peer.createDataChannel("admin-local-ip");
+
+          const completed = new Promise(resolve => {
+            let finished = false;
+
+            const finish = () => {
+              if (finished) return;
+              finished = true;
+              resolve();
+            };
+
+            peer.onicecandidate = event => {
+              if (event.candidate && event.candidate.candidate) {
+                collectDetectedAdminIps(event.candidate.candidate);
+              } else {
+                finish();
+              }
+            };
+
+            setTimeout(finish, 1200);
+          });
+
+          const offer = await peer.createOffer();
+          await peer.setLocalDescription(offer);
+          collectDetectedAdminIps(peer.localDescription && peer.localDescription.sdp ? peer.localDescription.sdp : "");
+          await completed;
+        } catch (error) {
+          // Ignore unsupported or blocked local IP detection environments.
+        } finally {
+          if (peer) {
+            try {
+              peer.close();
+            } catch (error) {
+              // Ignore close errors.
+            }
+          }
+        }
+      }
+
+      if (!detectedAdminIps.has(ADMIN_ALLOWED_LOCAL_IP)) {
+        await detectPublicAdminIp();
+      }
+
+      adminAuthorized = detectedAdminIps.has(ADMIN_ALLOWED_LOCAL_IP);
+      adminAccessChecking = false;
+
+      if (!adminAuthorized) {
+        closeAdminModal();
+      }
+
+      renderAdminPanel();
+    }
+
+    function adminSkipNight() {
+      if (!adminAuthorized || gameOver) return;
+
+      if (night >= 5) {
+        if (timer) clearInterval(timer);
+        showSuperWin();
+        return;
+      }
+
+      night += 1;
+      seconds = 0;
+      power = infinitePowerEnabled ? 100 : Math.max(power, 50);
+      cameraOn = false;
+      doorClosed = false;
+      lightsOn = false;
+      currentCameraRoom = 9;
+      klavsRoom = 0;
+      klavsCooldown = 0;
+      klavsMoveTimer = 0;
+      klavsDoorTimer = 0;
+      klavsMovePressure = 0;
+      klavsKillIntent = 0;
+      setCameraOverlayOpen(false);
+      setScreenMessage("nightStart", { night });
+      updateUI();
+    }
+
+    function adminToggleInfinitePower() {
+      if (!adminAuthorized) return;
+      infinitePowerEnabled = !infinitePowerEnabled;
+      if (infinitePowerEnabled) {
+        power = 100;
+      }
+      renderAdminPanel();
+      updateUI();
+    }
+
+    function adminToggleFreezeKlavs() {
+      if (!adminAuthorized) return;
+      freezeKlavsEnabled = !freezeKlavsEnabled;
+      renderAdminPanel();
+    }
+
+    function adminFillPower() {
+      if (!adminAuthorized || gameOver) return;
+      power = 100;
+      updateUI();
+    }
+
+    function adminResetKlavs() {
+      if (!adminAuthorized || gameOver) return;
+      klavsRoom = 0;
+      klavsCooldown = 4;
+      klavsMoveTimer = 0;
+      klavsDoorTimer = 0;
+      klavsMovePressure = 0;
+      klavsKillIntent = 0;
+
+      if (cameraOn) {
+        showCameraView();
+      }
+
+      updateUI();
+    }
+
+    function returnToStartScreen() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+
+      night = 1;
+      seconds = 0;
+      power = 100;
+      gameOver = true;
+      cameraOn = false;
+      doorClosed = false;
+      lightsOn = false;
+      klavsRoom = 0;
+      currentCameraRoom = 9;
+      klavsCooldown = 0;
+      klavsMoveTimer = 0;
+      klavsDoorTimer = 0;
+      klavsMovePressure = 0;
+      klavsKillIntent = 0;
+      deathMessageState = null;
+
+      jumpscare.style.display = "none";
+      congratsScreen.style.display = "none";
+      deathScreen.style.display = "none";
+      superWinScreen.style.display = "none";
+      btnRestart.style.display = "none";
+      closeHowToModal();
+      closeSettingsModal();
+      closeAdminModal();
+      setCameraOverlayOpen(false);
+      setScreenMessage("officeIdle");
+      updateUI();
+      startScreen.style.display = "flex";
+    }
+
+    function setLanguage(nextLanguage) {
+      if (!translations[nextLanguage]) return;
+      currentLanguage = nextLanguage;
+      localStorage.setItem("pnpk-language", currentLanguage);
+      applyLanguage();
+      updateUI();
+    }
+
+    function applyLanguage() {
+      document.documentElement.lang = currentLanguage;
+      document.title = getText("pageTitle");
+      languageSelect.value = currentLanguage;
+
+      languageLabelEl.textContent = getText("languageLabel");
+      titleEl.textContent = getText("gameTitle");
+      startTitleEl.textContent = getText("startTitle");
+      startSubtitleEl.textContent = getText("startSubtitle");
+      startTextEl.innerHTML = getText("startText");
+      btnHowTo.textContent = getText("btnHowTo");
+      btnSettings.textContent = getText("btnSettings");
+      howToTitleEl.textContent = getText("howToTitle");
+      howToTextEl.innerHTML = getText("howToBody");
+      btnHowToClose.textContent = getText("howToClose");
+      settingsTitleEl.textContent = getText("settingsTitle");
+      settingsLanguageLabelEl.textContent = getText("languageLabel");
+      settingsVolumeLabelEl.textContent = getText("settingsVolume");
+      settingsBrightnessLabelEl.textContent = getText("settingsBrightness");
+      settingsEffectsLabelEl.textContent = getText("settingsEffects");
+      settingsEffectsLowEl.textContent = getText("settingsEffectsLow");
+      settingsEffectsNormalEl.textContent = getText("settingsEffectsNormal");
+      settingsEffectsHighEl.textContent = getText("settingsEffectsHigh");
+      settingsNoteEl.textContent = getText("settingsAutoSave");
+      btnSettingsClose.textContent = getText("howToClose");
+      hudNightLabelEl.textContent = getText("hudNight");
+      hudTimeLabelEl.textContent = getText("hudTime");
+      hudPowerLabelEl.textContent = getText("hudPower");
+      btnStart.textContent = getText("btnStart");
+      btnLight.textContent = getText("btnLight");
+      btnCamera.textContent = getText("btnCamera");
+      btnScream.textContent = getText("btnScream");
+      btnRestart.textContent = getText("btnRestart");
+      btnRestartDeath.textContent = getText("btnRestartDeath");
+      btnBackToStart.textContent = getText("btnBackToStart");
+      btnReplay.textContent = getText("btnReplay");
+      deathTitleEl.textContent = getText("deathTitle");
+
+      renderDoorButton();
+      renderCameraLabel();
+      renderCameraButtonTitles();
+      renderCongrats();
+      renderSuperWinText();
+      renderLog();
+
+      if (screenMessageState) {
+        screenText.textContent = getText(screenMessageState.key, screenMessageState.params);
+      }
+
+      if (deathMessageState) {
+        deathMessage.textContent = getText(deathMessageState.key, deathMessageState.params);
+      } else {
+        deathMessage.textContent = "";
+      }
+
+      applySettings();
+      renderAdminPanel();
+    }
+
+    function format(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+    }
+
+    function updateRoomBackgrounds() {
+      roomBgs.forEach(bg => bg.classList.remove("active"));
+      if (!camFeedBg) return;
+      if (!cameraOn) {
+        camFeedBg.style.backgroundImage = "";
+        return;
+      }
+      const bg = document.getElementById("bg-" + currentCameraRoom);
+      camFeedBg.style.backgroundImage = bg ? getComputedStyle(bg).backgroundImage : "";
+    }
+
+    function updateKlavsFigure() {
+      klavsFigure.style.display = "none";
+      if (camFeedKlavs) camFeedKlavs.style.display = "none";
+      if (!cameraOn) return;
+      if (currentCameraRoom !== klavsRoom) return;
+      if (camFeedKlavs) camFeedKlavs.style.display = "block";
+    }
+
+    function updateOfficeBackground() {
+      const officeBg = document.getElementById("office-bg");
+      const cameraBg = document.getElementById("bg-9");
+      let bgImage;
+      
+      if (lightsOn && doorClosed) {
+        bgImage = 'url("https://media.sketchfab.com/models/5acfb6e741e34002aecd81a8b91b2a42/thumbnails/449641077ace4762ba91a9c605e05079/0995b85d336e40de987853cd1148e936.jpeg")';
+      } else if (lightsOn) {
+        bgImage = 'url("https://i.imgur.com/7QeAWe6.jpg")';
+      } else if (doorClosed) {
+        bgImage = 'url("https://i.redd.it/ipsas8d23z4y.png")';
+      } else {
+        bgImage = 'url("https://static.wikia.nocookie.net/fivenightsatfreddys/images/6/68/39.png/revision/latest?cb=20140916011608")';
+      }
+      
+      officeBg.style.backgroundImage = bgImage;
+      cameraBg.style.backgroundImage = bgImage;
+    }
+
+    function updateUI() {
+      nightEl.textContent = night;
+      timeEl.textContent = format(seconds);
+      powerEl.textContent = Math.floor(power) + "%";
+
+      renderDoorButton();
+      renderCameraLabel();
+      updateOfficeBackground();
+      updateRoomBackgrounds();
+      updateKlavsFigure();
+      // Highlight selected camera
+      if (camMapFnaf) {
+        Array.from(camMapFnaf.querySelectorAll('.fnaf-cam-btn')).forEach(btn => {
+          btn.classList.toggle('selected', parseInt(btn.dataset.cam) === currentCameraRoom);
+        });
+      }
+      drawCameraLines();
+    }
+
+    // Draw connecting lines between cameras
+    function drawCameraLines() {
+      const svg = document.getElementById("camera-lines");
+      if (!svg) return;
+      svg.innerHTML = "";
+      
+      const btnPositions = {};
+      Array.from(camMapFnaf.querySelectorAll('.fnaf-cam-btn')).forEach(btn => {
+        const cam = parseInt(btn.dataset.cam);
+        btnPositions[cam] = {
+          x: btn.offsetLeft + 22.5,
+          y: btn.offsetTop + 17.5
+        };
+      });
+
+      // Define connections (camera links)
+      const connections = [
+        [0, 4], [1, 4], [2, 4], [3, 4], [5, 7], [6, 8], [7, 4], [8, 4]
+      ];
+
+      connections.forEach(([from, to]) => {
+        if (btnPositions[from] && btnPositions[to]) {
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", btnPositions[from].x);
+          line.setAttribute("y1", btnPositions[from].y);
+          line.setAttribute("x2", btnPositions[to].x);
+          line.setAttribute("y2", btnPositions[to].y);
+          line.setAttribute("stroke", "#0fdfaf");
+          line.setAttribute("stroke-width", "0.5");
+          line.setAttribute("opacity", "0.4");
+          svg.appendChild(line);
+        }
+      });
+    }
+
+    // ===== KAMERAS =====
+    function setCameraRoom(id) {
+      currentCameraRoom = id;
+      const names = [
+        "CAM 1A — KORIDORS",
+        "CAM 1B — KORIDORS",
+        "CAM 2A — VIRTUVE",
+        "CAM 2B — ISTABA",
+        "CAM 3 — PRIEKŠTELPA",
+        "CAM 4A — KREISĀ PUSE",
+        "CAM 4B — LABĀ PUSE",
+        "CAM 5 — TELPA",
+        "CAM 6 — TELPA",
+        "OFFICE"
+      ];
+      camLabel.textContent = names[id] || "CAM";
+      showCameraView();
+      updateUI();
+    }
+
+    // Camera map FNAF click events
+    if (camMapFnaf) {
+      Array.from(camMapFnaf.querySelectorAll('.fnaf-cam-btn')).forEach(btn => {
+        btn.onclick = () => {
+          if (!cameraOn || gameOver) return;
+          playCameraSound();
+          setCameraRoom(parseInt(btn.dataset.cam));
+        };
+      });
+    }
+
+    function updateSchematic() {
+      // Schematic removed
+    }
+
+    function showCameraView() {
+      camStatic.style.opacity = 0.4;
+      setTimeout(() => camStatic.style.opacity = 0.12, 150);
+
+      if (currentCameraRoom === klavsRoom) {
+        screenText.textContent = "Kamerā redzi Klāvu stāvam tumsā.";
+      } else {
+        screenText.textContent = "Kameras rāda tukšas telpas.";
+      }
+
+      updateKlavsFigure();
+    }
+
+    function setCameraOverlayOpen(isOpen) {
+      camOverlay.classList.toggle("open", isOpen);
+    }
+
+    function toggleCamera() {
+      playCameraSound();
+      cameraOn = !cameraOn;
+      if (!infinitePowerEnabled) {
+        power -= 1;
+      } else {
+        power = 100;
+      }
+      setCameraOverlayOpen(cameraOn);
+
+      if (cameraOn) {
+        updateSchematic();
+        showCameraView();
+        drawCameraLines();
+      } else {
+        screenText.textContent = "Tu nolaid kameras un skaties ofisa.";
+      }
+
+      updateUI();
+    }
+
+    // ===== KLĀVA AI =====
+    function moveKlavs() {
+      if (klavsCooldown > 0) {
+        klavsCooldown--;
+        return;
+      }
+
+      const chance = 0.05 + night * 0.03;
+      if (Math.random() < chance) {
+        const idx = pathToOffice.indexOf(klavsRoom);
+        if (idx >= 0 && idx < pathToOffice.length - 1) {
+          const nextRoom = pathToOffice[idx + 1];
+          // Durvis notur Klāvu ārā - don't let him enter office if door is closed
+          if (nextRoom === 9 && doorClosed) {
+            log("Durvis notur Klāvu ārā.");
+          } else {
+            klavsRoom = nextRoom;
+            log("Kaut kas pārvietojas tumsā..");
+          }
+        }
+        klavsCooldown = Math.floor(Math.random() * 6) + 4;
+      }
+
+      if (klavsRoom === 9 && !doorClosed) {
+        triggerJumpscare();
+      }
+    }
+
+    // ===== BEIGAS =====
+    function triggerJumpscare() {
+      if (gameOver) return;
+      playJumpscareSound();
+      jumpscare.style.display = "flex";
+      setTimeout(() => end(false, "Klāvs ir ofisā. Tu neizdzīvoji šo nakti."), 3800);
+    }
+
+    function end(win, msg) {
+      gameOver = true;
+      clearInterval(timer);
+      screenText.textContent = msg;
+      congratsScreen.style.display = "none";
+      jumpscare.style.display = "none";
+      
+      if (!win) {
+        // Show death screen
+        deathMessage.textContent = msg;
+        deathScreen.style.display = "flex";
+      }
+    }
+
+    // ===== NAKTS PĀREJA =====
+    function showCongrats() {
+      const title = document.getElementById("congrats-title");
+      const text = document.getElementById("congrats-text");
+      const box = document.getElementById("congrats-box");
+
+      congratsScreen.style.display = "flex";
+
+      title.textContent = "NAKTS IZDZĪVOTA!";
+      const nightMessages = [
+        "Tu izdzīvoji pirmo nakti pie Klāva!",
+        "Vēl viena nakts aiz muguras. Jau tuvāk uzvārai!",
+        "Trīs naktis pārvērtības. Tu spēki pieaugsti!",
+        "Tik tuvu galam... Paturi spēcīgi!",
+        "Vēl tikai viena nakts... Tu to paveiksi!"
+      ];
+      text.textContent = nightMessages[night - 1] || "Tu izdzīvoji nakti " + night + "!";
+      btnNextNight.textContent = "→ NAKTS " + night + " →";
+      btnNextNight.style.display = "inline-block";
+      box.style.boxShadow = "0 0 40px #0fdfaf, inset 0 0 30px rgba(15,223,175,0.1)";
+    }
+
+    // ===== SUPER WIN =====
+    function showSuperWin() {
+      gameOver = true;
+      setCameraOverlayOpen(false);
+      congratsScreen.style.display = "none";
+      superWinScreen.style.display = "flex";
+    }
+
+    // ===== GALVENĀ CIKLA FUNKCIJA =====
+    function tick() {
+      if (gameOver) return;
+
+      seconds++;
+
+      if (doorClosed) power -= 1.5;
+      if (lightsOn) power -= 1.2;
+      if (cameraOn) power -= 0.3;
+      power -= 0.2; // base drain
+
+      moveKlavs();
+
+      if (power <= 0) {
+        return end(false, "Enerģija beigusies. Ofiss grimst tumsā.");
+      }
+
+      if (seconds >= 60) {
+        night++;
+        seconds = 0;
+        klavsRoom = 0;
+        klavsCooldown = 0;
+        clearInterval(timer);
+
+        if (night > 5) {
+          showSuperWin();
+          return;
+        }
+
+        showCongrats();
+        return;
+      }
+
+      updateUI();
+    }
+
+    // ===== POGAS =====
+    btnLight.onclick = () => {
+      if (gameOver) return;
+      playButtonSound();
+      lightsOn = !lightsOn;
+      screenText.textContent = lightsOn ? "Tu ieslēdz gaismu." : "Tu izslēdz gaismu.";
+      updateUI();
+    };
+
+    btnDoor.onclick = () => {
+      if (gameOver) return;
+      playButtonSound();
+      doorClosed = !doorClosed;
+      btnDoor.textContent = doorClosed ? "Durvis (aizvērtas)" : "Durvis (atvērtas)";
+      updateUI();
+    };
+
+    btnCamera.onclick = () => {
+      if (gameOver) return;
+      toggleCamera();
+    };
+
+    btnScream.onclick = () => {
+      if (gameOver) return;
+      triggerJumpscare();
+    };
+
+    btnRestart.onclick = () => start();
+
+    btnStart.onclick = () => {
+      playGameStartSound();
+      startScreen.style.display = "none";
+      start();
+    };
+
+    btnRestartDeath.onclick = () => {
+      playButtonSound();
+      deathScreen.style.display = "none";
+      start();
+    };
+
+    btnNextNight.onclick = () => {
+      congratsScreen.style.display = "none";
+
+      seconds = 0;
+      power = 100;
+      cameraOn = false;
+      klavsRoom = 0;
+      klavsCooldown = 0;
+      currentCameraRoom = 9;
+      doorClosed = false;
+      lightsOn = false;
+      setCameraOverlayOpen(false);
+
+      screenText.textContent = "Nakts " + night + " sākas.";
+      updateUI();
+
+      timer = setInterval(tick, 1000);
+    };
+
+    // ===== SUPER WIN =====
+    function showSuperWin() {
+      gameOver = true;
+      setCameraOverlayOpen(false);
+      congratsScreen.style.display = "none";
+      superWinScreen.style.display = "flex";
+    }
+
+    btnReplay.onclick = () => {
+      superWinScreen.style.display = "none";
+      start();
+    };
+
+    // ===== KEYBOARD CONTROLS =====
+    document.addEventListener("keydown", (e) => {
+      if (gameOver) return;
+      
+      // Space bar to toggle camera
+      if (e.code === "Space") {
+        e.preventDefault();
+        toggleCamera();
+      }
+      
+      // Number keys to switch cameras (1-9 for CAM 0-8, 0 for OFFICE)
+      if (cameraOn) {
+        const key = e.key;
+        if (key === "0") {
+          e.preventDefault();
+          setCameraRoom(9); // OFFICE
+        } else if (key >= "1" && key <= "9") {
+          e.preventDefault();
+          const cameraIndex = parseInt(key) - 1; // 1->0, 2->1, etc.
+          if (cameraIndex < 9) {
+            setCameraRoom(cameraIndex);
+          }
+        }
+      }
+    });
+
+    // ===== START =====
+    function start() {
+      night = 1;
+      seconds = 0;
+      power = 100;
+      gameOver = false;
+      cameraOn = false;
+      doorClosed = false;
+      lightsOn = false;
+      doorClosed = false;
+      klavsRoom = 0;
+      currentCameraRoom = 9;
+      klavsCooldown = 0;
+
+      jumpscare.style.display = "none";
+      congratsScreen.style.display = "none";
+      deathScreen.style.display = "none";
+      setCameraOverlayOpen(false);
+      btnRestart.style.display = "none";
+
+      screenText.textContent = "Tu sēdi ofisā. Klusums ir biedējošs.";
+      updateUI();
+
+      if (timer) clearInterval(timer);
+      timer = setInterval(tick, 1000);
+    }
+
+    function setCameraRoom(id) {
+      currentCameraRoom = id;
+      showCameraView();
+      updateUI();
+    }
+
+    function showCameraView() {
+      camStatic.style.opacity = 0.4;
+      setTimeout(() => {
+        camStatic.style.opacity = 0.12;
+      }, 150);
+
+      if (currentCameraRoom === klavsRoom) {
+        setScreenMessage("cameraSeesKlavs");
+      } else {
+        setScreenMessage("cameraEmpty");
+      }
+
+      updateKlavsFigure();
+    }
+
+    function toggleCamera() {
+      playCameraSound();
+      cameraOn = !cameraOn;
+      if (!infinitePowerEnabled) {
+        power -= 1;
+      } else {
+        power = 100;
+      }
+      setCameraOverlayOpen(cameraOn);
+
+      if (cameraOn) {
+        updateSchematic();
+        showCameraView();
+        drawCameraLines();
+      } else {
+        setScreenMessage("cameraLowered");
+      }
+
+      updateUI();
+    }
+
+    function getKlavsAiLevel() {
+      return Math.min(20, 2 + night * 2 + Math.floor(seconds / 15));
+    }
+
+    function getKlavsMoveInterval() {
+      return Math.max(1, 4 - Math.floor((night - 1) / 2) - Math.floor(seconds / 30));
+    }
+
+    function isWatchingKlavs() {
+      return cameraOn && currentCameraRoom === klavsRoom;
+    }
+
+    function updateKlavsKillIntent() {
+      const currentIndex = pathToOffice.indexOf(klavsRoom);
+      const distanceToOffice = currentIndex >= 0 ? pathToOffice.length - 1 - currentIndex : pathToOffice.length;
+
+      let intentGain = 0.04 + night * 0.015;
+
+      if (!doorClosed) intentGain += 0.08;
+      if (!cameraOn) intentGain += 0.06;
+      if (lightsOn) intentGain -= 0.1;
+      if (distanceToOffice <= 2) intentGain += 0.08;
+      if (distanceToOffice <= 1) intentGain += 0.12;
+
+      klavsKillIntent = Math.min(1, Math.max(0, klavsKillIntent + intentGain));
+    }
+
+    function retreatKlavsFromDoor() {
+      const hallIndex = pathToOffice.indexOf(6);
+      const retreatIndex = Math.max(0, hallIndex - 1);
+
+      klavsRoom = pathToOffice[retreatIndex];
+      klavsDoorTimer = 0;
+      klavsMoveTimer = 0;
+      klavsMovePressure = 0.25;
+      klavsKillIntent = Math.min(1, klavsKillIntent + 0.25);
+      klavsCooldown = 0;
+    }
+
+    function moveKlavs() {
+      if (freezeKlavsEnabled || gameOver) {
+        return;
+      }
+
+      const watchingKlavs = isWatchingKlavs();
+      updateKlavsKillIntent();
+
+      if (klavsDoorTimer > 0) {
+        if (doorClosed) {
+          klavsDoorTimer--;
+
+          if (klavsDoorTimer <= 0) {
+            if (!infinitePowerEnabled) {
+              power = Math.max(0, power - (3 + night));
+            } else {
+              power = 100;
+            }
+            log("logDoorBlocked");
+            retreatKlavsFromDoor();
+          }
+          return;
+        }
+
+        if (!doorClosed) {
+          klavsDoorTimer = Math.max(0, klavsDoorTimer - 1);
+        }
+
+        if (lightsOn && Math.random() < 0.7) {
+          klavsDoorTimer = Math.min(5, klavsDoorTimer + 1);
+        }
+
+        if (watchingKlavs) {
+          klavsDoorTimer = Math.min(4, klavsDoorTimer + 1);
+          klavsMovePressure = Math.min(0.55, klavsMovePressure + 0.05);
+        }
+
+        klavsDoorTimer--;
+        if (klavsDoorTimer <= 0) {
+          triggerJumpscare();
+        }
+        return;
+      }
+
+      if (klavsCooldown > 0) {
+        klavsCooldown--;
+        return;
+      }
+
+      klavsMoveTimer++;
+      const moveInterval = getKlavsMoveInterval();
+      if (klavsMoveTimer < moveInterval) {
+        return;
+      }
+      klavsMoveTimer = 0;
+
+      const currentIndex = pathToOffice.indexOf(klavsRoom);
+      const distanceToOffice = currentIndex >= 0 ? pathToOffice.length - 1 - currentIndex : pathToOffice.length;
+
+      let moveChance = 0.42 + getKlavsAiLevel() * 0.032 + klavsMovePressure + klavsKillIntent * 0.28;
+      if (watchingKlavs) {
+        moveChance *= 0.55;
+      } else if (cameraOn) {
+        moveChance += 0.12;
+      }
+
+      if (lightsOn) {
+        moveChance -= distanceToOffice <= 2 ? 0.22 : 0.1;
+      }
+      if (!doorClosed && distanceToOffice <= 2) {
+        moveChance += 0.2;
+      }
+      if (distanceToOffice <= 1) {
+        moveChance += 0.1;
+      }
+      moveChance = Math.min(0.95, moveChance);
+
+      if (Math.random() > moveChance) {
+        klavsMovePressure = Math.min(0.75, klavsMovePressure + (watchingKlavs ? 0.05 : 0.12));
+        klavsKillIntent = Math.min(1, klavsKillIntent + 0.08);
+        klavsCooldown = 0;
+        return;
+      }
+
+      klavsMovePressure = 0;
+      if (currentIndex < 0) {
+        klavsRoom = 0;
+        return;
+      }
+
+      let stepSize = 1;
+      if (!watchingKlavs && !cameraOn && night >= 2 && Math.random() < 0.28 + night * 0.05) {
+        stepSize = 2;
+      }
+
+      if (!doorClosed && distanceToOffice <= 2) {
+        stepSize = 2;
+      }
+
+      if (distanceToOffice <= 1) {
+        stepSize = 1;
+      }
+
+      if (watchingKlavs && Math.random() < 0.18) {
+        stepSize = 0;
+      }
+
+      const nextIndex = Math.min(pathToOffice.length - 2, currentIndex + stepSize);
+      if (nextIndex === currentIndex) {
+        klavsCooldown = 1;
+        return;
+      }
+
+      klavsRoom = pathToOffice[nextIndex];
+      log("logSomethingMoves");
+      klavsKillIntent = Math.min(1, klavsKillIntent + 0.12);
+
+      if (klavsRoom === 6) {
+        klavsDoorTimer = Math.max(1, 3 - Math.floor(night / 3));
+        klavsCooldown = 0;
+      } else {
+        klavsCooldown = Math.max(0, moveInterval - 3);
+      }
+    }
+
+    function triggerJumpscare() {
+      if (gameOver) return;
+      playJumpscareSound();
+      jumpscare.style.display = "flex";
+      setTimeout(() => end(false, "deathKlavs"), 3800);
+    }
+
+    function end(win, messageKey, params = {}) {
+      gameOver = true;
+      clearInterval(timer);
+      setCameraOverlayOpen(false);
+      setScreenMessage(messageKey, params);
+      congratsScreen.style.display = "none";
+      jumpscare.style.display = "none";
+
+      if (!win) {
+        setDeathMessage(messageKey, params);
+        deathScreen.style.display = "flex";
+      }
+    }
+
+    function showCongrats() {
+      const box = document.getElementById("congrats-box");
+
+      congratsScreen.style.display = "flex";
+      renderCongrats();
+      btnNextNight.style.display = "inline-block";
+      box.style.boxShadow = "0 0 40px #0fdfaf, inset 0 0 30px rgba(15,223,175,0.1)";
+    }
+
+    function showSuperWin() {
+      gameOver = true;
+      setCameraOverlayOpen(false);
+      congratsScreen.style.display = "none";
+      superWinScreen.style.display = "flex";
+      renderSuperWinText();
+    }
+
+    function tick() {
+      if (gameOver) return;
+
+      seconds++;
+
+      if (infinitePowerEnabled) {
+        power = 100;
+      } else {
+        if (doorClosed) power -= 1.5;
+        if (lightsOn) power -= 1.2;
+        if (cameraOn) power -= 0.3;
+        power -= 0.2;
+      }
+
+      moveKlavs();
+
+      if (!infinitePowerEnabled && power <= 0) {
+        end(false, "deathPower");
+        return;
+      }
+
+      if (seconds >= 60) {
+        night++;
+        seconds = 0;
+        klavsRoom = 0;
+        klavsCooldown = 0;
+        clearInterval(timer);
+
+        if (night > 5) {
+          showSuperWin();
+          return;
+        }
+
+        showCongrats();
+        return;
+      }
+
+      if (infinitePowerEnabled) {
+        power = 100;
+      }
+
+      updateUI();
+    }
+
+    function start() {
+      night = 1;
+      seconds = 0;
+      power = 100;
+      gameOver = false;
+      cameraOn = false;
+      doorClosed = false;
+      lightsOn = false;
+      klavsRoom = 0;
+      currentCameraRoom = 9;
+      klavsCooldown = 0;
+      klavsMoveTimer = 0;
+      klavsDoorTimer = 0;
+      klavsMovePressure = 0;
+      klavsKillIntent = 0;
+      deathMessageState = null;
+      logEntries.length = 0;
+
+      jumpscare.style.display = "none";
+      congratsScreen.style.display = "none";
+      deathScreen.style.display = "none";
+      superWinScreen.style.display = "none";
+      setCameraOverlayOpen(false);
+      btnRestart.style.display = "none";
+      closeAdminModal();
+
+      renderLog();
+      setScreenMessage("officeIdle");
+      updateUI();
+
+      if (timer) clearInterval(timer);
+      timer = setInterval(tick, 1000);
+    }
+
+    btnLight.onclick = () => {
+      if (gameOver) return;
+      playButtonSound();
+      lightsOn = !lightsOn;
+      setScreenMessage(lightsOn ? "lightOn" : "lightOff");
+      updateUI();
+    };
+
+    btnDoor.onclick = () => {
+      if (gameOver) return;
+      playButtonSound();
+      doorClosed = !doorClosed;
+      updateUI();
+    };
+
+    btnCamera.onclick = () => {
+      if (gameOver) return;
+      toggleCamera();
+    };
+
+    btnScream.onclick = () => {
+      if (gameOver) return;
+      triggerJumpscare();
+    };
+
+    btnRestart.onclick = () => start();
+
+    btnHowTo.onclick = () => {
+      playButtonSound();
+      openHowToModal();
+    };
+
+    btnSettings.onclick = () => {
+      playButtonSound();
+      openSettingsModal();
+    };
+
+    btnAdmin.onclick = () => {
+      playButtonSound();
+      openAdminModal();
+    };
+
+    btnHowToClose.onclick = () => {
+      playButtonSound();
+      closeHowToModal();
+    };
+
+    btnSettingsClose.onclick = () => {
+      playButtonSound();
+      closeSettingsModal();
+    };
+
+    btnAdminClose.onclick = () => {
+      playButtonSound();
+      closeAdminModal();
+    };
+
+    howToModal.onclick = (e) => {
+      if (e.target === howToModal) {
+        closeHowToModal();
+      }
+    };
+
+    settingsModal.onclick = (e) => {
+      if (e.target === settingsModal) {
+        closeSettingsModal();
+      }
+    };
+
+    adminModal.onclick = (e) => {
+      if (e.target === adminModal) {
+        closeAdminModal();
+      }
+    };
+
+    btnStart.onclick = () => {
+      playGameStartSound();
+      closeHowToModal();
+      closeSettingsModal();
+      closeAdminModal();
+      startScreen.style.display = "none";
+      start();
+    };
+
+    btnRestartDeath.onclick = () => {
+      playButtonSound();
+      deathScreen.style.display = "none";
+      start();
+    };
+
+    btnBackToStart.onclick = () => {
+      playButtonSound();
+      returnToStartScreen();
+    };
+
+    btnAdminSkipNight.onclick = () => {
+      playButtonSound();
+      adminSkipNight();
+    };
+
+    btnAdminInfinitePower.onclick = () => {
+      playButtonSound();
+      adminToggleInfinitePower();
+    };
+
+    btnAdminFreezeKlavs.onclick = () => {
+      playButtonSound();
+      adminToggleFreezeKlavs();
+    };
+
+    btnAdminFillPower.onclick = () => {
+      playButtonSound();
+      adminFillPower();
+    };
+
+    btnAdminResetKlavs.onclick = () => {
+      playButtonSound();
+      adminResetKlavs();
+    };
+
+    btnNextNight.onclick = () => {
+      congratsScreen.style.display = "none";
+      if (timer) clearInterval(timer);
+      seconds = 0;
+      power = 100;
+      cameraOn = false;
+      klavsRoom = 0;
+      klavsCooldown = 0;
+      klavsMoveTimer = 0;
+      klavsDoorTimer = 0;
+      klavsMovePressure = 0;
+      klavsKillIntent = 0;
+      currentCameraRoom = 9;
+      doorClosed = false;
+      lightsOn = false;
+      deathMessageState = null;
+
+      setCameraOverlayOpen(false);
+      setScreenMessage("nightStart", { night });
+      updateUI();
+
+      timer = setInterval(tick, 1000);
+    };
+
+    btnReplay.onclick = () => {
+      superWinScreen.style.display = "none";
+      start();
+    };
+
+    languageSelect.addEventListener("change", () => {
+      setLanguage(languageSelect.value);
+    });
+
+    settingsLanguageSelect.addEventListener("change", () => {
+      setLanguage(settingsLanguageSelect.value);
+    });
+
+    settingsVolumeEl.addEventListener("input", () => {
+      gameSettings.volume = Math.max(0, Math.min(100, Number(settingsVolumeEl.value) || 0));
+      settingsVolumeValueEl.textContent = `${gameSettings.volume}%`;
+      saveSettings();
+    });
+
+    settingsBrightnessEl.addEventListener("input", () => {
+      gameSettings.brightness = Math.max(50, Math.min(150, Number(settingsBrightnessEl.value) || 100));
+      settingsBrightnessValueEl.textContent = `${gameSettings.brightness}%`;
+      saveSettings();
+      applySettings();
+    });
+
+    settingsEffectsSelect.addEventListener("change", () => {
+      if (!jumpscareEffectPresets[settingsEffectsSelect.value]) return;
+      gameSettings.effects = settingsEffectsSelect.value;
+      saveSettings();
+      applySettings();
+      playButtonSound();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (howToModal.classList.contains("open")) {
+          closeHowToModal();
+        }
+        if (settingsModal.classList.contains("open")) {
+          closeSettingsModal();
+        }
+        if (adminModal.classList.contains("open")) {
+          closeAdminModal();
+        }
+      }
+    });
+
+    applyLanguage();
+    detectLocalAdminAccess();
+    setScreenMessage("officeIdle");
+    setCameraOverlayOpen(false);
+    updateUI();
+
+    // Start screen is shown by default, game starts when player clicks the button
+  </script>
+</body>
+</html>
