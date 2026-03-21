@@ -2,7 +2,7 @@
 <html lang="lv">
 <head>
   <meta charset="UTF-8">
-  <title>Piecas naktis pie Klāva</title>
+  <title>Piecas naktis pie KlÄ†ā€˛Ä€Āva</title>
   <style>
     :root {
       --scene-brightness: 1;
@@ -82,7 +82,7 @@
       background: #000;
       overflow: hidden;
     }
-    /* Ofiss fonā */
+    /* Ofiss fonÄ†ā€˛Ä€Ā */
     #office-bg {
       background-size: 100% 100%;
       background-position: center;
@@ -136,7 +136,7 @@
       display: block;
     }
 
-    /* Vienkārši “telpu” toņi – vari nomainīt uz bildēm */
+    /* VienkÄ†ā€˛Ä€ĀrÄ†ā€¦Ä¼Ā£Ā¼i Ć„ĀÄā€Ā¬Ä€ĀtelpuĆ„ĀÄā€Ā¬Ä€Ć† toÄ†ā€¦Äā‚¬Ā i Ć„ĀÄā€Ā¬Äā‚¬Ā vari nomainÄ†ā€˛Ä€Ā«t uz bildÄ†ā€˛Äā‚¬Ām */
     #bg-0 {
       background-image:
         radial-gradient(circle at 50% 18%, rgba(220,230,245,0.16) 0 7%, transparent 11%),
@@ -203,7 +203,7 @@
     }
 
 
-    /* Klāvs kamerās */
+    /* KlÄ†ā€˛Ä€Āvs kamerÄ†ā€˛Ä€Ās */
     #klavs-figure {
       position: absolute;
       width: 120px;
@@ -462,7 +462,7 @@
       text-shadow: 0 0 5px rgba(0,0,0,0.5);
     }
 
-    /* Teksts ekrānā */
+    /* Teksts ekrÄ†ā€˛Ä€ĀnÄ†ā€˛Ä€Ā */
     #screen-text {
       position: absolute;
       bottom: 10px;
@@ -508,7 +508,7 @@
       font-size: 11px;
     }
 
-    /* Apsveikuma ekrāns */
+    /* Apsveikuma ekrÄ†ā€˛Ä€Āns */
     #congrats-screen {
       position: fixed;
       inset: 0;
@@ -536,7 +536,7 @@
 
     #congrats-screen::before,
     #congrats-screen::after {
-      content: '★';
+      content: 'Ć„ĀÄ€ĀÄā‚¬Ā¦';
       position: fixed;
       font-size: 60px;
       color: #0fdfaf;
@@ -810,7 +810,15 @@
       font-weight: bold;
     }
 
-    #btn-replay {
+    #super-win-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    #btn-replay,
+    #btn-super-back-to-start {
       background: linear-gradient(135deg, rgba(15,223,175,0.2), rgba(15,223,175,0.05));
       border: 4px solid #0fdfaf;
       color: #0fdfaf;
@@ -826,13 +834,22 @@
       text-transform: uppercase;
     }
 
-    #btn-replay:hover {
+    #btn-super-back-to-start {
+      border-color: #7ae9ff;
+      color: #7ae9ff;
+      box-shadow: 0 0 24px rgba(122, 233, 255, 0.7);
+      animation: buttonPulseWin 2.2s ease-in-out infinite 1.2s;
+    }
+
+    #btn-replay:hover,
+    #btn-super-back-to-start:hover {
       background: rgba(15,223,175,0.2);
       box-shadow: 0 0 60px #0fdfaf, inset 0 0 30px rgba(15,223,175,0.4);
       transform: scale(1.1);
     }
 
-    #btn-replay:active {
+    #btn-replay:active,
+    #btn-super-back-to-start:active {
       transform: scale(0.9);
     }
 
@@ -1407,10 +1424,10 @@
   <div id="language-panel">
     <label id="language-label" for="language-select">Language</label>
     <select id="language-select">
-      <option value="lv">Latviešu</option>
+      <option value="lv">LatvieÄ†ā€¦Ä¼Ā£Ā¼u</option>
       <option value="en">English</option>
-      <option value="ru">Русский</option>
-      <option value="uk">Українська</option>
+      <option value="ru">Ć…Ā Ä€Ā Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¹</option>
+      <option value="uk">Ć…Ā Ä€Ā£Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ā€¯Ć…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā°</option>
       <option value="de">Deutsch</option>
       <option value="da">Dansk</option>
     </select>
@@ -1420,14 +1437,14 @@
   <div id="start-screen">
     <div id="start-content">
       <div id="start-title">PIECAS NAKTIS</div>
-      <div id="start-subtitle">PIE KLĀVA</div>
+      <div id="start-subtitle">PIE KLÄ†ā€˛Äā€Ā¬VA</div>
       <div id="start-text">
-        Jūs tikko tikāt pieņemti darbā "Klāva pieskatīšana".
-        Jūsu darbs ir sēdēt ofisā un uzraudzīt video kameras.
-        Pārdzīvojiet piecas naktis bez notikumiem (if you know what i mean)... 
+        JÄ†ā€¦Ä€Ā«s tikko tikÄ†ā€˛Ä€Āt pieÄ†ā€¦Äā‚¬Ā emti darbÄ†ā€˛Ä€Ā "KlÄ†ā€˛Ä€Āva pieskatÄ†ā€˛Ä€Ā«Ä†ā€¦Ä¼Ā£Ā¼ana".
+        JÄ†ā€¦Ä€Ā«su darbs ir sÄ†ā€˛Äā‚¬ĀdÄ†ā€˛Äā‚¬Āt ofisÄ†ā€˛Ä€Ā un uzraudzÄ†ā€˛Ä€Ā«t video kameras.
+        PÄ†ā€˛Ä€ĀrdzÄ†ā€˛Ä€Ā«vojiet piecas naktis bez notikumiem (if you know what i mean)... 
       </div>
       <div id="start-actions">
-        <button id="btn-start">SĀKT SPĒLI</button>
+        <button id="btn-start">SÄ†ā€˛Äā€Ā¬KT SPÄ†ā€˛Äā‚¬ā„¢LI</button>
         <button id="btn-bonus-shift">BONUS SHIFT</button>
         <button id="btn-how-to">How to play</button>
         <button id="btn-settings">Settings</button>
@@ -1491,25 +1508,25 @@
       <div id="admin-controls">
         <button class="admin-action-btn" id="btn-admin-skip-night">Skip Night (+1)</button>
         <button class="admin-action-btn" id="btn-admin-infinite-power">Infinite Power: OFF</button>
-        <button class="admin-action-btn" id="btn-admin-freeze-klavs">Freeze Klāvs: OFF</button>
+        <button class="admin-action-btn" id="btn-admin-freeze-klavs">Freeze KlÄ†ā€˛Ä€Āvs: OFF</button>
         <button class="admin-action-btn" id="btn-admin-fill-power">Fill Power</button>
-        <button class="admin-action-btn" id="btn-admin-reset-klavs">Reset Klāvs</button>
+        <button class="admin-action-btn" id="btn-admin-reset-klavs">Reset KlÄ†ā€˛Ä€Āvs</button>
       </div>
       <button id="btn-admin-close">Close</button>
     </div>
   </div>
 
   <div id="game">
-    <div id="title">PIECAS NAKTIS PIE KLĀVA</div>
+    <div id="title">PIECAS NAKTIS PIE KLÄ†ā€˛Äā€Ā¬VA</div>
 
     <div id="hud">
       <div><span id="hud-night-label">Nakts</span>: <span id="night">1</span>/5</div>
       <div><span id="hud-time-label">Laiks</span>: <span id="time">00:00</span></div>
-      <div><span id="hud-power-label">Enerģija</span>: <span id="power">100%</span></div>
+      <div><span id="hud-power-label">EnerÄ†ā€˛Ä€Ā£ija</span>: <span id="power">100%</span></div>
     </div>
 
     <div id="screen">
-      <!-- Ofiss fonā -->
+      <!-- Ofiss fonÄ†ā€˛Ä€Ā -->
       <div id="office-bg"></div>
 
       <!-- Kameru foni -->
@@ -1524,7 +1541,7 @@
       <div id="bg-8" class="room-bg"></div>
       <div id="bg-9" class="room-bg"></div>
 
-      <!-- Klāvs kamerās -->
+      <!-- KlÄ†ā€˛Ä€Āvs kamerÄ†ā€˛Ä€Ās -->
       <div id="klavs-figure"></div>
 
       <!-- Kameru overlay -->
@@ -1556,21 +1573,21 @@
 
     <div id="controls">
       <button id="btn-light">Gaisma</button>
-      <button id="btn-door">Durvis (atvērtas)</button>
+      <button id="btn-door">Durvis (atvÄ†ā€˛Äā‚¬Ārtas)</button>
       <button id="btn-camera">Kameras</button>
       <button id="btn-scream">Kliegt</button>
       <button id="btn-admin">ADMIN</button>
-      <button id="btn-restart" style="display:none;">Restartēt</button>
+      <button id="btn-restart" style="display:none;">RestartÄ†ā€˛Äā‚¬Āt</button>
     </div>
 
     <div id="log"></div>
   </div>
 
-  <!-- Apsveikuma ekrāns -->
+  <!-- Apsveikuma ekrÄ†ā€˛Ä€Āns -->
   <div id="congrats-screen">
     <div id="congrats-box">
       <h1 id="congrats-title">Apsveicu!</h1>
-      <p id="congrats-text">Tu izdzīvoji nakti.</p>
+      <p id="congrats-text">Tu izdzÄ†ā€˛Ä€Ā«voji nakti.</p>
       <button id="btn-next-night">Play Night 2</button>
     </div>
   </div>
@@ -1578,35 +1595,38 @@
   <!-- Super Win Screen -->
   <div id="super-win-screen">
     <div id="super-win-content">
-      <div id="super-win-title">JŪZĪVOJI!</div>
+      <div id="super-win-title">JÄ†ā€¦Ć…ā€“ZÄ†ā€˛Ć…ā€“VOJI!</div>
       <div id="super-win-subtitle">VISAS PIECAS NAKTIS</div>
       <div id="super-win-map">
       </div>
-      <div id="super-win-message">Tu esi uzvarējis visas piecas naktis pie Klāva!
-Tu esi brīvs... Pagaidām...</div>
-      <button id="btn-replay">→ SPĒLĒT VĒLREIZ →</button>
+      <div id="super-win-message">Tu esi uzvarÄ†ā€˛Äā‚¬Ājis visas piecas naktis pie KlÄ†ā€˛Ä€Āva!
+Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...</div>
+      <div id="super-win-actions">
+        <button id="btn-replay">? SPĆ„ā€™LĆ„ā€™T VĆ„ā€™LREIZ ?</button>
+        <button id="btn-super-back-to-start">ATPAKAĆ„Ā» UZ SĆ„ā‚¬KUMU</button>
+      </div>
     </div>
   </div>
 
   <!-- Jumpscare -->
   <div id="jumpscare">
-    <div id="jumpscare-face">■</div>
+    <div id="jumpscare-face">Ć„ĀÄā‚¬ā€Ä€Ā </div>
   </div>
 
   <!-- Death Screen -->
   <div id="death-screen">
     <div id="death-content">
-      <h1 id="death-title">NĀVE</h1>
+      <h1 id="death-title">NÄ†ā€˛Äā€Ā¬VE</h1>
       <p id="death-message"></p>
       <div id="death-actions">
-        <button id="btn-restart-death">MĒĢINĀT VĒLREIZ</button>
-        <button id="btn-back-to-start">ATPAKAĻ UZ SĀKUMU</button>
+        <button id="btn-restart-death">MÄ†ā€˛Äā‚¬ā„¢Ä†ā€˛Ä€Ā¢INÄ†ā€˛Äā€Ā¬T VÄ†ā€˛Äā‚¬ā„¢LREIZ</button>
+        <button id="btn-back-to-start">ATPAKAÄ†ā€˛Ä€Ā» UZ SÄ†ā€˛Äā€Ā¬KUMU</button>
       </div>
     </div>
   </div>
 
   <script>
-    // ===== MAINĪGIE =====
+    // ===== MAINÄ†ā€˛Ć…ā€“GIE =====
     let night = 1;
     let seconds = 0;
     let power = 100;
@@ -2370,6 +2390,7 @@ Tu esi brīvs... Pagaidām...</div>
     const klavsFigure = document.getElementById("klavs-figure");
     const superWinScreen = document.getElementById("super-win-screen");
     const btnReplay = document.getElementById("btn-replay");
+    const btnSuperBackToStart = document.getElementById("btn-super-back-to-start");
 
     const btnLight = document.getElementById("btn-light");
     const btnDoor = document.getElementById("btn-door");
@@ -2399,95 +2420,95 @@ Tu esi brīvs... Pagaidām...</div>
 
     const translations = {
       lv: {
-        pageTitle: "Piecas naktis pie Klāva",
+        pageTitle: "Piecas naktis pie KlÄ†ā€˛Ä€Āva",
         languageLabel: "Valoda",
         startTitle: "PIECAS NAKTIS",
-        startSubtitle: "PIE KLĀVA",
-        startText: 'Jūs tikko tikāt pieņemti darbā "Klāva pieskatīšanā".<br>Jūsu darbs ir sēdēt ofisā un uzraudzīt video kameras.<br>Pārdzīvojiet piecas naktis bez notikumiem (if you know what I mean)...',
-        btnHowTo: "Kā spēlēt",
-        btnSettings: "Iestatījumi",
-        howToTitle: "Kā spēlēt",
-        howToClose: "Aizvērt",
-        settingsTitle: "Iestatījumi",
-        settingsVolume: "Skaļums",
+        startSubtitle: "PIE KLÄ†ā€˛Äā€Ā¬VA",
+        startText: 'JÄ†ā€¦Ä€Ā«s tikko tikÄ†ā€˛Ä€Āt pieÄ†ā€¦Äā‚¬Ā emti darbÄ†ā€˛Ä€Ā "KlÄ†ā€˛Ä€Āva pieskatÄ†ā€˛Ä€Ā«Ä†ā€¦Ä¼Ā£Ā¼anÄ†ā€˛Ä€Ā".<br>JÄ†ā€¦Ä€Ā«su darbs ir sÄ†ā€˛Äā‚¬ĀdÄ†ā€˛Äā‚¬Āt ofisÄ†ā€˛Ä€Ā un uzraudzÄ†ā€˛Ä€Ā«t video kameras.<br>PÄ†ā€˛Ä€ĀrdzÄ†ā€˛Ä€Ā«vojiet piecas naktis bez notikumiem (if you know what I mean)...',
+        btnHowTo: "KÄ†ā€˛Ä€Ā spÄ†ā€˛Äā‚¬ĀlÄ†ā€˛Äā‚¬Āt",
+        btnSettings: "IestatÄ†ā€˛Ä€Ā«jumi",
+        howToTitle: "KÄ†ā€˛Ä€Ā spÄ†ā€˛Äā‚¬ĀlÄ†ā€˛Äā‚¬Āt",
+        howToClose: "AizvÄ†ā€˛Äā‚¬Ārt",
+        settingsTitle: "IestatÄ†ā€˛Ä€Ā«jumi",
+        settingsVolume: "SkaÄ†ā€˛Ä€Ā¼ums",
         settingsBrightness: "Spilgtums",
         settingsEffects: "Jumpscare efekti",
         settingsEffectsLow: "Zemi",
-        settingsEffectsNormal: "Normāli",
-        settingsEffectsHigh: "Spēcīgi",
-        settingsAutoSave: "Iestatījumi saglabājas automātiski.",
-        howToBody: '<strong>Mērķis:</strong> Izdzīvo līdz nakts beigām un pārvari visas piecas naktis.<br><br><strong>Vadība:</strong><ul><li><strong>Gaisma:</strong> pārbauda ofisu un samazina Klāva iespēju doties uz ofisu, bet tērē enerģiju.</li><li><strong>Durvis:</strong> aizver tās, kad Klāvs ir tuvu ofisam. Bloķēts uzbrukums tevi glābj, bet maksā enerģiju.</li><li><strong>Kameras:</strong> izmanto tās, lai izsekotu Klāvu. Skatīšanās viņu var palēnināt, bet kameras arī tērē enerģiju.</li><li><strong>Kliegt:</strong> uzreiz palaid jumpscare pogu.</li></ul><strong>Kā Klāvs medī:</strong><ul><li>Viņš kustas pa karti uz ofisu kā animatroniks.</li><li>Ja durvis ir vaļā un tu ilgi esi neaizsargāts, viņš kļūst agresīvāks.</li><li>Kad viņš ir pie durvīm, reaģē ātri: izmanto durvis un gaismu kopā.</li></ul><strong>Enerģijas padomi:</strong><ul><li>Gaisma, durvis un kameras patērē enerģiju.</li><li>Ja enerģija beidzas, tu esi lielās briesmās.</li></ul>',
-        gameTitle: "PIECAS NAKTIS PIE KLĀVA",
+        settingsEffectsNormal: "NormÄ†ā€˛Ä€Āli",
+        settingsEffectsHigh: "SpÄ†ā€˛Äā‚¬ĀcÄ†ā€˛Ä€Ā«gi",
+        settingsAutoSave: "IestatÄ†ā€˛Ä€Ā«jumi saglabÄ†ā€˛Ä€Ājas automÄ†ā€˛Ä€Ātiski.",
+        howToBody: '<strong>MÄ†ā€˛Äā‚¬ĀrÄ†ā€˛Ä€Ā·is:</strong> IzdzÄ†ā€˛Ä€Ā«vo lÄ†ā€˛Ä€Ā«dz nakts beigÄ†ā€˛Ä€Ām un pÄ†ā€˛Ä€Ārvari visas piecas naktis.<br><br><strong>VadÄ†ā€˛Ä€Ā«ba:</strong><ul><li><strong>Gaisma:</strong> pÄ†ā€˛Ä€Ārbauda ofisu un samazina KlÄ†ā€˛Ä€Āva iespÄ†ā€˛Äā‚¬Āju doties uz ofisu, bet tÄ†ā€˛Äā‚¬ĀrÄ†ā€˛Äā‚¬Ā enerÄ†ā€˛Ä€Ā£iju.</li><li><strong>Durvis:</strong> aizver tÄ†ā€˛Ä€Ās, kad KlÄ†ā€˛Ä€Āvs ir tuvu ofisam. BloÄ†ā€˛Ä€Ā·Ä†ā€˛Äā‚¬Āts uzbrukums tevi glÄ†ā€˛Ä€Ābj, bet maksÄ†ā€˛Ä€Ā enerÄ†ā€˛Ä€Ā£iju.</li><li><strong>Kameras:</strong> izmanto tÄ†ā€˛Ä€Ās, lai izsekotu KlÄ†ā€˛Ä€Āvu. SkatÄ†ā€˛Ä€Ā«Ä†ā€¦Ä¼Ā£Ā¼anÄ†ā€˛Ä€Ās viÄ†ā€¦Äā‚¬Ā u var palÄ†ā€˛Äā‚¬ĀninÄ†ā€˛Ä€Āt, bet kameras arÄ†ā€˛Ä€Ā« tÄ†ā€˛Äā‚¬ĀrÄ†ā€˛Äā‚¬Ā enerÄ†ā€˛Ä€Ā£iju.</li><li><strong>Kliegt:</strong> uzreiz palaid jumpscare pogu.</li></ul><strong>KÄ†ā€˛Ä€Ā KlÄ†ā€˛Ä€Āvs medÄ†ā€˛Ä€Ā«:</strong><ul><li>ViÄ†ā€¦Äā‚¬Ā Ä†ā€¦Ä¼Ā£Ā¼ kustas pa karti uz ofisu kÄ†ā€˛Ä€Ā animatroniks.</li><li>Ja durvis ir vaÄ†ā€˛Ä€Ā¼Ä†ā€˛Ä€Ā un tu ilgi esi neaizsargÄ†ā€˛Ä€Āts, viÄ†ā€¦Äā‚¬Ā Ä†ā€¦Ä¼Ā£Ā¼ kÄ†ā€˛Ä€Ā¼Ä†ā€¦Ä€Ā«st agresÄ†ā€˛Ä€Ā«vÄ†ā€˛Ä€Āks.</li><li>Kad viÄ†ā€¦Äā‚¬Ā Ä†ā€¦Ä¼Ā£Ā¼ ir pie durvÄ†ā€˛Ä€Ā«m, reaÄ†ā€˛Ä€Ā£Ä†ā€˛Äā‚¬Ā Ä†ā€˛Ä€Ātri: izmanto durvis un gaismu kopÄ†ā€˛Ä€Ā.</li></ul><strong>EnerÄ†ā€˛Ä€Ā£ijas padomi:</strong><ul><li>Gaisma, durvis un kameras patÄ†ā€˛Äā‚¬ĀrÄ†ā€˛Äā‚¬Ā enerÄ†ā€˛Ä€Ā£iju.</li><li>Ja enerÄ†ā€˛Ä€Ā£ija beidzas, tu esi lielÄ†ā€˛Ä€Ās briesmÄ†ā€˛Ä€Ās.</li></ul>',
+        gameTitle: "PIECAS NAKTIS PIE KLÄ†ā€˛Äā€Ā¬VA",
         hudNight: "Nakts",
         hudTime: "Laiks",
-        hudPower: "Enerģija",
-        cameraMonitorLabel: "DROŠĪBAS MONITORS",
+        hudPower: "EnerÄ†ā€˛Ä€Ā£ija",
+        cameraMonitorLabel: "DROÄ†ā€¦Ä€Ā Ä†ā€˛Ć…ā€“BAS MONITORS",
         cameraRoomNames: [
-          "CAM 1A — KORIDORS",
-          "CAM 1B — KORIDORS",
-          "CAM 2A — VIRTUVE",
-          "CAM 2B — ĒDAMZĀLE",
-          "CAM 3 — PRIEKŠTELPA",
-          "CAM 4A — KREISĀ PUSE",
-          "CAM 4B — LABĀ PUSE",
-          "CAM 5 — NOLIKTAVA",
-          "CAM 6 — AIZKULISES",
+          "CAM 1A Ć„ĀÄā€Ā¬Äā‚¬ĀÆ KORIDORS",
+          "CAM 1B Ć„ĀÄā€Ā¬Äā‚¬ĀÆ KORIDORS",
+          "CAM 2A Ć„ĀÄā€Ā¬Äā‚¬ĀÆ VIRTUVE",
+          "CAM 2B Ć„ĀÄā€Ā¬Äā‚¬ĀÆ Ä†ā€˛Äā‚¬ā„¢DAMZÄ†ā€˛Äā€Ā¬LE",
+          "CAM 3 Ć„ĀÄā€Ā¬Äā‚¬ĀÆ PRIEKÄ†ā€¦Ä€Ā TELPA",
+          "CAM 4A Ć„ĀÄā€Ā¬Äā‚¬ĀÆ KREISÄ†ā€˛Äā€Ā¬ PUSE",
+          "CAM 4B Ć„ĀÄā€Ā¬Äā‚¬ĀÆ LABÄ†ā€˛Äā€Ā¬ PUSE",
+          "CAM 5 Ć„ĀÄā€Ā¬Äā‚¬ĀÆ NOLIKTAVA",
+          "CAM 6 Ć„ĀÄā€Ā¬Äā‚¬ĀÆ AIZKULISES",
           "OFISS"
         ],
         cameraButtonTitles: [
           "Koridors",
           "Koridors",
           "Virtuve",
-          "Ēdamzāle",
-          "Priekštelpa",
-          "Kreisā puse",
-          "Labā puse",
+          "Ä†ā€˛Äā‚¬ā„¢damzÄ†ā€˛Ä€Āle",
+          "PriekÄ†ā€¦Ä¼Ā£Ā¼telpa",
+          "KreisÄ†ā€˛Ä€Ā puse",
+          "LabÄ†ā€˛Ä€Ā puse",
           "Noliktava",
           "Aizkulises",
           "Ofiss"
         ],
-        btnStart: "SĀKT SPĒLI",
+        btnStart: "SÄ†ā€˛Äā€Ā¬KT SPÄ†ā€˛Äā‚¬ā„¢LI",
         btnLight: "Gaisma",
-        btnDoorOpen: "Durvis (atvērtas)",
-        btnDoorClosed: "Durvis (aizvērtas)",
+        btnDoorOpen: "Durvis (atvÄ†ā€˛Äā‚¬Ārtas)",
+        btnDoorClosed: "Durvis (aizvÄ†ā€˛Äā‚¬Ārtas)",
         btnCamera: "Kameras",
         btnScream: "Kliegt",
-        btnRestart: "Restartēt",
-        btnRestartDeath: "MĒĢINĀT VĒLREIZ",
-        btnBackToStart: "ATPAKAĻ UZ SĀKUMU",
-        btnReplay: "\u2192 SPĒLĒT VĒLREIZ \u2192",
-        congratsTitle: "NAKTS IZDZĪVOTA!",
+        btnRestart: "RestartÄ†ā€˛Äā‚¬Āt",
+        btnRestartDeath: "MÄ†ā€˛Äā‚¬ā„¢Ä†ā€˛Ä€Ā¢INÄ†ā€˛Äā€Ā¬T VÄ†ā€˛Äā‚¬ā„¢LREIZ",
+        btnBackToStart: "ATPAKAÄ†ā€˛Ä€Ā» UZ SÄ†ā€˛Äā€Ā¬KUMU",
+        btnReplay: "\u2192 SPÄ†ā€˛Äā‚¬ā„¢LÄ†ā€˛Äā‚¬ā„¢T VÄ†ā€˛Äā‚¬ā„¢LREIZ \u2192",
+        congratsTitle: "NAKTS IZDZÄ†ā€˛Ć…ā€“VOTA!",
         congratsMessages: [
-          "Tu izdzīvoji pirmo nakti pie Klāva!",
-          "Vēl viena nakts aiz muguras. Jau tuvāk uzvarai!",
-          "Trīs naktis pārdzīvotas. Tu esi spēcīgs!",
+          "Tu izdzÄ†ā€˛Ä€Ā«voji pirmo nakti pie KlÄ†ā€˛Ä€Āva!",
+          "VÄ†ā€˛Äā‚¬Āl viena nakts aiz muguras. Jau tuvÄ†ā€˛Ä€Āk uzvarai!",
+          "TrÄ†ā€˛Ä€Ā«s naktis pÄ†ā€˛Ä€ĀrdzÄ†ā€˛Ä€Ā«votas. Tu esi spÄ†ā€˛Äā‚¬ĀcÄ†ā€˛Ä€Ā«gs!",
           "Tik tuvu galam... Esi lepns, tu esi stiprs!",
-          "Vēl tikai viena nakts... Tu to paveiksi!"
+          "VÄ†ā€˛Äā‚¬Āl tikai viena nakts... Tu to paveiksi!"
         ],
         nextNightButton: ({ night }) => `\u2192 NAKTS ${night} \u2192`,
-        congratsFallback: ({ night }) => `Tu izdzīvoji nakti ${night}!`,
-        superWinTitle: "IZDZĪVOJI!",
+        congratsFallback: ({ night }) => `Tu izdzÄ†ā€˛Ä€Ā«voji nakti ${night}!`,
+        superWinTitle: "IZDZÄ†ā€˛Ć…ā€“VOJI!",
         superWinSubtitle: "VISAS PIECAS NAKTIS",
-        superWinMessage: "Tu esi uzvarējis visas piecas naktis pie Klāva!<br>Tu esi brīvs... Pagaidām...",
-        deathTitle: "NĀVE",
-        cameraSeesKlavs: "Kamerā redzi Klāvu stāvam tumsā.",
-        cameraEmpty: "Kameras rāda tukšas telpas.",
-        cameraLowered: "Tu nolaid kameras un skaties ofisā.",
-        lightOn: "Tu ieslēdz gaismu.",
-        lightOff: "Tu izslēdz gaismu.",
-        nightStart: ({ night }) => `Nakts ${night} sākas.`,
-        officeIdle: "Tu sēdi ofisā. Klusums ir biedējošs.",
-        logDoorBlocked: "Durvis notur Klāvu ārā.",
-        logSomethingMoves: "Kaut kas pārvietojas tumsā...",
-        deathKlavs: "Klāvs ir ofisā. Tu neizdzīvoji šo nakti.",
-        deathPower: "Enerģija beigusies. Ofiss grimst tumsā."
+        superWinMessage: "Tu esi uzvarÄ†ā€˛Äā‚¬Ājis visas piecas naktis pie KlÄ†ā€˛Ä€Āva!<br>Tu esi brÄ†ā€˛Ä€Ā«vs... PagaidÄ†ā€˛Ä€Ām...",
+        deathTitle: "NÄ†ā€˛Äā€Ā¬VE",
+        cameraSeesKlavs: "KamerÄ†ā€˛Ä€Ā redzi KlÄ†ā€˛Ä€Āvu stÄ†ā€˛Ä€Āvam tumsÄ†ā€˛Ä€Ā.",
+        cameraEmpty: "Kameras rÄ†ā€˛Ä€Āda tukÄ†ā€¦Ä¼Ā£Ā¼as telpas.",
+        cameraLowered: "Tu nolaid kameras un skaties ofisÄ†ā€˛Ä€Ā.",
+        lightOn: "Tu ieslÄ†ā€˛Äā‚¬Ādz gaismu.",
+        lightOff: "Tu izslÄ†ā€˛Äā‚¬Ādz gaismu.",
+        nightStart: ({ night }) => `Nakts ${night} sÄ†ā€˛Ä€Ākas.`,
+        officeIdle: "Tu sÄ†ā€˛Äā‚¬Ādi ofisÄ†ā€˛Ä€Ā. Klusums ir biedÄ†ā€˛Äā‚¬ĀjoÄ†ā€¦Ä¼Ā£Ā¼s.",
+        logDoorBlocked: "Durvis notur KlÄ†ā€˛Ä€Āvu Ä†ā€˛Ä€ĀrÄ†ā€˛Ä€Ā.",
+        logSomethingMoves: "Kaut kas pÄ†ā€˛Ä€Ārvietojas tumsÄ†ā€˛Ä€Ā...",
+        deathKlavs: "KlÄ†ā€˛Ä€Āvs ir ofisÄ†ā€˛Ä€Ā. Tu neizdzÄ†ā€˛Ä€Ā«voji Ä†ā€¦Ä¼Ā£Ā¼o nakti.",
+        deathPower: "EnerÄ†ā€˛Ä€Ā£ija beigusies. Ofiss grimst tumsÄ†ā€˛Ä€Ā."
       },
       en: {
         pageTitle: "Five Nights at Klavs",
         languageLabel: "Language",
         startTitle: "FIVE NIGHTS",
         startSubtitle: "AT KLAVS",
-        startText: 'You have just been hired for "Klāvs supervision".<br>Your job is to sit in the office and monitor the video cameras.<br>Survive five nights without incidents (if you know what I mean)...',
+        startText: 'You have just been hired for "KlÄ†ā€˛Ä€Āvs supervision".<br>Your job is to sit in the office and monitor the video cameras.<br>Survive five nights without incidents (if you know what I mean)...',
         btnHowTo: "How to play",
         btnSettings: "Settings",
         howToTitle: "How to play",
@@ -2500,22 +2521,22 @@ Tu esi brīvs... Pagaidām...</div>
         settingsEffectsNormal: "Normal",
         settingsEffectsHigh: "High",
         settingsAutoSave: "Settings save automatically.",
-        howToBody: '<strong>Goal:</strong> Survive until the end of each night and clear all five nights.<br><br><strong>Controls:</strong><ul><li><strong>Light:</strong> checks the office and lowers Klāvs\' chance to commit to the office, but drains power.</li><li><strong>Door:</strong> close it when Klāvs is near. A blocked attack saves you, but costs power.</li><li><strong>Cameras:</strong> use them to track Klāvs. Watching him can slow him down, but cameras also drain power.</li><li><strong>Scream:</strong> fires the jumpscare button instantly.</li></ul><strong>How Klāvs hunts:</strong><ul><li>He moves across the map toward the office like an animatronic.</li><li>If the door stays open and you remain exposed, he becomes more aggressive.</li><li>When he reaches the doorway, react fast: use the door and the light together.</li></ul><strong>Power tips:</strong><ul><li>Lights, door, and cameras all consume power.</li><li>If power runs out, you are in serious danger.</li></ul>',
+        howToBody: '<strong>Goal:</strong> Survive until the end of each night and clear all five nights.<br><br><strong>Controls:</strong><ul><li><strong>Light:</strong> checks the office and lowers KlÄ†ā€˛Ä€Āvs\' chance to commit to the office, but drains power.</li><li><strong>Door:</strong> close it when KlÄ†ā€˛Ä€Āvs is near. A blocked attack saves you, but costs power.</li><li><strong>Cameras:</strong> use them to track KlÄ†ā€˛Ä€Āvs. Watching him can slow him down, but cameras also drain power.</li><li><strong>Scream:</strong> fires the jumpscare button instantly.</li></ul><strong>How KlÄ†ā€˛Ä€Āvs hunts:</strong><ul><li>He moves across the map toward the office like an animatronic.</li><li>If the door stays open and you remain exposed, he becomes more aggressive.</li><li>When he reaches the doorway, react fast: use the door and the light together.</li></ul><strong>Power tips:</strong><ul><li>Lights, door, and cameras all consume power.</li><li>If power runs out, you are in serious danger.</li></ul>',
         gameTitle: "FIVE NIGHTS AT KLAVS",
         hudNight: "Night",
         hudTime: "Time",
         hudPower: "Power",
         cameraMonitorLabel: "SECURITY MONITOR",
         cameraRoomNames: [
-          "CAM 1A — HALLWAY",
-          "CAM 1B — HALLWAY",
-          "CAM 2A — KITCHEN",
-          "CAM 2B — DINING",
-          "CAM 3 — ENTRY",
-          "CAM 4A — WEST SIDE",
-          "CAM 4B — EAST SIDE",
-          "CAM 5 — STORAGE",
-          "CAM 6 — BACKSTAGE",
+          "CAM 1A Ć„ĀÄā€Ā¬Äā‚¬ĀÆ HALLWAY",
+          "CAM 1B Ć„ĀÄā€Ā¬Äā‚¬ĀÆ HALLWAY",
+          "CAM 2A Ć„ĀÄā€Ā¬Äā‚¬ĀÆ KITCHEN",
+          "CAM 2B Ć„ĀÄā€Ā¬Äā‚¬ĀÆ DINING",
+          "CAM 3 Ć„ĀÄā€Ā¬Äā‚¬ĀÆ ENTRY",
+          "CAM 4A Ć„ĀÄā€Ā¬Äā‚¬ĀÆ WEST SIDE",
+          "CAM 4B Ć„ĀÄā€Ā¬Äā‚¬ĀÆ EAST SIDE",
+          "CAM 5 Ć„ĀÄā€Ā¬Äā‚¬ĀÆ STORAGE",
+          "CAM 6 Ć„ĀÄā€Ā¬Äā‚¬ĀÆ BACKSTAGE",
           "OFFICE"
         ],
         cameraButtonTitles: [
@@ -2542,7 +2563,7 @@ Tu esi brīvs... Pagaidām...</div>
         btnReplay: "\u2192 PLAY AGAIN \u2192",
         congratsTitle: "NIGHT SURVIVED!",
         congratsMessages: [
-          "You survived the first night with Klāvs!",
+          "You survived the first night with KlÄ†ā€˛Ä€Āvs!",
           "Another night behind you. Victory is getting closer!",
           "Three nights down. You're getting stronger!",
           "So close to the end... Be proud, you've got this!",
@@ -2552,208 +2573,208 @@ Tu esi brīvs... Pagaidām...</div>
         congratsFallback: ({ night }) => `You survived night ${night}!`,
         superWinTitle: "YOU SURVIVED!",
         superWinSubtitle: "ALL FIVE NIGHTS",
-        superWinMessage: "You beat all five nights with Klāvs!<br>You are free... for now...",
+        superWinMessage: "You beat all five nights with KlÄ†ā€˛Ä€Āvs!<br>You are free... for now...",
         deathTitle: "DEATH",
-        cameraSeesKlavs: "On the camera you see Klāvs standing in the dark.",
+        cameraSeesKlavs: "On the camera you see KlÄ†ā€˛Ä€Āvs standing in the dark.",
         cameraEmpty: "The cameras show empty rooms.",
         cameraLowered: "You lower the cameras and watch the office.",
         lightOn: "You turn on the light.",
         lightOff: "You turn off the light.",
         nightStart: ({ night }) => `Night ${night} begins.`,
         officeIdle: "You sit in the office. The silence is unsettling.",
-        logDoorBlocked: "The door keeps Klāvs outside.",
+        logDoorBlocked: "The door keeps KlÄ†ā€˛Ä€Āvs outside.",
         logSomethingMoves: "Something is moving in the dark...",
-        deathKlavs: "Klāvs is in the office. You did not survive the night.",
+        deathKlavs: "KlÄ†ā€˛Ä€Āvs is in the office. You did not survive the night.",
         deathPower: "The power is gone. The office sinks into darkness."
       },
       ru: {
-        pageTitle: "Пять ночей у Клава",
-        languageLabel: "Язык",
-        startTitle: "ПЯТЬ НОЧЕЙ",
-        startSubtitle: "У КЛАВА",
-        startText: "Вас только что наняли на работу по \"наблюдению за Клавом\".<br>Ваша задача - сидеть в офисе и следить за видеокамерами.<br>Переживите пять ночей без происшествий (если вы понимаете, о чём я)...",
-        btnHowTo: "Как играть",
-        btnSettings: "Настройки",
-        howToTitle: "Как играть",
-        howToClose: "Закрыть",
-        settingsTitle: "Настройки",
-        settingsVolume: "Громкость",
-        settingsBrightness: "Яркость",
-        settingsEffects: "Эффекты скримера",
-        settingsEffectsLow: "Низкие",
-        settingsEffectsNormal: "Обычные",
-        settingsEffectsHigh: "Сильные",
-        settingsAutoSave: "Настройки сохраняются автоматически.",
-        howToBody: '<strong>Цель:</strong> Дожить до конца каждой ночи и пережить все пять ночей.<br><br><strong>Управление:</strong><ul><li><strong>Свет:</strong> помогает проверить офис и снижает шанс того, что Клав решится идти в офис, но тратит энергию.</li><li><strong>Дверь:</strong> закрывай её, когда Клав рядом. Заблокированная атака спасает тебя, но стоит энергии.</li><li><strong>Камеры:</strong> используй их, чтобы отслеживать Клава. Наблюдение может замедлить его, но камеры тоже тратят энергию.</li><li><strong>Крикнуть:</strong> сразу запускает кнопку jumpscare.</li></ul><strong>Как Клав охотится:</strong><ul><li>Он движется по карте к офису как аниматроник.</li><li>Если дверь открыта и ты долго остаёшься без защиты, он становится агрессивнее.</li><li>Когда он у двери, реагируй быстро: используй свет и дверь вместе.</li></ul><strong>Советы по энергии:</strong><ul><li>Свет, дверь и камеры расходуют энергию.</li><li>Если энергия закончится, ты окажешься в большой опасности.</li></ul>',
-        gameTitle: "ПЯТЬ НОЧЕЙ У КЛАВА",
-        hudNight: "Ночь",
-        hudTime: "Время",
-        hudPower: "Энергия",
-        cameraMonitorLabel: "МОНИТОР БЕЗОПАСНОСТИ",
+        pageTitle: "Ć…Ā Ä€ĀĆ…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹ Ć…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°",
+        languageLabel: "Ć…Ā Ä†ā€ Ć…Ā Ä€Ā·Ć…ĀÄā‚¬Ā¹Ć…Ā Ć…ā€”",
+        startTitle: "Ć…Ā Ä€ĀĆ…Ā Ä†ā€ Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Äā‚¬Ā¢Ć…Ā Äā€˛Ā¢",
+        startSubtitle: "Ć…Ā Ä€Ā£ Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā",
+        startText: "Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā°Ć…ĀÄ€Ā Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā¾ Ć…ĀÄā‚¬ļ£¼Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾ Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…ĀÄ€ĆøĆ…Ā Ä€Ā»Ć…Ā Ä†Ćø Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā±Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾ \"Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…Ā Ä€Ā±Ć…Ā Ä€Ā»Ć…ĀÄ–ā€Ć…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…ĀÄ–ā€ Ć…Ā Ä€Ā·Ć…Ā Ä€Ā° Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼\".<br>Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…Ā Ä€Ā° Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā° - Ć…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä€Āµ Ć…Ā Ä†Ćø Ć…ĀÄ€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€ĀµĆ…Ā Ä€Ā´Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā·Ć…Ā Ä€Ā° Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä†Ćø.<br>Ć…Ā Ä€ĀĆ…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä€Āµ Ć…Ā Ä†Ā¦Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹ Ć…Ā Ä€Ā±Ć…Ā Ä€ĀµĆ…Ā Ä€Ā· Ć…Ā Ä†Ā¦Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¹ (Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ä€Ā»Ć…Ā Ä†Ćø Ć…Ā Ä€Ā²Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¼Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ĀĆ…Ā Ä€Āµ, Ć…Ā Ä€Ā¾ Ć…ĀÄā‚¬ļ£¼Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¼ Ć…ĀÄ€Ćø)...",
+        btnHowTo: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ć…ā€” Ć…Ā Ä†ĆøĆ…Ā Ä€Ā³Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā",
+        btnSettings: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¹Ć…Ā Ć…ā€”Ć…Ā Ä†Ćø",
+        howToTitle: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ć…ā€” Ć…Ā Ä†ĆøĆ…Ā Ä€Ā³Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā",
+        howToClose: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā",
+        settingsTitle: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¹Ć…Ā Ć…ā€”Ć…Ā Ä†Ćø",
+        settingsVolume: "Ć…Ā Äā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā",
+        settingsBrightness: "Ć…Ā Ä†ā€ Ć…ĀÄā€Ā¬Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā",
+        settingsEffects: "Ć…Ā Ä€Ā­Ć…ĀÄā‚¬Ė›Ć…ĀÄā‚¬Ė›Ć…Ā Ä€ĀµĆ…Ā Ć…ā€”Ć…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹ Ć…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°",
+        settingsEffectsLow: "Ć…Ā Ä€Ć†Ć…Ā Ä†ĆøĆ…Ā Ä€Ā·Ć…Ā Ć…ā€”Ć…Ā Ä†ĆøĆ…Ā Ä€Āµ",
+        settingsEffectsNormal: "Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā±Ć…ĀÄā‚¬Ā¹Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā½Ć…ĀÄā‚¬Ā¹Ć…Ā Ä€Āµ",
+        settingsEffectsHigh: "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…ĀÄā‚¬Ā¹Ć…Ā Ä€Āµ",
+        settingsAutoSave: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¹Ć…Ā Ć…ā€”Ć…Ā Ä†Ćø Ć…ĀÄ€ĀĆ…Ā Ä€Ā¾Ć…ĀÄā‚¬Ā¦Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…ĀÄ€ĆøĆ…ĀÄ–ā€Ć…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä†ĆøĆ…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä†Ćø.",
+        howToBody: '<strong>Ć…Ā Ä€Ā¦Ć…Ā Ä€ĀµĆ…Ā Ä€Ā»Ć…ĀÄ€Ā:</strong> Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾ Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…ĀÄā‚¬Ā Ć…Ā Ä€Ā° Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¶Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¹ Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†Ćø Ć…Ā Ä†Ćø Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā²Ć…ĀÄ€ĀĆ…Ā Ä€Āµ Ć…Ā Ä†Ā¦Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹.<br><br><strong>Ć…Ā Ä€Ā£Ć…Ā Ä†Ā¦Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā»Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ä€Āµ:</strong><ul><li><strong>Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā:</strong> Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā Ć…Ā Ä†Ā¦Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€Ā Ć…Ā Ä†Ćø Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¶Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…ĀÄ€Ā Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…Ā Ä€Ā¾, Ć…ĀÄā‚¬ļ£¼Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾ Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā² Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€Ā, Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾ Ć…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä†ĆøĆ…ĀÄā‚¬Ā Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ–ā€.</li><li><strong>Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā:</strong> Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¹ Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā, Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…Ā Ä€Ā´Ć…Ā Ä€Ā° Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā² Ć…ĀÄā€Ā¬Ć…ĀÄ€ĆøĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼. Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä€Ā±Ć…Ā Ä€Ā»Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä†ĆøĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄ€Ćø Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…Ā Ä€Ā° Ć…ĀÄ€ĀĆ…Ā Ä†Ā¦Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā Ć…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā±Ć…ĀÄ€Ćø, Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾ Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä†ĆøĆ…ĀÄā‚¬Ā Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…Ā Ä†Ćø.</li><li><strong>Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹:</strong> Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā·Ć…ĀÄ€ĀĆ…Ā Ä€Ā¹ Ć…Ā Ä†ĆøĆ…ĀÄā‚¬Ā¦, Ć…ĀÄā‚¬ļ£¼Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā±Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°. Ć…Ā Ä€Ć†Ć…Ā Ä€Ā°Ć…Ā Ä€Ā±Ć…Ā Ä€Ā»Ć…ĀÄ–ā€Ć…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ä€Āµ Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā´Ć…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀµĆ…Ā Ä€Ā³Ć…Ā Ä€Ā¾, Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾ Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹ Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä€Āµ Ć…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…ĀÄ€ĆøĆ…ĀÄā‚¬Ā Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ–ā€.</li><li><strong>Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā:</strong> Ć…ĀÄ€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā·Ć…ĀÄ€Ā Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā Ć…Ā Ć…ā€”Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…Ā Ć…ā€”Ć…ĀÄ€Ā jumpscare.</li></ul><strong>Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ć…ā€” Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ā¦Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ĀĆ…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø:</strong><ul><li>Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā½ Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¶Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾ Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬ĀĆ…Ā Ä€Āµ Ć…Ā Ć…ā€” Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€Ā Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ć…ā€” Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¼Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”.</li><li>Ć…Ā Äā‚¬Ā¢Ć…ĀÄ€ĀĆ…Ā Ä€Ā»Ć…Ā Ä†Ćø Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ĀĆ…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā° Ć…Ā Ä†Ćø Ć…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…Ā Ä€Ā³Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā±Ć…Ā Ä€ĀµĆ…Ā Ä€Ā· Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…ĀÄā‚¬Ā°Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹, Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½ Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā°Ć…Ā Ä€Ā³Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā²Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…Ā Ä€Āµ.</li><li>Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…Ā Ä€Ā´Ć…Ā Ä€Ā° Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½ Ć…ĀÄ€Ā Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä†Ćø, Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā°Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄā€Ā¬Ć…ĀÄ€ĀĆ…Ā Ä€Ā¹ Ć…Ā Ä€Ā±Ć…ĀÄā‚¬Ā¹Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾: Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā·Ć…ĀÄ€ĀĆ…Ā Ä€Ā¹ Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā Ć…Ā Ä†Ćø Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Āµ.</li></ul><strong>Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹ Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾ Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…Ā Ä†Ćø:</strong><ul><li>Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā, Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā Ć…Ā Ä†Ćø Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹ Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄā‚¬Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´Ć…ĀÄ€ĀĆ…ĀÄ–ā€Ć…ĀÄā‚¬Ā Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ–ā€.</li><li>Ć…Ā Äā‚¬Ā¢Ć…ĀÄ€ĀĆ…Ā Ä€Ā»Ć…Ā Ä†Ćø Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ€Ćø Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø, Ć…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¶Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā² Ć…Ā Ä€Ā±Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā¹ Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø.</li></ul>',
+        gameTitle: "Ć…Ā Ä€ĀĆ…Ā Ä†ā€ Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Äā‚¬Ā¢Ć…Ā Äā€˛Ā¢ Ć…Ā Ä€Ā£ Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā",
+        hudNight: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄ€Ā",
+        hudTime: "Ć…Ā Äā‚¬ā„¢Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¼Ć…ĀÄ€Ćø",
+        hudPower: "Ć…Ā Ä€Ā­Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ€Ćø",
+        cameraMonitorLabel: "Ć…Ā Ä€ĀĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ć†Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā  Ć…Ā Äā‚¬ĀĆ…Ā Äā‚¬Ā¢Ć…Ā Äā‚¬ā€¯Ć…Ā Ä–ā€ŗĆ…Ā Ä€ĀĆ…Ā Ä€ĀĆ…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā",
         cameraRoomNames: [
-          "CAM 1A - КОРИДОР",
-          "CAM 1B - КОРИДОР",
-          "CAM 2A - КУХНЯ",
-          "CAM 2B - СТОЛОВАЯ",
-          "CAM 3 - ВХОД",
-          "CAM 4A - ЛЕВАЯ СТОРОНА",
-          "CAM 4B - ПРАВАЯ СТОРОНА",
-          "CAM 5 - СКЛАД",
-          "CAM 6 - ЗАКУЛИСЬЕ",
-          "ОФИС"
+          "CAM 1A - Ć…Ā Ä€ĀĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀÆĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā ",
+          "CAM 1B - Ć…Ā Ä€ĀĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀÆĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā ",
+          "CAM 2A - Ć…Ā Ä€ĀĆ…Ā Ä€Ā£Ć…Ā Ä¼Ā£Ā½Ć…Ā Ä€Ć†Ć…Ā Ä†ā€ ",
+          "CAM 2B - Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā¢Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬Å—Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Ä†ā€ ",
+          "CAM 3 - Ć…Ā Äā‚¬ā„¢Ć…Ā Ä¼Ā£Ā½Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬ĀÆ",
+          "CAM 4A - Ć…Ā Äā‚¬Å—Ć…Ā Äā‚¬Ā¢Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Ä†ā€  Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā¢Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ć†Ć…Ā Ä€Ā",
+          "CAM 4B - Ć…Ā Ä€ĀĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Ä†ā€  Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā¢Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ć†Ć…Ā Ä€Ā",
+          "CAM 5 - Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀÆ",
+          "CAM 6 - Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€ĀĆ…Ā Ä€ĀĆ…Ā Ä€Ā£Ć…Ā Äā‚¬Å—Ć…Ā Ä€ĀĆ…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā¬Ć…Ā Äā‚¬Ā¢",
+          "Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā¤Ć…Ā Ä€ĀĆ…Ā Ä¼Ā£Ā¼"
         ],
         cameraButtonTitles: [
-          "Коридор",
-          "Коридор",
-          "Кухня",
-          "Столовая",
-          "Вход",
-          "Левая сторона",
-          "Правая сторона",
-          "Склад",
-          "Закулисье",
-          "Офис"
+          "Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬",
+          "Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬",
+          "Ć…Ā Ä€ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬Ā¦Ć…Ā Ä€Ā½Ć…ĀÄ€Ćø",
+          "Ć…Ā Ä¼Ā£Ā¼Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…ĀÄ€Ćø",
+          "Ć…Ā Äā‚¬ā„¢Ć…ĀÄā‚¬Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´",
+          "Ć…Ā Äā‚¬Å—Ć…Ā Ä€ĀµĆ…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…ĀÄ€Ćø Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°",
+          "Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…ĀÄ€Ćø Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°",
+          "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ć…ā€”Ć…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´",
+          "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…ĀÄ€ĀĆ…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ä€Āµ",
+          "Ć…Ā Ä–ā€ŗĆ…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€Ā"
         ],
-        btnStart: "НАЧАТЬ ИГРУ",
-        btnLight: "Свет",
-        btnDoorOpen: "Дверь (открыта)",
-        btnDoorClosed: "Дверь (закрыта)",
-        btnCamera: "Камеры",
-        btnScream: "Крикнуть",
-        btnRestart: "Перезапуск",
-        btnRestartDeath: "ПОПРОБОВАТЬ ЕЩЁ РАЗ",
-        btnBackToStart: "НАЗАД НА СТАРТОВЫЙ ЭКРАН",
-        btnReplay: "\u2192 ИГРАТЬ СНОВА \u2192",
-        congratsTitle: "НОЧЬ ПЕРЕЖИТА!",
+        btnStart: "Ć…Ā Ä€Ć†Ć…Ā Ä€ĀĆ…Ā Ä€Ā§Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀĆ…Ā Ä€Ā Ć…Ā Ä€Ā£",
+        btnLight: "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā",
+        btnDoorOpen: "Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā (Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ĀĆ…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā°)",
+        btnDoorClosed: "Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā (Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā°)",
+        btnCamera: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹",
+        btnScream: "Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā",
+        btnRestart: "Ć…Ā Ä€ĀĆ…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ć…ā€”",
+        btnRestartDeath: "Ć…Ā Ä€ĀĆ…Ā Ä–ā€ŗĆ…Ā Ä€ĀĆ…Ā Ä€Ā Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬ĀĆ…Ā Ä–ā€ŗĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Äā‚¬Ā¢Ć…Ā Ä€Ā©Ć…Ā Ä€Ā Ć…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā€¯",
+        btnBackToStart: "Ć…Ā Ä€Ć†Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā€¯Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀÆ Ć…Ā Ä€Ć†Ć…Ā Ä€Ā Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā¢Ć…Ā Ä€ĀĆ…Ā Ä€Ā Ć…Ā Ä€Ā¢Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā«Ć…Ā Äā€˛Ā¢ Ć…Ā Ä€Ā­Ć…Ā Ä€ĀĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ć†",
+        btnReplay: "\u2192 Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā \u2192",
+        congratsTitle: "Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Ä€Ā¬ Ć…Ā Ä€ĀĆ…Ā Äā‚¬Ā¢Ć…Ā Ä€Ā Ć…Ā Äā‚¬Ā¢Ć…Ā Äā‚¬ā€Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä€Ā!",
         congratsMessages: [
-          "Ты пережил первую ночь с Клавом!",
-          "Ещё одна ночь позади. Победа всё ближе!",
-          "Три ночи позади. Ты становишься сильнее!",
-          "Финиш уже близко... Гордись собой, ты справляешься!",
-          "Осталась всего одна ночь... Ты сможешь!"
+          "Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā» Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā²Ć…ĀÄ€ĀĆ…ĀÄ–ā€ Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄ€Ā Ć…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼!",
+          "Ć…Ā Äā‚¬Ā¢Ć…ĀÄā‚¬Ā°Ć…ĀÄā‚¬Ā Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄ€Ā Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…Ā Ä†Ćø. Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā±Ć…Ā Ä€ĀµĆ…Ā Ä€Ā´Ć…Ā Ä€Ā° Ć…Ā Ä€Ā²Ć…ĀÄ€ĀĆ…ĀÄā‚¬Ā Ć…Ā Ä€Ā±Ć…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¶Ć…Ā Ä€Āµ!",
+          "Ć…Ā Ä€Ā¢Ć…ĀÄā€Ā¬Ć…Ā Ä†Ćø Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†Ćø Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…Ā Ä†Ćø. Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…Ā Ä€Āµ!",
+          "Ć…Ā Ä€Ā¤Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā¶Ć…Ā Ä€Āµ Ć…Ā Ä€Ā±Ć…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…Ā Ä€Ā·Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾... Ć…Ā Äā‚¬ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā´Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā±Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¹, Ć…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹ Ć…ĀÄ€ĀĆ…Ā Ä†Ā¦Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā»Ć…ĀÄ€ĆøĆ…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø!",
+          "Ć…Ā Ä–ā€ŗĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā²Ć…ĀÄ€ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā³Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄ€Ā... Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…ĀÄ€ĀĆ…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄ€Ā!"
         ],
-        nextNightButton: ({ night }) => `\u2192 НОЧЬ ${night} \u2192`,
-        congratsFallback: ({ night }) => `Ты пережил ночь ${night}!`,
-        superWinTitle: "ТЫ ВЫЖИЛ!",
-        superWinSubtitle: "ВСЕ ПЯТЬ НОЧЕЙ",
-        superWinMessage: "Ты пережил все пять ночей у Клава!<br>Теперь ты свободен... пока что...",
-        deathTitle: "СМЕРТЬ",
-        cameraSeesKlavs: "На камере ты видишь Клава, стоящего во тьме.",
-        cameraEmpty: "Камеры показывают пустые комнаты.",
-        cameraLowered: "Ты опускаешь камеры и смотришь в офис.",
-        lightOn: "Ты включаешь свет.",
-        lightOff: "Ты выключаешь свет.",
-        nightStart: ({ night }) => `Ночь ${night} начинается.`,
-        officeIdle: "Ты сидишь в офисе. Тишина пугает.",
-        logDoorBlocked: "Дверь удерживает Клава снаружи.",
-        logSomethingMoves: "Что-то движется во тьме...",
-        deathKlavs: "Клав в офисе. Эту ночь ты не пережил.",
-        deathPower: "Энергия закончилась. Офис погружается во тьму."
+        nextNightButton: ({ night }) => `\u2192 Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Ä€Ā¬ ${night} \u2192`,
+        congratsFallback: ({ night }) => `Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā» Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄ€Ā ${night}!`,
+        superWinTitle: "Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā« Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā«Ć…Ā Äā‚¬ā€Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—!",
+        superWinSubtitle: "Ć…Ā Äā‚¬ā„¢Ć…Ā Ä¼Ā£Ā¼Ć…Ā Äā‚¬Ā¢ Ć…Ā Ä€ĀĆ…Ā Ä†ā€ Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Äā‚¬Ā¢Ć…Ā Äā€˛Ā¢",
+        superWinMessage: "Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā» Ć…Ā Ä€Ā²Ć…ĀÄ€ĀĆ…Ā Ä€Āµ Ć…Ā Ä†Ā¦Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹ Ć…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°!<br>Ć…Ā Ä€Ā¢Ć…Ā Ä€ĀµĆ…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā Ć…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹ Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā±Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½... Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā° Ć…ĀÄā‚¬ļ£¼Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾...",
+        deathTitle: "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€ĀĆ…Ā Äā‚¬Ā¢Ć…Ā Ä€Ā Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā¬",
+        cameraSeesKlavs: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā° Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Āµ Ć…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°, Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…ĀÄ€ĆøĆ…ĀÄā‚¬Ā°Ć…Ā Ä€ĀµĆ…Ā Ä€Ā³Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾ Ć…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä€Ā¼Ć…Ā Ä€Āµ.",
+        cameraEmpty: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā·Ć…ĀÄā‚¬Ā¹Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…ĀÄ–ā€Ć…ĀÄā‚¬Ā Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹Ć…Ā Ä€Āµ Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹.",
+        cameraLowered: "Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄ€Ā Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä†Ćø Ć…ĀÄ€ĀĆ…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€Ā.",
+        lightOn: "Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā²Ć…Ā Ć…ā€”Ć…Ā Ä€Ā»Ć…ĀÄ–ā€Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā.",
+        lightOff: "Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā²Ć…ĀÄā‚¬Ā¹Ć…Ā Ć…ā€”Ć…Ā Ä€Ā»Ć…ĀÄ–ā€Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā.",
+        nightStart: ({ night }) => `Ć…Ā Ä€Ć†Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄ€Ā ${night} Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø.`,
+        officeIdle: "Ć…Ā Ä€Ā¢Ć…ĀÄā‚¬Ā¹ Ć…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä€Āµ. Ć…Ā Ä€Ā¢Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…Ā Ä€Ā³Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā.",
+        logDoorBlocked: "Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā° Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄā€Ā¬Ć…ĀÄ€ĀĆ…Ā Ä€Ā¶Ć…Ā Ä†Ćø.",
+        logSomethingMoves: "Ć…Ā Ä€Ā§Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾-Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾ Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¶Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾ Ć…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä€Ā¼Ć…Ā Ä€Āµ...",
+        deathKlavs: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā² Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä€Āµ. Ć…Ā Ä€Ā­Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄ€Ā Ć…ĀÄā‚¬ĀĆ…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā½Ć…Ā Ä€Āµ Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā».",
+        deathPower: "Ć…Ā Ä€Ā­Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ€Ćø Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄ€Ā. Ć…Ā Ä–ā€ŗĆ…ĀÄā‚¬Ė›Ć…Ā Ä†ĆøĆ…ĀÄ€Ā Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…ĀÄā€Ā¬Ć…ĀÄ€ĀĆ…Ā Ä€Ā¶Ć…Ā Ä€Ā°Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾ Ć…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä€Ā¼Ć…ĀÄ€Ā."
       },
       uk: {
-        pageTitle: "П'ять ночей у Клава",
-        languageLabel: "Мова",
-        startTitle: "П'ЯТЬ НОЧЕЙ",
-        startSubtitle: "У КЛАВА",
-        startText: "Вас щойно найняли на роботу з \"нагляду за Клавом\".<br>Ваше завдання - сидіти в офісі та стежити за відеокамерами.<br>Переживіть п'ять ночей без пригод (якщо ви розумієте, про що я)...",
-        btnHowTo: "Як грати",
-        btnSettings: "Налаштування",
-        howToTitle: "Як грати",
-        howToClose: "Закрити",
-        settingsTitle: "Налаштування",
-        settingsVolume: "Гучність",
-        settingsBrightness: "Яскравість",
-        settingsEffects: "Ефекти скримеру",
-        settingsEffectsLow: "Низькі",
-        settingsEffectsNormal: "Звичайні",
-        settingsEffectsHigh: "Сильні",
-        settingsAutoSave: "Налаштування зберігаються автоматично.",
-        howToBody: '<strong>Мета:</strong> Дожити до кінця кожної ночі та пережити всі п\'ять ночей.<br><br><strong>Керування:</strong><ul><li><strong>Світло:</strong> допомагає перевірити офіс і зменшує шанс того, що Клав піде в офіс, але витрачає енергію.</li><li><strong>Двері:</strong> зачиняй їх, коли Клав поруч. Заблокована атака рятує тебе, але коштує енергії.</li><li><strong>Камери:</strong> використовуй їх, щоб стежити за Клавом. Спостереження може його сповільнити, але камери теж витрачають енергію.</li><li><strong>Крикнути:</strong> миттєво запускає кнопку jumpscare.</li></ul><strong>Як Клав полює:</strong><ul><li>Він рухається картою до офісу як аніматронік.</li><li>Якщо двері відкриті й ти довго лишаєшся без захисту, він стає агресивнішим.</li><li>Коли він біля дверей, реагуй швидко: використовуй світло й двері разом.</li></ul><strong>Поради щодо енергії:</strong><ul><li>Світло, двері й камери витрачають енергію.</li><li>Якщо енергія скінчиться, ти опинишся у великій небезпеці.</li></ul>',
-        gameTitle: "П'ЯТЬ НОЧЕЙ У КЛАВА",
-        hudNight: "Ніч",
-        hudTime: "Час",
-        hudPower: "Енергія",
-        cameraMonitorLabel: "МОНІТОР БЕЗПЕКИ",
+        pageTitle: "Ć…Ā Ä€Ā'Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹ Ć…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°",
+        languageLabel: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°",
+        startTitle: "Ć…Ā Ä€Ā'Ć…Ā Ä†ā€ Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Äā‚¬Ā¢Ć…Ā Äā€˛Ā¢",
+        startSubtitle: "Ć…Ā Ä€Ā£ Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā",
+        startText: "Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā°Ć…ĀÄ€Ā Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¹Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¹Ć…Ā Ä€Ā½Ć…ĀÄ€ĆøĆ…Ā Ä€Ā»Ć…Ā Ä†Ćø Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā±Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā· \"Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…Ā Ä€Ā³Ć…Ā Ä€Ā»Ć…ĀÄ€ĆøĆ…Ā Ä€Ā´Ć…ĀÄ€Ā Ć…Ā Ä€Ā·Ć…Ā Ä€Ā° Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼\".<br>Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…Ā Ä€Āµ Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā´Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…ĀÄ€Ćø - Ć…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…ĀÄā‚¬ā€ Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā° Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā·Ć…Ā Ä€Ā° Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä†Ćø.<br>Ć…Ā Ä€ĀĆ…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä†Ā¦'Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹ Ć…Ā Ä€Ā±Ć…Ā Ä€ĀµĆ…Ā Ä€Ā· Ć…Ā Ä†Ā¦Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ä€Ā³Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´ (Ć…ĀÄ€ĆøĆ…Ā Ć…ā€”Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā²Ć…Ā Ä†Ćø Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…ĀÄ€ĀĆ…Ā Ä€Ā¼Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀÆĆ…ĀÄā‚¬ĀĆ…Ā Ä€Āµ, Ć…Ā Ä†Ā¦Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾ Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾ Ć…ĀÄ€Ćø)...",
+        btnHowTo: "Ć…Ā Ä†ā€ Ć…Ā Ć…ā€” Ć…Ā Ä€Ā³Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø",
+        btnSettings: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…ĀÄ€Ćø",
+        howToTitle: "Ć…Ā Ä†ā€ Ć…Ā Ć…ā€” Ć…Ā Ä€Ā³Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø",
+        howToClose: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø",
+        settingsTitle: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…ĀÄ€Ćø",
+        settingsVolume: "Ć…Ā Äā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā",
+        settingsBrightness: "Ć…Ā Ä†ā€ Ć…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā",
+        settingsEffects: "Ć…Ā Äā‚¬Ā¢Ć…ĀÄā‚¬Ė›Ć…Ā Ä€ĀµĆ…Ā Ć…ā€”Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€Ā",
+        settingsEffectsLow: "Ć…Ā Ä€Ć†Ć…Ā Ä†ĆøĆ…Ā Ä€Ā·Ć…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…ĀÄā‚¬ā€",
+        settingsEffectsNormal: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¹Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€",
+        settingsEffectsHigh: "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…ĀÄā‚¬ā€",
+        settingsAutoSave: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…ĀÄ€Ćø Ć…Ā Ä€Ā·Ć…Ā Ä€Ā±Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā³Ć…Ā Ä€Ā°Ć…ĀÄ–ā€Ć…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä†ĆøĆ…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾.",
+        howToBody: '<strong>Ć…Ā Ä€ĀĆ…Ā Ä€ĀµĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā°:</strong> Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾ Ć…Ā Ć…ā€”Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½Ć…ĀÄā‚¬Ā Ć…ĀÄ€Ćø Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ā€¯ Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄā‚¬ā€ Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā° Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā²Ć…ĀÄ€ĀĆ…ĀÄā‚¬ā€ Ć…Ā Ä†Ā¦\'Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹.<br><br><strong>Ć…Ā Ä€ĀĆ…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…ĀÄ€Ćø:</strong><ul><li><strong>Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā¾:</strong> Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā°Ć…Ā Ä€Ā³Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆ Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ā Ć…ĀÄā‚¬ā€ Ć…Ā Ä€Ā·Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀÆ Ć…ĀÄ€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…ĀÄ€Ā Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…Ā Ä€Ā¾, Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾ Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā² Ć…Ā Ä†Ā¦Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā´Ć…Ā Ä€Āµ Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ā, Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä€Āµ Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆ Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ–ā€.</li><li><strong>Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€:</strong> Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…ĀÄ€ĆøĆ…Ā Ä€Ā¹ Ć…ĀÄā‚¬ā€¯Ć…ĀÄā‚¬Ā¦, Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…Ā Ä†Ćø Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā² Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…ĀÄ€ĀĆ…ĀÄā‚¬ļ£¼. Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä€Ā±Ć…Ā Ä€Ā»Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…Ā Ä€Ā° Ć…ĀÄā€Ā¬Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀÆ Ć…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā±Ć…Ā Ä€Āµ, Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä€Āµ Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀÆ Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ā€¯.</li><li><strong>Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä†Ćø:</strong> Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…ĀÄ€ĀĆ…Ā Ä€Ā¹ Ć…ĀÄā‚¬ā€¯Ć…ĀÄā‚¬Ā¦, Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā± Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā·Ć…Ā Ä€Ā° Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼. Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…ĀÄ€Ćø Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä€Āµ Ć…Ā Ä€Ā¹Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…Ā Ä€Ā¾ Ć…ĀÄ€ĀĆ…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø, Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä€Āµ Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä†Ćø Ć…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā¶ Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā°Ć…ĀÄ–ā€Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ–ā€.</li><li><strong>Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø:</strong> Ć…Ā Ä€Ā¼Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆ Ć…Ā Ć…ā€”Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…Ā Ć…ā€”Ć…ĀÄ€Ā jumpscare.</li></ul><strong>Ć…Ā Ä†ā€ Ć…Ā Ć…ā€” Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā² Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…ĀÄ–ā€Ć…ĀÄā‚¬ĀÆ:</strong><ul><li>Ć…Ā Äā‚¬ā„¢Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½ Ć…ĀÄā€Ā¬Ć…ĀÄ€ĀĆ…ĀÄā‚¬Ā¦Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…ĀÄ–ā€ Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…ĀÄ€Ā Ć…ĀÄ€ĆøĆ…Ā Ć…ā€” Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…Ā Ć…ā€”.</li><li>Ć…Ā Ä†ā€ Ć…Ā Ć…ā€”Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€ Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā´Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄā‚¬ā€ Ć…Ā Ä€Ā¹ Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€Ā³Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā±Ć…Ā Ä€ĀµĆ…Ā Ä€Ā· Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…ĀÄā‚¬Ā¦Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā, Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½ Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆ Ć…Ā Ä€Ā°Ć…Ā Ä€Ā³Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā²Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā¼.</li><li>Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…Ā Ä†Ćø Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½ Ć…Ā Ä€Ā±Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā»Ć…ĀÄ€Ćø Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹, Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā°Ć…Ā Ä€Ā³Ć…ĀÄ€ĀĆ…Ā Ä€Ā¹ Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ć…ā€”Ć…Ā Ä€Ā¾: Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…ĀÄ€ĀĆ…Ā Ä€Ā¹ Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā¹ Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€ Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā·Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼.</li></ul><strong>Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…Ā Ä†Ćø Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾ Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ā€¯:</strong><ul><li>Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā¾, Ć…Ā Ä€Ā´Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€ Ć…Ā Ä€Ā¹ Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä†Ćø Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā°Ć…ĀÄ–ā€Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ–ā€.</li><li>Ć…Ā Ä†ā€ Ć…Ā Ć…ā€”Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾ Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ćø Ć…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø, Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…ĀÄ€Ā Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā¹ Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…Ā Ä€Ā±Ć…Ā Ä€ĀµĆ…Ā Ä€Ā·Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā‚¬Ā Ć…ĀÄā‚¬ā€.</li></ul>',
+        gameTitle: "Ć…Ā Ä€Ā'Ć…Ā Ä†ā€ Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Äā‚¬Ā¢Ć…Ā Äā€˛Ā¢ Ć…Ā Ä€Ā£ Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā",
+        hudNight: "Ć…Ā Ä€Ć†Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼",
+        hudTime: "Ć…Ā Ä€Ā§Ć…Ā Ä€Ā°Ć…ĀÄ€Ā",
+        hudPower: "Ć…Ā Äā‚¬Ā¢Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ćø",
+        cameraMonitorLabel: "Ć…Ā Ä€ĀĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ć†Ć…Ā Äā‚¬Ā Ć…Ā Ä€Ā¢Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā  Ć…Ā Äā‚¬ĀĆ…Ā Äā‚¬Ā¢Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€ĀĆ…Ā Äā‚¬Ā¢Ć…Ā Ä€ĀĆ…Ā Ä€Ā",
         cameraRoomNames: [
-          "CAM 1A - КОРИДОР",
-          "CAM 1B - КОРИДОР",
-          "CAM 2A - КУХНЯ",
-          "CAM 2B - ЇДАЛЬНЯ",
-          "CAM 3 - ВХІД",
-          "CAM 4A - ЛІВИЙ БІК",
-          "CAM 4B - ПРАВИЙ БІК",
-          "CAM 5 - СКЛАД",
-          "CAM 6 - ЗАКУЛІССЯ",
-          "ОФІС"
+          "CAM 1A - Ć…Ā Ä€ĀĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀÆĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā ",
+          "CAM 1B - Ć…Ā Ä€ĀĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀÆĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā ",
+          "CAM 2A - Ć…Ā Ä€ĀĆ…Ā Ä€Ā£Ć…Ā Ä¼Ā£Ā½Ć…Ā Ä€Ć†Ć…Ā Ä†ā€ ",
+          "CAM 2B - Ć…Ā Äā‚¬ļ£¼Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€ĀĆ…Ā Äā‚¬Å—Ć…Ā Ä€Ā¬Ć…Ā Ä€Ć†Ć…Ā Ä†ā€ ",
+          "CAM 3 - Ć…Ā Äā‚¬ā„¢Ć…Ā Ä¼Ā£Ā½Ć…Ā Äā‚¬Ā Ć…Ā Äā‚¬ĀÆ",
+          "CAM 4A - Ć…Ā Äā‚¬Å—Ć…Ā Äā‚¬Ā Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Äā€˛Ā¢ Ć…Ā Äā‚¬ĀĆ…Ā Äā‚¬Ā Ć…Ā Ä€Ā",
+          "CAM 4B - Ć…Ā Ä€ĀĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Äā€˛Ā¢ Ć…Ā Äā‚¬ĀĆ…Ā Äā‚¬Ā Ć…Ā Ä€Ā",
+          "CAM 5 - Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀÆ",
+          "CAM 6 - Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€ĀĆ…Ā Ä€ĀĆ…Ā Ä€Ā£Ć…Ā Äā‚¬Å—Ć…Ā Äā‚¬Ā Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä†ā€ ",
+          "Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā¤Ć…Ā Äā‚¬Ā Ć…Ā Ä¼Ā£Ā¼"
         ],
         cameraButtonTitles: [
-          "Коридор",
-          "Коридор",
-          "Кухня",
-          "Їдальня",
-          "Вхід",
-          "Лівий бік",
-          "Правий бік",
-          "Склад",
-          "Закулісся",
-          "Офіс"
+          "Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬",
+          "Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬",
+          "Ć…Ā Ä€ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬Ā¦Ć…Ā Ä€Ā½Ć…ĀÄ€Ćø",
+          "Ć…Ā Äā‚¬ļ£¼Ć…Ā Ä€Ā´Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…ĀÄ€Ćø",
+          "Ć…Ā Äā‚¬ā„¢Ć…ĀÄā‚¬Ā¦Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā´",
+          "Ć…Ā Äā‚¬Å—Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¹ Ć…Ā Ä€Ā±Ć…ĀÄā‚¬ā€Ć…Ā Ć…ā€”",
+          "Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¹ Ć…Ā Ä€Ā±Ć…ĀÄā‚¬ā€Ć…Ā Ć…ā€”",
+          "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ć…ā€”Ć…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´",
+          "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…ĀÄ€ĀĆ…Ā Ä€Ā»Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø",
+          "Ć…Ā Ä–ā€ŗĆ…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ā"
         ],
-        btnStart: "ПОЧАТИ ГРУ",
-        btnLight: "Світло",
-        btnDoorOpen: "Двері (відчинені)",
-        btnDoorClosed: "Двері (зачинені)",
-        btnCamera: "Камери",
-        btnScream: "Крикнути",
-        btnRestart: "Перезапуск",
-        btnRestartDeath: "СПРОБУВАТИ ЩЕ РАЗ",
-        btnBackToStart: "НАЗАД НА СТАРТОВИЙ ЕКРАН",
-        btnReplay: "\u2192 ГРАТИ ЗНОВУ \u2192",
-        congratsTitle: "НІЧ ПЕРЕЖИТО!",
+        btnStart: "Ć…Ā Ä€ĀĆ…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä€Ā Ć…Ā Äā‚¬ĀĆ…Ā Ä€Ā Ć…Ā Ä€Ā£",
+        btnLight: "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā¾",
+        btnDoorOpen: "Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€ (Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā´Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…ĀÄā‚¬ā€)",
+        btnDoorClosed: "Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€ (Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…ĀÄā‚¬ā€)",
+        btnCamera: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä†Ćø",
+        btnScream: "Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø",
+        btnRestart: "Ć…Ā Ä€ĀĆ…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ć…ā€”",
+        btnRestartDeath: "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€ĀĆ…Ā Ä€Ā Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬ĀĆ…Ā Ä€Ā£Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä€Ā Ć…Ā Ä€Ā©Ć…Ā Äā‚¬Ā¢ Ć…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā€¯",
+        btnBackToStart: "Ć…Ā Ä€Ć†Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā€¯Ć…Ā Ä€ĀĆ…Ā Äā‚¬ĀÆ Ć…Ā Ä€Ć†Ć…Ā Ä€Ā Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€Ā¢Ć…Ā Ä€ĀĆ…Ā Ä€Ā Ć…Ā Ä€Ā¢Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Äā€˛Ā¢ Ć…Ā Äā‚¬Ā¢Ć…Ā Ä€ĀĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ć†",
+        btnReplay: "\u2192 Ć…Ā Äā‚¬ĀĆ…Ā Ä€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä€Ā Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā£ \u2192",
+        congratsTitle: "Ć…Ā Ä€Ć†Ć…Ā Äā‚¬Ā Ć…Ā Ä€Ā§ Ć…Ā Ä€ĀĆ…Ā Äā‚¬Ā¢Ć…Ā Ä€Ā Ć…Ā Äā‚¬Ā¢Ć…Ā Äā‚¬ā€Ć…Ā Ä€ĀĆ…Ā Ä€Ā¢Ć…Ā Ä–ā€ŗ!",
         congratsMessages: [
-          "Ти пережив першу ніч з Клавом!",
-          "Ще одна ніч позаду. Перемога вже ближче!",
-          "Три ночі позаду. Ти стаєш сильнішим!",
-          "Фініш уже близько... Пишайся собою, ти справляєшся!",
-          "Залишилася лише одна ніч... Ти зможеш!"
+          "Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā² Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄ€ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼ Ć…Ā Ä€Ā· Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼!",
+          "Ć…Ā Ä€Ā©Ć…Ā Ä€Āµ Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼ Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…ĀÄ€Ā. Ć…Ā Ä€ĀĆ…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…Ā Ä€Ā° Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¶Ć…Ā Ä€Āµ Ć…Ā Ä€Ā±Ć…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¶Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Āµ!",
+          "Ć…Ā Ä€Ā¢Ć…ĀÄā€Ā¬Ć…Ā Ä†Ćø Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄā‚¬ā€ Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…ĀÄ€Ā. Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆĆ…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā¼!",
+          "Ć…Ā Ä€Ā¤Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā¶Ć…Ā Ä€Āµ Ć…Ā Ä€Ā±Ć…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…Ā Ä€Ā·Ć…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā¾... Ć…Ā Ä€ĀĆ…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā¹Ć…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…ĀÄ€ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā±Ć…Ā Ä€Ā¾Ć…ĀÄ–ā€, Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…ĀÄ€ĀĆ…Ā Ä†Ā¦Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā»Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀÆĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø!",
+          "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā»Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä€Āµ Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā´Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼... Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…Ā Ä€Ā·Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä€ĀµĆ…ĀÄ€Ā!"
         ],
-        nextNightButton: ({ night }) => `\u2192 НІЧ ${night} \u2192`,
-        congratsFallback: ({ night }) => `Ти пережив ніч ${night}!`,
-        superWinTitle: "ТИ ВИЖИВ!",
-        superWinSubtitle: "УСІ П'ЯТЬ НОЧЕЙ",
-        superWinMessage: "Ти пережив усі п'ять ночей у Клава!<br>Тепер ти вільний... поки що...",
-        deathTitle: "СМЕРТЬ",
-        cameraSeesKlavs: "На камері ти бачиш Клава, що стоїть у темряві.",
-        cameraEmpty: "Камери показують порожні кімнати.",
-        cameraLowered: "Ти опускаєш камери й дивишся в офіс.",
-        lightOn: "Ти вмикаєш світло.",
-        lightOff: "Ти вимикаєш світло.",
-        nightStart: ({ night }) => `Ніч ${night} починається.`,
-        officeIdle: "Ти сидиш в офісі. Тиша лякає.",
-        logDoorBlocked: "Двері стримують Клава зовні.",
-        logSomethingMoves: "Щось рухається в темряві...",
-        deathKlavs: "Клав в офісі. Цю ніч ти не пережив.",
-        deathPower: "Енергія скінчилася. Офіс занурюється в темряву."
+        nextNightButton: ({ night }) => `\u2192 Ć…Ā Ä€Ć†Ć…Ā Äā‚¬Ā Ć…Ā Ä€Ā§ ${night} \u2192`,
+        congratsFallback: ({ night }) => `Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā² Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼ ${night}!`,
+        superWinTitle: "Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā€Ć…Ā Ä€ĀĆ…Ā Äā‚¬ā„¢!",
+        superWinSubtitle: "Ć…Ā Ä€Ā£Ć…Ā Ä¼Ā£Ā¼Ć…Ā Äā‚¬Ā  Ć…Ā Ä€Ā'Ć…Ā Ä†ā€ Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā¬ Ć…Ā Ä€Ć†Ć…Ā Ä–ā€ŗĆ…Ā Ä€Ā§Ć…Ā Äā‚¬Ā¢Ć…Ā Äā€˛Ā¢",
+        superWinMessage: "Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā² Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬ā€ Ć…Ā Ä†Ā¦'Ć…ĀÄ€ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¹ Ć…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°!<br>Ć…Ā Ä€Ā¢Ć…Ā Ä€ĀµĆ…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬ Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¹... Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä†Ćø Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾...",
+        deathTitle: "Ć…Ā Ä¼Ā£Ā¼Ć…Ā Ä€ĀĆ…Ā Äā‚¬Ā¢Ć…Ā Ä€Ā Ć…Ā Ä€Ā¢Ć…Ā Ä€Ā¬",
+        cameraSeesKlavs: "Ć…Ā Ä€Ć†Ć…Ā Ä€Ā° Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€ Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā±Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°, Ć…ĀÄā‚¬Ā°Ć…Ā Ä€Ā¾ Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…ĀÄā‚¬ā€¯Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…ĀÄ€Ā Ć…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā¼Ć…ĀÄā€Ā¬Ć…ĀÄ€ĆøĆ…Ā Ä€Ā²Ć…ĀÄā‚¬ā€.",
+        cameraEmpty: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä†Ćø Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā·Ć…ĀÄ€ĀĆ…ĀÄ–ā€Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¶Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€ Ć…Ā Ć…ā€”Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø.",
+        cameraLowered: "Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆĆ…ĀÄ€Ā Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä†Ćø Ć…Ā Ä€Ā¹ Ć…Ā Ä€Ā´Ć…Ā Ä†ĆøĆ…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ā.",
+        lightOn: "Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¼Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆĆ…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā¾.",
+        lightOff: "Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…Ā Ä€Ā²Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¼Ć…Ā Ä†ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆĆ…ĀÄ€Ā Ć…ĀÄ€ĀĆ…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā¾.",
+        nightStart: ({ night }) => `Ć…Ā Ä€Ć†Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼ ${night} Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø.`,
+        officeIdle: "Ć…Ā Ä€Ā¢Ć…Ā Ä†Ćø Ć…ĀÄ€ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā´Ć…Ā Ä†ĆøĆ…ĀÄ€Ā Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…ĀÄā‚¬ā€. Ć…Ā Ä€Ā¢Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…Ā Ä€Ā° Ć…Ā Ä€Ā»Ć…ĀÄ€ĆøĆ…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆ.",
+        logDoorBlocked: "Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…ĀÄā‚¬ā€ Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¼Ć…ĀÄ€ĀĆ…ĀÄ–ā€Ć…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā° Ć…Ā Ä€Ā·Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€.",
+        logSomethingMoves: "Ć…Ā Ä€Ā©Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄ€Ā Ć…ĀÄā€Ā¬Ć…ĀÄ€ĀĆ…ĀÄā‚¬Ā¦Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀÆĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā² Ć…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā¼Ć…ĀÄā€Ā¬Ć…ĀÄ€ĆøĆ…Ā Ä€Ā²Ć…ĀÄā‚¬ā€...",
+        deathKlavs: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā² Ć…Ā Ä€Ā² Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…ĀÄā‚¬ā€. Ć…Ā Ä€Ā¦Ć…ĀÄ–ā€ Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼ Ć…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā½Ć…Ā Ä€Āµ Ć…Ā Ä†Ā¦Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā¶Ć…Ā Ä†ĆøĆ…Ā Ä€Ā².",
+        deathPower: "Ć…Ā Äā‚¬Ā¢Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ćø Ć…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…ĀÄ€ĀĆ…ĀÄ€Ćø. Ć…Ā Ä–ā€ŗĆ…ĀÄā‚¬Ė›Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ā Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄā€Ā¬Ć…ĀÄ–ā€Ć…ĀÄā‚¬ĀÆĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄ€Ćø Ć…Ā Ä€Ā² Ć…ĀÄā‚¬ĀĆ…Ā Ä€ĀµĆ…Ā Ä€Ā¼Ć…ĀÄā€Ā¬Ć…ĀÄ€ĆøĆ…Ā Ä€Ā²Ć…ĀÄ€Ā."
       },
       de: {
-        pageTitle: "Fünf Nächte bei Klavs",
+        pageTitle: "FĆ„ā€ Ä€Ā¼nf NĆ„ā€ Ä€Ā¤chte bei Klavs",
         languageLabel: "Sprache",
-        startTitle: "FÜNF NÄCHTE",
+        startTitle: "FĆ„ā€ Ä€ĀNF NĆ„ā€ Äā‚¬Ė›CHTE",
         startSubtitle: "BEI KLAVS",
-        startText: "Du wurdest gerade für die \"Klavs-Überwachung\" eingestellt.<br>Dein Job ist es, im Büro zu sitzen und die Überwachungskameras zu beobachten.<br>Überlebe fünf Nächte ohne Zwischenfälle (wenn du weißt, was ich meine)...",
+        startText: "Du wurdest gerade fĆ„ā€ Ä€Ā¼r die \"Klavs-Ć„ā€ Ä€Āberwachung\" eingestellt.<br>Dein Job ist es, im BĆ„ā€ Ä€Ā¼ro zu sitzen und die Ć„ā€ Ä€Āberwachungskameras zu beobachten.<br>Ć„ā€ Ä€Āberlebe fĆ„ā€ Ä€Ā¼nf NĆ„ā€ Ä€Ā¤chte ohne ZwischenfĆ„ā€ Ä€Ā¤lle (wenn du weiĆ„ā€ Ä€Āt, was ich meine)...",
         btnHowTo: "So spielt man",
         btnSettings: "Einstellungen",
         howToTitle: "So spielt man",
-        howToClose: "Schließen",
+        howToClose: "SchlieĆ„ā€ Ä€Āen",
         settingsTitle: "Einstellungen",
-        settingsVolume: "Lautstärke",
+        settingsVolume: "LautstĆ„ā€ Ä€Ā¤rke",
         settingsBrightness: "Helligkeit",
         settingsEffects: "Jumpscare-Effekte",
         settingsEffectsLow: "Niedrig",
         settingsEffectsNormal: "Normal",
         settingsEffectsHigh: "Hoch",
         settingsAutoSave: "Einstellungen werden automatisch gespeichert.",
-        howToBody: '<strong>Ziel:</strong> Überlebe bis zum Ende jeder Nacht und schaffe alle fünf Nächte.<br><br><strong>Steuerung:</strong><ul><li><strong>Licht:</strong> überprüft das Büro und senkt Klavs\' Chance, sich ins Büro vorzuwagen, verbraucht aber Energie.</li><li><strong>Tür:</strong> schließe sie, wenn Klavs in der Nähe ist. Ein abgewehrter Angriff rettet dich, kostet aber Energie.</li><li><strong>Kameras:</strong> nutze sie, um Klavs zu verfolgen. Wenn du ihn beobachtest, kann ihn das verlangsamen, aber Kameras verbrauchen ebenfalls Energie.</li><li><strong>Schreien:</strong> löst sofort den Jumpscare-Knopf aus.</li></ul><strong>Wie Klavs jagt:</strong><ul><li>Er bewegt sich wie ein Animatronic über die Karte in Richtung Büro.</li><li>Wenn die Tür offen bleibt und du zu lange ungeschützt bist, wird er aggressiver.</li><li>Wenn er an der Tür ist, reagiere schnell: nutze Licht und Tür zusammen.</li></ul><strong>Energie-Tipps:</strong><ul><li>Licht, Tür und Kameras verbrauchen Energie.</li><li>Wenn die Energie ausgeht, bist du in großer Gefahr.</li></ul>',
-        gameTitle: "FÜNF NÄCHTE BEI KLAVS",
+        howToBody: '<strong>Ziel:</strong> Ć„ā€ Ä€Āberlebe bis zum Ende jeder Nacht und schaffe alle fĆ„ā€ Ä€Ā¼nf NĆ„ā€ Ä€Ā¤chte.<br><br><strong>Steuerung:</strong><ul><li><strong>Licht:</strong> Ć„ā€ Ä€Ā¼berprĆ„ā€ Ä€Ā¼ft das BĆ„ā€ Ä€Ā¼ro und senkt Klavs\' Chance, sich ins BĆ„ā€ Ä€Ā¼ro vorzuwagen, verbraucht aber Energie.</li><li><strong>TĆ„ā€ Ä€Ā¼r:</strong> schlieĆ„ā€ Ä€Āe sie, wenn Klavs in der NĆ„ā€ Ä€Ā¤he ist. Ein abgewehrter Angriff rettet dich, kostet aber Energie.</li><li><strong>Kameras:</strong> nutze sie, um Klavs zu verfolgen. Wenn du ihn beobachtest, kann ihn das verlangsamen, aber Kameras verbrauchen ebenfalls Energie.</li><li><strong>Schreien:</strong> lĆ„ā€ Ä€Ā¶st sofort den Jumpscare-Knopf aus.</li></ul><strong>Wie Klavs jagt:</strong><ul><li>Er bewegt sich wie ein Animatronic Ć„ā€ Ä€Ā¼ber die Karte in Richtung BĆ„ā€ Ä€Ā¼ro.</li><li>Wenn die TĆ„ā€ Ä€Ā¼r offen bleibt und du zu lange ungeschĆ„ā€ Ä€Ā¼tzt bist, wird er aggressiver.</li><li>Wenn er an der TĆ„ā€ Ä€Ā¼r ist, reagiere schnell: nutze Licht und TĆ„ā€ Ä€Ā¼r zusammen.</li></ul><strong>Energie-Tipps:</strong><ul><li>Licht, TĆ„ā€ Ä€Ā¼r und Kameras verbrauchen Energie.</li><li>Wenn die Energie ausgeht, bist du in groĆ„ā€ Ä€Āer Gefahr.</li></ul>',
+        gameTitle: "FĆ„ā€ Ä€ĀNF NĆ„ā€ Äā‚¬Ė›CHTE BEI KLAVS",
         hudNight: "Nacht",
         hudTime: "Zeit",
         hudPower: "Energie",
@@ -2761,72 +2782,72 @@ Tu esi brīvs... Pagaidām...</div>
         cameraRoomNames: [
           "CAM 1A - FLUR",
           "CAM 1B - FLUR",
-          "CAM 2A - KÜCHE",
+          "CAM 2A - KĆ„ā€ Ä€ĀCHE",
           "CAM 2B - SPEISESAAL",
           "CAM 3 - EINGANG",
           "CAM 4A - WESTSEITE",
           "CAM 4B - OSTSEITE",
           "CAM 5 - LAGER",
-          "CAM 6 - HINTERBÜHNE",
-          "BÜRO"
+          "CAM 6 - HINTERBĆ„ā€ Ä€ĀHNE",
+          "BĆ„ā€ Ä€ĀRO"
         ],
         cameraButtonTitles: [
           "Flur",
           "Flur",
-          "Küche",
+          "KĆ„ā€ Ä€Ā¼che",
           "Speisesaal",
           "Eingang",
           "Westseite",
           "Ostseite",
           "Lager",
-          "Hinterbühne",
-          "Büro"
+          "HinterbĆ„ā€ Ä€Ā¼hne",
+          "BĆ„ā€ Ä€Ā¼ro"
         ],
         btnStart: "SPIEL STARTEN",
         btnLight: "Licht",
-        btnDoorOpen: "Tür (offen)",
-        btnDoorClosed: "Tür (geschlossen)",
+        btnDoorOpen: "TĆ„ā€ Ä€Ā¼r (offen)",
+        btnDoorClosed: "TĆ„ā€ Ä€Ā¼r (geschlossen)",
         btnCamera: "Kameras",
         btnScream: "Schreien",
         btnRestart: "Neustart",
         btnRestartDeath: "NOCH EINMAL",
-        btnBackToStart: "ZURÜCK ZUM STARTBILDSCHIRM",
+        btnBackToStart: "ZURĆ„ā€ Ä€ĀCK ZUM STARTBILDSCHIRM",
         btnReplay: "\u2192 NOCHMAL SPIELEN \u2192",
-        congratsTitle: "NACHT ÜBERLEBT!",
+        congratsTitle: "NACHT Ć„ā€ Ä€ĀBERLEBT!",
         congratsMessages: [
-          "Du hast die erste Nacht mit Klavs überlebt!",
-          "Noch eine Nacht geschafft. Der Sieg rückt näher!",
-          "Drei Nächte liegen hinter dir. Du wirst stärker!",
+          "Du hast die erste Nacht mit Klavs Ć„ā€ Ä€Ā¼berlebt!",
+          "Noch eine Nacht geschafft. Der Sieg rĆ„ā€ Ä€Ā¼ckt nĆ„ā€ Ä€Ā¤her!",
+          "Drei NĆ„ā€ Ä€Ā¤chte liegen hinter dir. Du wirst stĆ„ā€ Ä€Ā¤rker!",
           "Das Ende ist nah... Sei stolz auf dich, du schaffst das!",
           "Nur noch eine Nacht... Du packst das!"
         ],
         nextNightButton: ({ night }) => `\u2192 NACHT ${night} \u2192`,
-        congratsFallback: ({ night }) => `Du hast Nacht ${night} überlebt!`,
-        superWinTitle: "DU HAST ÜBERLEBT!",
-        superWinSubtitle: "ALLE FÜNF NÄCHTE",
-        superWinMessage: "Du hast alle fünf Nächte bei Klavs überlebt!<br>Du bist frei... vorerst...",
+        congratsFallback: ({ night }) => `Du hast Nacht ${night} Ć„ā€ Ä€Ā¼berlebt!`,
+        superWinTitle: "DU HAST Ć„ā€ Ä€ĀBERLEBT!",
+        superWinSubtitle: "ALLE FĆ„ā€ Ä€ĀNF NĆ„ā€ Äā‚¬Ė›CHTE",
+        superWinMessage: "Du hast alle fĆ„ā€ Ä€Ā¼nf NĆ„ā€ Ä€Ā¤chte bei Klavs Ć„ā€ Ä€Ā¼berlebt!<br>Du bist frei... vorerst...",
         deathTitle: "TOD",
         cameraSeesKlavs: "Auf der Kamera siehst du Klavs im Dunkeln stehen.",
-        cameraEmpty: "Die Kameras zeigen leere Räume.",
-        cameraLowered: "Du senkst die Kameras und beobachtest das Büro.",
+        cameraEmpty: "Die Kameras zeigen leere RĆ„ā€ Ä€Ā¤ume.",
+        cameraLowered: "Du senkst die Kameras und beobachtest das BĆ„ā€ Ä€Ā¼ro.",
         lightOn: "Du schaltest das Licht ein.",
         lightOff: "Du schaltest das Licht aus.",
         nightStart: ({ night }) => `Nacht ${night} beginnt.`,
-        officeIdle: "Du sitzt im Büro. Die Stille ist unheimlich.",
-        logDoorBlocked: "Die Tür hält Klavs draußen.",
+        officeIdle: "Du sitzt im BĆ„ā€ Ä€Ā¼ro. Die Stille ist unheimlich.",
+        logDoorBlocked: "Die TĆ„ā€ Ä€Ā¼r hĆ„ā€ Ä€Ā¤lt Klavs drauĆ„ā€ Ä€Āen.",
         logSomethingMoves: "Etwas bewegt sich in der Dunkelheit...",
-        deathKlavs: "Klavs ist im Büro. Du hast diese Nacht nicht überlebt.",
-        deathPower: "Die Energie ist aufgebraucht. Das Büro versinkt in Dunkelheit."
+        deathKlavs: "Klavs ist im BĆ„ā€ Ä€Ā¼ro. Du hast diese Nacht nicht Ć„ā€ Ä€Ā¼berlebt.",
+        deathPower: "Die Energie ist aufgebraucht. Das BĆ„ā€ Ä€Ā¼ro versinkt in Dunkelheit."
       },
       da: {
-        pageTitle: "Fem nætter hos Klavs",
+        pageTitle: "Fem nĆ„ā€ Ä€Ā¦tter hos Klavs",
         languageLabel: "Sprog",
-        startTitle: "FEM NÆTTER",
+        startTitle: "FEM NĆ„ā€ Äā‚¬Ā TTER",
         startSubtitle: "HOS KLAVS",
-        startText: "Du er lige blevet ansat til \"Klavs-overvågning\".<br>Dit job er at sidde på kontoret og holde øje med overvågningskameraerne.<br>Overlev fem nætter uden uheld (hvis du ved, hvad jeg mener)...",
-        btnHowTo: "Sådan spiller du",
+        startText: "Du er lige blevet ansat til \"Klavs-overvĆ„ā€ Ä¼Ā£Ā½gning\".<br>Dit job er at sidde pĆ„ā€ Ä¼Ā£Ā½ kontoret og holde Ć„ā€ Ä†Ćøje med overvĆ„ā€ Ä¼Ā£Ā½gningskameraerne.<br>Overlev fem nĆ„ā€ Ä€Ā¦tter uden uheld (hvis du ved, hvad jeg mener)...",
+        btnHowTo: "SĆ„ā€ Ä¼Ā£Ā½dan spiller du",
         btnSettings: "Indstillinger",
-        howToTitle: "Sådan spiller du",
+        howToTitle: "SĆ„ā€ Ä¼Ā£Ā½dan spiller du",
         howToClose: "Luk",
         settingsTitle: "Indstillinger",
         settingsVolume: "Lydstyrke",
@@ -2834,10 +2855,10 @@ Tu esi brīvs... Pagaidām...</div>
         settingsEffects: "Jumpscare-effekter",
         settingsEffectsLow: "Lav",
         settingsEffectsNormal: "Normal",
-        settingsEffectsHigh: "Høj",
+        settingsEffectsHigh: "HĆ„ā€ Ä†Ćøj",
         settingsAutoSave: "Indstillinger gemmes automatisk.",
-        howToBody: '<strong>Mål:</strong> Overlev til slutningen af hver nat og klar alle fem nætter.<br><br><strong>Styring:</strong><ul><li><strong>Lys:</strong> lader dig tjekke kontoret og sænker Klavs\' chance for at gå helt ind i kontoret, men bruger energi.</li><li><strong>Dør:</strong> luk den, når Klavs er tæt på. Et blokeret angreb redder dig, men koster energi.</li><li><strong>Kameraer:</strong> brug dem til at spore Klavs. At holde øje med ham kan sinke ham, men kameraer bruger også energi.</li><li><strong>Skrig:</strong> udløser jumpscare-knappen med det samme.</li></ul><strong>Sådan jager Klavs:</strong><ul><li>Han bevæger sig gennem kortet mod kontoret som en animatronic.</li><li>Hvis døren står åben, og du er udsat for længe, bliver han mere aggressiv.</li><li>Når han står ved døren, skal du reagere hurtigt: brug lys og dør sammen.</li></ul><strong>Energitips:</strong><ul><li>Lys, dør og kameraer bruger energi.</li><li>Hvis energien løber tør, er du i stor fare.</li></ul>',
-        gameTitle: "FEM NÆTTER HOS KLAVS",
+        howToBody: '<strong>MĆ„ā€ Ä¼Ā£Ā½l:</strong> Overlev til slutningen af hver nat og klar alle fem nĆ„ā€ Ä€Ā¦tter.<br><br><strong>Styring:</strong><ul><li><strong>Lys:</strong> lader dig tjekke kontoret og sĆ„ā€ Ä€Ā¦nker Klavs\' chance for at gĆ„ā€ Ä¼Ā£Ā½ helt ind i kontoret, men bruger energi.</li><li><strong>DĆ„ā€ Ä†Ćør:</strong> luk den, nĆ„ā€ Ä¼Ā£Ā½r Klavs er tĆ„ā€ Ä€Ā¦t pĆ„ā€ Ä¼Ā£Ā½. Et blokeret angreb redder dig, men koster energi.</li><li><strong>Kameraer:</strong> brug dem til at spore Klavs. At holde Ć„ā€ Ä†Ćøje med ham kan sinke ham, men kameraer bruger ogsĆ„ā€ Ä¼Ā£Ā½ energi.</li><li><strong>Skrig:</strong> udlĆ„ā€ Ä†Ćøser jumpscare-knappen med det samme.</li></ul><strong>SĆ„ā€ Ä¼Ā£Ā½dan jager Klavs:</strong><ul><li>Han bevĆ„ā€ Ä€Ā¦ger sig gennem kortet mod kontoret som en animatronic.</li><li>Hvis dĆ„ā€ Ä†Ćøren stĆ„ā€ Ä¼Ā£Ā½r Ć„ā€ Ä¼Ā£Ā½ben, og du er udsat for lĆ„ā€ Ä€Ā¦nge, bliver han mere aggressiv.</li><li>NĆ„ā€ Ä¼Ā£Ā½r han stĆ„ā€ Ä¼Ā£Ā½r ved dĆ„ā€ Ä†Ćøren, skal du reagere hurtigt: brug lys og dĆ„ā€ Ä†Ćør sammen.</li></ul><strong>Energitips:</strong><ul><li>Lys, dĆ„ā€ Ä†Ćør og kameraer bruger energi.</li><li>Hvis energien lĆ„ā€ Ä†Ćøber tĆ„ā€ Ä†Ćør, er du i stor fare.</li></ul>',
+        gameTitle: "FEM NĆ„ā€ Äā‚¬Ā TTER HOS KLAVS",
         hudNight: "Nat",
         hudTime: "Tid",
         hudPower: "Energi",
@@ -2845,11 +2866,11 @@ Tu esi brīvs... Pagaidām...</div>
         cameraRoomNames: [
           "CAM 1A - GANG",
           "CAM 1B - GANG",
-          "CAM 2A - KØKKEN",
+          "CAM 2A - KĆ„ā€ Ä€ĀKKEN",
           "CAM 2B - SPISESAL",
           "CAM 3 - INDGANG",
           "CAM 4A - VENSTRE SIDE",
-          "CAM 4B - HØJRE SIDE",
+          "CAM 4B - HĆ„ā€ Ä€ĀJRE SIDE",
           "CAM 5 - LAGER",
           "CAM 6 - BAGSCENE",
           "KONTOR"
@@ -2857,50 +2878,50 @@ Tu esi brīvs... Pagaidām...</div>
         cameraButtonTitles: [
           "Gang",
           "Gang",
-          "Køkken",
+          "KĆ„ā€ Ä†Ćøkken",
           "Spisesal",
           "Indgang",
           "Venstre side",
-          "Højre side",
+          "HĆ„ā€ Ä†Ćøjre side",
           "Lager",
           "Bagscene",
           "Kontor"
         ],
         btnStart: "START SPIL",
         btnLight: "Lys",
-        btnDoorOpen: "Dør (åben)",
-        btnDoorClosed: "Dør (lukket)",
+        btnDoorOpen: "DĆ„ā€ Ä†Ćør (Ć„ā€ Ä¼Ā£Ā½ben)",
+        btnDoorClosed: "DĆ„ā€ Ä†Ćør (lukket)",
         btnCamera: "Kameraer",
         btnScream: "Skrig",
         btnRestart: "Genstart",
-        btnRestartDeath: "PRØV IGEN",
-        btnBackToStart: "TILBAGE TIL STARTSKÆRMEN",
+        btnRestartDeath: "PRĆ„ā€ Ä€ĀV IGEN",
+        btnBackToStart: "TILBAGE TIL STARTSKĆ„ā€ Äā‚¬Ā RMEN",
         btnReplay: "\u2192 SPIL IGEN \u2192",
         congratsTitle: "NAT OVERLEVET!",
         congratsMessages: [
-          "Du overlevede den første nat med Klavs!",
-          "Endnu en nat er bag dig. Sejren kommer tættere på!",
-          "Tre nætter er klaret. Du bliver stærkere!",
-          "Du er så tæt på slutningen... Vær stolt, du klarer det!",
-          "Der er kun én nat tilbage... Du kan godt!"
+          "Du overlevede den fĆ„ā€ Ä†Ćørste nat med Klavs!",
+          "Endnu en nat er bag dig. Sejren kommer tĆ„ā€ Ä€Ā¦ttere pĆ„ā€ Ä¼Ā£Ā½!",
+          "Tre nĆ„ā€ Ä€Ā¦tter er klaret. Du bliver stĆ„ā€ Ä€Ā¦rkere!",
+          "Du er sĆ„ā€ Ä¼Ā£Ā½ tĆ„ā€ Ä€Ā¦t pĆ„ā€ Ä¼Ā£Ā½ slutningen... VĆ„ā€ Ä€Ā¦r stolt, du klarer det!",
+          "Der er kun Ć„ā€ Ä€Ā©n nat tilbage... Du kan godt!"
         ],
         nextNightButton: ({ night }) => `\u2192 NAT ${night} \u2192`,
         congratsFallback: ({ night }) => `Du overlevede nat ${night}!`,
         superWinTitle: "DU OVERLEVEDE!",
-        superWinSubtitle: "ALLE FEM NÆTTER",
-        superWinMessage: "Du klarede alle fem nætter hos Klavs!<br>Du er fri... indtil videre...",
-        deathTitle: "DØD",
-        cameraSeesKlavs: "På kameraet ser du Klavs stå i mørket.",
+        superWinSubtitle: "ALLE FEM NĆ„ā€ Äā‚¬Ā TTER",
+        superWinMessage: "Du klarede alle fem nĆ„ā€ Ä€Ā¦tter hos Klavs!<br>Du er fri... indtil videre...",
+        deathTitle: "DĆ„ā€ Ä€ĀD",
+        cameraSeesKlavs: "PĆ„ā€ Ä¼Ā£Ā½ kameraet ser du Klavs stĆ„ā€ Ä¼Ā£Ā½ i mĆ„ā€ Ä†Ćørket.",
         cameraEmpty: "Kameraerne viser tomme rum.",
-        cameraLowered: "Du sænker kameraerne og holder øje med kontoret.",
-        lightOn: "Du tænder lyset.",
+        cameraLowered: "Du sĆ„ā€ Ä€Ā¦nker kameraerne og holder Ć„ā€ Ä†Ćøje med kontoret.",
+        lightOn: "Du tĆ„ā€ Ä€Ā¦nder lyset.",
         lightOff: "Du slukker lyset.",
         nightStart: ({ night }) => `Nat ${night} begynder.`,
-        officeIdle: "Du sidder på kontoret. Stilheden er uhyggelig.",
-        logDoorBlocked: "Døren holder Klavs ude.",
-        logSomethingMoves: "Noget bevæger sig i mørket...",
-        deathKlavs: "Klavs er på kontoret. Du overlevede ikke natten.",
-        deathPower: "Energien er opbrugt. Kontoret synker ned i mørket."
+        officeIdle: "Du sidder pĆ„ā€ Ä¼Ā£Ā½ kontoret. Stilheden er uhyggelig.",
+        logDoorBlocked: "DĆ„ā€ Ä†Ćøren holder Klavs ude.",
+        logSomethingMoves: "Noget bevĆ„ā€ Ä€Ā¦ger sig i mĆ„ā€ Ä†Ćørket...",
+        deathKlavs: "Klavs er pĆ„ā€ Ä¼Ā£Ā½ kontoret. Du overlevede ikke natten.",
+        deathPower: "Energien er opbrugt. Kontoret synker ned i mĆ„ā€ Ä†Ćørket."
       }
     };
 
@@ -2908,18 +2929,18 @@ Tu esi brīvs... Pagaidām...</div>
       lv: {
         adminButton: "Admin",
         adminTitle: "Admin Panelis",
-        adminStatusChecking: "Pārbauda lokālā IP piekļuvi...",
-        adminStatusAllowed: ({ ip }) => `Admin piekļuve atbloķēta IP ${ip}.`,
-        adminStatusLocked: ({ ip }) => `Admin aizslēgts. Atļautā IP: ${ip}.`,
+        adminStatusChecking: "PÄ†ā€˛Ä€Ārbauda lokÄ†ā€˛Ä€ĀlÄ†ā€˛Ä€Ā IP piekÄ†ā€˛Ä€Ā¼uvi...",
+        adminStatusAllowed: ({ ip }) => `Admin piekÄ†ā€˛Ä€Ā¼uve atbloÄ†ā€˛Ä€Ā·Ä†ā€˛Äā‚¬Āta IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Admin aizslÄ†ā€˛Äā‚¬Āgts. AtÄ†ā€˛Ä€Ā¼autÄ†ā€˛Ä€Ā IP: ${ip}.`,
         adminDetected: ({ ips }) => `Atrastas adreses: ${ips}`,
         adminNoIps: "nekas",
         adminSkipNight: "Izlaist nakti (+1)",
-        adminInfinitePowerOn: "Bezgalīga enerģija: IESLĒGTA",
-        adminInfinitePowerOff: "Bezgalīga enerģija: IZSLĒGTA",
-        adminFreezeKlavsOn: "Iesaldēt Klāvu: IESLĒGTS",
-        adminFreezeKlavsOff: "Iesaldēt Klāvu: IZSLĒGTS",
-        adminFillPower: "Uzpildīt enerģiju",
-        adminResetKlavs: "Atmest Klāvu sākumā"
+        adminInfinitePowerOn: "BezgalÄ†ā€˛Ä€Ā«ga enerÄ†ā€˛Ä€Ā£ija: IESLÄ†ā€˛Äā‚¬ā„¢GTA",
+        adminInfinitePowerOff: "BezgalÄ†ā€˛Ä€Ā«ga enerÄ†ā€˛Ä€Ā£ija: IZSLÄ†ā€˛Äā‚¬ā„¢GTA",
+        adminFreezeKlavsOn: "IesaldÄ†ā€˛Äā‚¬Āt KlÄ†ā€˛Ä€Āvu: IESLÄ†ā€˛Äā‚¬ā„¢GTS",
+        adminFreezeKlavsOff: "IesaldÄ†ā€˛Äā‚¬Āt KlÄ†ā€˛Ä€Āvu: IZSLÄ†ā€˛Äā‚¬ā„¢GTS",
+        adminFillPower: "UzpildÄ†ā€˛Ä€Ā«t enerÄ†ā€˛Ä€Ā£iju",
+        adminResetKlavs: "Atmest KlÄ†ā€˛Ä€Āvu sÄ†ā€˛Ä€ĀkumÄ†ā€˛Ä€Ā"
       },
       en: {
         adminButton: "Admin",
@@ -2932,65 +2953,65 @@ Tu esi brīvs... Pagaidām...</div>
         adminSkipNight: "Skip Night (+1)",
         adminInfinitePowerOn: "Infinite Power: ON",
         adminInfinitePowerOff: "Infinite Power: OFF",
-        adminFreezeKlavsOn: "Freeze Klāvs: ON",
-        adminFreezeKlavsOff: "Freeze Klāvs: OFF",
+        adminFreezeKlavsOn: "Freeze KlÄ†ā€˛Ä€Āvs: ON",
+        adminFreezeKlavsOff: "Freeze KlÄ†ā€˛Ä€Āvs: OFF",
         adminFillPower: "Fill Power",
-        adminResetKlavs: "Reset Klāvs"
+        adminResetKlavs: "Reset KlÄ†ā€˛Ä€Āvs"
       },
       ru: {
-        adminButton: "Админ",
-        adminTitle: "Панель Админа",
-        adminStatusChecking: "Проверка доступа по локальному IP...",
-        adminStatusAllowed: ({ ip }) => `Доступ администратора открыт для IP ${ip}.`,
-        adminStatusLocked: ({ ip }) => `Админ закрыт. Разрешённый IP: ${ip}.`,
-        adminDetected: ({ ips }) => `Найдены адреса: ${ips}`,
-        adminNoIps: "ничего",
-        adminSkipNight: "Пропустить ночь (+1)",
-        adminInfinitePowerOn: "Бесконечная энергия: ВКЛ",
-        adminInfinitePowerOff: "Бесконечная энергия: ВЫКЛ",
-        adminFreezeKlavsOn: "Заморозить Клава: ВКЛ",
-        adminFreezeKlavsOff: "Заморозить Клава: ВЫКЛ",
-        adminFillPower: "Заполнить энергию",
-        adminResetKlavs: "Вернуть Клава в начало"
+        adminButton: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½",
+        adminTitle: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…Ā Ä€Ā»Ć…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä€Ā°",
+        adminStatusChecking: "Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ć…ā€”Ć…Ā Ä€Ā° Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä†Ā¦Ć…Ā Ä€Ā° Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾ Ć…Ā Ä€Ā»Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā¼Ć…ĀÄ€Ā IP...",
+        adminStatusAllowed: ({ ip }) => `Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä†Ā¦ Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā° Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ĀĆ…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹Ć…ĀÄā‚¬Ā Ć…Ā Ä€Ā´Ć…Ā Ä€Ā»Ć…ĀÄ€Ćø IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Ć…Ā Ä€ĀĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¼Ć…Ā Ä†ĆøĆ…Ā Ä€Ā½ Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā¹Ć…ĀÄā‚¬Ā. Ć…Ā Ä€Ā Ć…Ā Ä€Ā°Ć…Ā Ä€Ā·Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…ĀÄā‚¬Ā¹Ć…Ā Ä€Ā¹ IP: ${ip}.`,
+        adminDetected: ({ ips }) => `Ć…Ā Ä€Ć†Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¹Ć…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…ĀÄā‚¬Ā¹ Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ä€Ā°: ${ips}`,
+        adminNoIps: "Ć…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā³Ć…Ā Ä€Ā¾",
+        adminSkipNight: "Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€Ā½Ć…Ā Ä€Ā¾Ć…ĀÄā‚¬ļ£¼Ć…ĀÄ€Ā (+1)",
+        adminInfinitePowerOn: "Ć…Ā Äā‚¬ĀĆ…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄ€Ćø Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ€Ćø: Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—",
+        adminInfinitePowerOff: "Ć…Ā Äā‚¬ĀĆ…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄ€Ćø Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ€Ćø: Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā«Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—",
+        adminFreezeKlavsOn: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°: Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—",
+        adminFreezeKlavsOff: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°: Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€Ā«Ć…Ā Ä€ĀĆ…Ā Äā‚¬Å—",
+        adminFillPower: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…ĀÄ€ĆĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…Ā Ä†ĆøĆ…ĀÄ–ā€",
+        adminResetKlavs: "Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā° Ć…Ā Ä€Ā² Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…Ā Ä€Ā¾"
       },
       uk: {
-        adminButton: "Адмін",
-        adminTitle: "Панель Адміна",
-        adminStatusChecking: "Перевірка доступу за локальним IP...",
-        adminStatusAllowed: ({ ip }) => `Доступ адміністратора відкрито для IP ${ip}.`,
-        adminStatusLocked: ({ ip }) => `Адмін закритий. Дозволений IP: ${ip}.`,
-        adminDetected: ({ ips }) => `Знайдені адреси: ${ips}`,
-        adminNoIps: "нічого",
-        adminSkipNight: "Пропустити ніч (+1)",
-        adminInfinitePowerOn: "Нескінченна енергія: УВІМК",
-        adminInfinitePowerOff: "Нескінченна енергія: ВИМК",
-        adminFreezeKlavsOn: "Заморозити Клава: УВІМК",
-        adminFreezeKlavsOff: "Заморозити Клава: ВИМК",
-        adminFillPower: "Заповнити енергію",
-        adminResetKlavs: "Повернути Клава на старт"
+        adminButton: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¼Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½",
+        adminTitle: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā°Ć…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…Ā Ä€Ā»Ć…ĀÄ€Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¼Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°",
+        adminStatusChecking: "Ć…Ā Ä€ĀĆ…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…ĀÄā€Ā¬Ć…Ā Ć…ā€”Ć…Ā Ä€Ā° Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä†Ā¦Ć…ĀÄ€Ā Ć…Ā Ä€Ā·Ć…Ā Ä€Ā° Ć…Ā Ä€Ā»Ć…Ā Ä€Ā¾Ć…Ā Ć…ā€”Ć…Ā Ä€Ā°Ć…Ā Ä€Ā»Ć…ĀÄ€ĀĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¼ IP...",
+        adminStatusAllowed: ({ ip }) => `Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā¾Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄ€ĀĆ…Ā Ä†Ā¦ Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…Ā Ä€Ā¼Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā°Ć…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā° Ć…Ā Ä€Ā²Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā´Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā¾ Ć…Ā Ä€Ā´Ć…Ā Ä€Ā»Ć…ĀÄ€Ćø IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Ć…Ā Ä€ĀĆ…Ā Ä€Ā´Ć…Ā Ä€Ā¼Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½ Ć…Ā Ä€Ā·Ć…Ā Ä€Ā°Ć…Ā Ć…ā€”Ć…ĀÄā€Ā¬Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†ĆøĆ…Ā Ä€Ā¹. Ć…Ā Äā‚¬ĀÆĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä€Ā²Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā»Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…Ā Ä€Ā¹ IP: ${ip}.`,
+        adminDetected: ({ ips }) => `Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā½Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¹Ć…Ā Ä€Ā´Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…ĀÄā‚¬ā€ Ć…Ā Ä€Ā°Ć…Ā Ä€Ā´Ć…ĀÄā€Ā¬Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ä†Ćø: ${ips}`,
+        adminNoIps: "Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā³Ć…Ā Ä€Ā¾",
+        adminSkipNight: "Ć…Ā Ä€ĀĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä†Ā¦Ć…ĀÄ€ĀĆ…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ā€Ć…ĀÄā‚¬ļ£¼ (+1)",
+        adminInfinitePowerOn: "Ć…Ā Ä€Ć†Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ćø: Ć…Ā Ä€Ā£Ć…Ā Äā‚¬ā„¢Ć…Ā Äā‚¬Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā",
+        adminInfinitePowerOff: "Ć…Ā Ä€Ć†Ć…Ā Ä€ĀµĆ…ĀÄ€ĀĆ…Ā Ć…ā€”Ć…ĀÄā‚¬ā€Ć…Ā Ä€Ā½Ć…ĀÄā‚¬ļ£¼Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ€Ćø: Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Ä€ĀĆ…Ā Ä€Ā",
+        adminFreezeKlavsOn: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°: Ć…Ā Ä€Ā£Ć…Ā Äā‚¬ā„¢Ć…Ā Äā‚¬Ā Ć…Ā Ä€ĀĆ…Ā Ä€Ā",
+        adminFreezeKlavsOff: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä€Ā¼Ć…Ā Ä€Ā¾Ć…ĀÄā€Ā¬Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā·Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā°: Ć…Ā Äā‚¬ā„¢Ć…Ā Ä€ĀĆ…Ā Ä€ĀĆ…Ā Ä€Ā",
+        adminFillPower: "Ć…Ā Äā‚¬ā€¯Ć…Ā Ä€Ā°Ć…Ā Ä†Ā¦Ć…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€Ā½Ć…Ā Ä†ĆøĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€ĀµĆ…Ā Ä€Ā½Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā³Ć…ĀÄā‚¬ā€Ć…ĀÄ–ā€",
+        adminResetKlavs: "Ć…Ā Ä€ĀĆ…Ā Ä€Ā¾Ć…Ā Ä€Ā²Ć…Ā Ä€ĀµĆ…ĀÄā€Ā¬Ć…Ā Ä€Ā½Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä†Ćø Ć…Ā Ä€ĀĆ…Ā Ä€Ā»Ć…Ā Ä€Ā°Ć…Ā Ä€Ā²Ć…Ā Ä€Ā° Ć…Ā Ä€Ā½Ć…Ā Ä€Ā° Ć…ĀÄ€ĀĆ…ĀÄā‚¬ĀĆ…Ā Ä€Ā°Ć…ĀÄā€Ā¬Ć…ĀÄā‚¬Ā"
       },
       de: {
         adminButton: "Admin",
         adminTitle: "Admin-Panel",
-        adminStatusChecking: "Prüfe lokalen IP-Zugang...",
-        adminStatusAllowed: ({ ip }) => `Admin-Zugang für IP ${ip} freigeschaltet.`,
+        adminStatusChecking: "PrĆ„ā€ Ä€Ā¼fe lokalen IP-Zugang...",
+        adminStatusAllowed: ({ ip }) => `Admin-Zugang fĆ„ā€ Ä€Ā¼r IP ${ip} freigeschaltet.`,
         adminStatusLocked: ({ ip }) => `Admin gesperrt. Erlaubte IP: ${ip}.`,
         adminDetected: ({ ips }) => `Erkannte Adressen: ${ips}`,
         adminNoIps: "keine",
-        adminSkipNight: "Nacht überspringen (+1)",
+        adminSkipNight: "Nacht Ć„ā€ Ä€Ā¼berspringen (+1)",
         adminInfinitePowerOn: "Unendliche Energie: AN",
         adminInfinitePowerOff: "Unendliche Energie: AUS",
         adminFreezeKlavsOn: "Klavs einfrieren: AN",
         adminFreezeKlavsOff: "Klavs einfrieren: AUS",
-        adminFillPower: "Energie auffüllen",
-        adminResetKlavs: "Klavs zurücksetzen"
+        adminFillPower: "Energie auffĆ„ā€ Ä€Ā¼llen",
+        adminResetKlavs: "Klavs zurĆ„ā€ Ä€Ā¼cksetzen"
       },
       da: {
         adminButton: "Admin",
         adminTitle: "Adminpanel",
         adminStatusChecking: "Tjekker lokal IP-adgang...",
-        adminStatusAllowed: ({ ip }) => `Admin-adgang låst op for IP ${ip}.`,
-        adminStatusLocked: ({ ip }) => `Admin låst. Tilladt IP: ${ip}.`,
+        adminStatusAllowed: ({ ip }) => `Admin-adgang lĆ„ā€ Ä¼Ā£Ā½st op for IP ${ip}.`,
+        adminStatusLocked: ({ ip }) => `Admin lĆ„ā€ Ä¼Ā£Ā½st. Tilladt IP: ${ip}.`,
         adminDetected: ({ ips }) => `Fundne adresser: ${ips}`,
         adminNoIps: "ingen",
         adminSkipNight: "Spring nat over (+1)",
@@ -3244,7 +3265,7 @@ Tu esi brīvs... Pagaidām...</div>
       ]
     };
 
-    // ===== PALĪGFUNKCIJAS =====
+    // ===== PALÄ†ā€˛Ć…ā€“GFUNKCIJAS =====
     function getText(key, params = {}) {
       const value = translations[currentLanguage][key];
       if (typeof value === "function") return value(params);
@@ -3604,6 +3625,7 @@ Tu esi brīvs... Pagaidām...</div>
       btnRestartDeath.textContent = getText("btnRestartDeath");
       btnBackToStart.textContent = getText("btnBackToStart");
       btnReplay.textContent = getText("btnReplay");
+      btnSuperBackToStart.textContent = getText("btnBackToStart");
       deathTitleEl.textContent = getText("deathTitle");
 
       renderDoorButton();
@@ -3752,9 +3774,9 @@ Tu esi brīvs... Pagaidām...</div>
       setTimeout(() => camStatic.style.opacity = 0.12, 150);
 
       if (currentCameraRoom === klavsRoom) {
-        screenText.textContent = "Kamerā redzi Klāvu stāvam tumsā.";
+        screenText.textContent = "KamerÄ†ā€˛Ä€Ā redzi KlÄ†ā€˛Ä€Āvu stÄ†ā€˛Ä€Āvam tumsÄ†ā€˛Ä€Ā.";
       } else {
-        screenText.textContent = "Kameras rāda tukšas telpas.";
+        screenText.textContent = "Kameras rÄ†ā€˛Ä€Āda tukÄ†ā€¦Ä¼Ā£Ā¼as telpas.";
       }
 
       updateKlavsFigure();
@@ -3785,7 +3807,7 @@ Tu esi brīvs... Pagaidām...</div>
       updateUI();
     }
 
-    // ===== KLĀVA AI =====
+    // ===== KLÄ†ā€˛Äā€Ā¬VA AI =====
     function moveKlavs() {
       if (klavsCooldown > 0) {
         klavsCooldown--;
@@ -3797,12 +3819,12 @@ Tu esi brīvs... Pagaidām...</div>
         const idx = pathToOffice.indexOf(klavsRoom);
         if (idx >= 0 && idx < pathToOffice.length - 1) {
           const nextRoom = pathToOffice[idx + 1];
-          // Durvis notur Klāvu ārā - don't let him enter office if door is closed
+          // Durvis notur KlÄ†ā€˛Ä€Āvu Ä†ā€˛Ä€ĀrÄ†ā€˛Ä€Ā - don't let him enter office if door is closed
           if (nextRoom === 9 && doorClosed) {
-            log("Durvis notur Klāvu ārā.");
+            log("Durvis notur KlÄ†ā€˛Ä€Āvu Ä†ā€˛Ä€ĀrÄ†ā€˛Ä€Ā.");
           } else {
             klavsRoom = nextRoom;
-            log("Kaut kas pārvietojas tumsā..");
+            log("Kaut kas pÄ†ā€˛Ä€Ārvietojas tumsÄ†ā€˛Ä€Ā..");
           }
         }
         klavsCooldown = Math.floor(Math.random() * 6) + 4;
@@ -3818,7 +3840,7 @@ Tu esi brīvs... Pagaidām...</div>
       if (gameOver) return;
       playJumpscareSound();
       jumpscare.style.display = "flex";
-      setTimeout(() => end(false, "Klāvs ir ofisā. Tu neizdzīvoji šo nakti."), 3800);
+      setTimeout(() => end(false, "KlÄ†ā€˛Ä€Āvs ir ofisÄ†ā€˛Ä€Ā. Tu neizdzÄ†ā€˛Ä€Ā«voji Ä†ā€¦Ä¼Ā£Ā¼o nakti."), 3800);
     }
 
     function end(win, msg) {
@@ -3835,7 +3857,7 @@ Tu esi brīvs... Pagaidām...</div>
       }
     }
 
-    // ===== NAKTS PĀREJA =====
+    // ===== NAKTS PÄ†ā€˛Äā€Ā¬REJA =====
     function showCongrats() {
       const title = document.getElementById("congrats-title");
       const text = document.getElementById("congrats-text");
@@ -3843,16 +3865,16 @@ Tu esi brīvs... Pagaidām...</div>
 
       congratsScreen.style.display = "flex";
 
-      title.textContent = "NAKTS IZDZĪVOTA!";
+      title.textContent = "NAKTS IZDZÄ†ā€˛Ć…ā€“VOTA!";
       const nightMessages = [
-        "Tu izdzīvoji pirmo nakti pie Klāva!",
-        "Vēl viena nakts aiz muguras. Jau tuvāk uzvārai!",
-        "Trīs naktis pārvērtības. Tu spēki pieaugsti!",
-        "Tik tuvu galam... Paturi spēcīgi!",
-        "Vēl tikai viena nakts... Tu to paveiksi!"
+        "Tu izdzÄ†ā€˛Ä€Ā«voji pirmo nakti pie KlÄ†ā€˛Ä€Āva!",
+        "VÄ†ā€˛Äā‚¬Āl viena nakts aiz muguras. Jau tuvÄ†ā€˛Ä€Āk uzvÄ†ā€˛Ä€Ārai!",
+        "TrÄ†ā€˛Ä€Ā«s naktis pÄ†ā€˛Ä€ĀrvÄ†ā€˛Äā‚¬ĀrtÄ†ā€˛Ä€Ā«bas. Tu spÄ†ā€˛Äā‚¬Āki pieaugsti!",
+        "Tik tuvu galam... Paturi spÄ†ā€˛Äā‚¬ĀcÄ†ā€˛Ä€Ā«gi!",
+        "VÄ†ā€˛Äā‚¬Āl tikai viena nakts... Tu to paveiksi!"
       ];
-      text.textContent = nightMessages[night - 1] || "Tu izdzīvoji nakti " + night + "!";
-      btnNextNight.textContent = "→ NAKTS " + night + " →";
+      text.textContent = nightMessages[night - 1] || "Tu izdzÄ†ā€˛Ä€Ā«voji nakti " + night + "!";
+      btnNextNight.textContent = "Ć„ĀÄā‚¬Ā Äā‚¬ā„¢ NAKTS " + night + " Ć„ĀÄā‚¬Ā Äā‚¬ā„¢";
       btnNextNight.style.display = "inline-block";
       box.style.boxShadow = "0 0 40px #0fdfaf, inset 0 0 30px rgba(15,223,175,0.1)";
     }
@@ -3865,7 +3887,7 @@ Tu esi brīvs... Pagaidām...</div>
       superWinScreen.style.display = "flex";
     }
 
-    // ===== GALVENĀ CIKLA FUNKCIJA =====
+    // ===== GALVENÄ†ā€˛Äā€Ā¬ CIKLA FUNKCIJA =====
     function tick() {
       if (gameOver) return;
 
@@ -3879,7 +3901,7 @@ Tu esi brīvs... Pagaidām...</div>
       moveKlavs();
 
       if (power <= 0) {
-        return end(false, "Enerģija beigusies. Ofiss grimst tumsā.");
+        return end(false, "EnerÄ†ā€˛Ä€Ā£ija beigusies. Ofiss grimst tumsÄ†ā€˛Ä€Ā.");
       }
 
       if (seconds >= 60) {
@@ -3906,7 +3928,7 @@ Tu esi brīvs... Pagaidām...</div>
       if (gameOver) return;
       playButtonSound();
       lightsOn = !lightsOn;
-      screenText.textContent = lightsOn ? "Tu ieslēdz gaismu." : "Tu izslēdz gaismu.";
+      screenText.textContent = lightsOn ? "Tu ieslÄ†ā€˛Äā‚¬Ādz gaismu." : "Tu izslÄ†ā€˛Äā‚¬Ādz gaismu.";
       updateUI();
     };
 
@@ -3914,7 +3936,7 @@ Tu esi brīvs... Pagaidām...</div>
       if (gameOver) return;
       playButtonSound();
       doorClosed = !doorClosed;
-      btnDoor.textContent = doorClosed ? "Durvis (aizvērtas)" : "Durvis (atvērtas)";
+      btnDoor.textContent = doorClosed ? "Durvis (aizvÄ†ā€˛Äā‚¬Ārtas)" : "Durvis (atvÄ†ā€˛Äā‚¬Ārtas)";
       updateUI();
     };
 
@@ -3955,7 +3977,7 @@ Tu esi brīvs... Pagaidām...</div>
       lightsOn = false;
       setCameraOverlayOpen(false);
 
-      screenText.textContent = "Nakts " + night + " sākas.";
+      screenText.textContent = "Nakts " + night + " sÄ†ā€˛Ä€Ākas.";
       updateUI();
 
       timer = setInterval(tick, 1000);
@@ -4020,7 +4042,7 @@ Tu esi brīvs... Pagaidām...</div>
       setCameraOverlayOpen(false);
       btnRestart.style.display = "none";
 
-      screenText.textContent = "Tu sēdi ofisā. Klusums ir biedējošs.";
+      screenText.textContent = "Tu sÄ†ā€˛Äā‚¬Ādi ofisÄ†ā€˛Ä€Ā. Klusums ir biedÄ†ā€˛Äā‚¬ĀjoÄ†ā€¦Ä¼Ā£Ā¼s.";
       updateUI();
 
       if (timer) clearInterval(timer);
@@ -4513,6 +4535,12 @@ Tu esi brīvs... Pagaidām...</div>
 
     btnReplay.onclick = () => {
       playButtonSound();
+      superWinScreen.style.display = "none";
+      start(1, false);
+    };
+
+    btnSuperBackToStart.onclick = () => {
+      playButtonSound();
       returnToStartScreen();
     };
 
@@ -4569,4 +4597,5 @@ Tu esi brīvs... Pagaidām...</div>
   </script>
 </body>
 </html>
+
 
