@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="lv">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Piecas naktis pie Klāva</title>
+  <title>Five Nights at Klavs</title>
   <style>
     :root {
       --scene-brightness: 1;
@@ -610,9 +610,12 @@
     #congrats-text {
       font-size: 22px;
       margin-bottom: 30px;
+      margin-left: auto;
+      margin-right: auto;
       color: #0fdfaf;
       opacity: 0.9;
       line-height: 1.6;
+      text-align: center;
       animation: textFadeIn 1s ease-out 0.3s both;
     }
 
@@ -795,9 +798,10 @@
       font-size: 20px;
       color: #0fdfaf;
       max-width: 600px;
-      margin-bottom: 40px;
+      margin: 0 auto 40px;
       line-height: 2;
       opacity: 0.95;
+      text-align: center;
       animation: textFadeIn 1s ease-out 0.5s both;
     }
 
@@ -967,6 +971,85 @@
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
+    }
+
+    #start-redeem {
+      position: absolute;
+      left: 22px;
+      bottom: 18px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    #start-redeem-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    #btn-redeem {
+      border: 2px solid #0fdfaf;
+      border-right: 0;
+      background: rgba(0, 14, 10, 0.94);
+      color: #0fdfaf;
+      font-family: monospace;
+      font-size: 17px;
+      letter-spacing: 1px;
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #btn-redeem:hover,
+    #btn-redeem:focus-visible {
+      outline: none;
+      background: rgba(15,223,175,0.12);
+      box-shadow: 0 0 18px rgba(15,223,175,0.24);
+    }
+
+    #redeem-input {
+      width: 190px;
+      border: 2px solid #0fdfaf;
+      background: rgba(0, 8, 6, 0.96);
+      color: #d9fff4;
+      font-family: monospace;
+      font-size: 16px;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      caret-color: #0fdfaf;
+    }
+
+    #redeem-input::placeholder {
+      color: rgba(217,255,244,0.48);
+      text-transform: lowercase;
+    }
+
+    #redeem-input:focus {
+      outline: none;
+      box-shadow: inset 0 0 0 1px rgba(15,223,175,0.25), 0 0 18px rgba(15,223,175,0.22);
+    }
+
+    #redeem-status {
+      min-height: 18px;
+      font-size: 12px;
+      color: rgba(217,255,244,0.74);
+      letter-spacing: 0.4px;
+      font-family: monospace;
+      padding-left: 2px;
+      text-shadow: 0 0 10px rgba(15,223,175,0.16);
+    }
+
+    #redeem-status.error {
+      color: #ff8f8f;
+      text-shadow: 0 0 10px rgba(255,120,120,0.18);
+    }
+
+    #redeem-status.success {
+      color: #fff4bf;
+      text-shadow: 0 0 10px rgba(255,236,168,0.18);
     }
 
     #btn-start,
@@ -1307,6 +1390,63 @@
       overflow: hidden;
     }
 
+    #fight-mercy-wave {
+      position: absolute;
+      left: -14%;
+      top: 112%;
+      width: 128%;
+      height: 0;
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 44% 56% 0 0 / 16% 18% 0 0;
+      background:
+        radial-gradient(circle at 21% 18%, rgba(255,255,255,0.98) 0 10%, rgba(255,255,255,0.34) 11%, rgba(255,255,255,0) 24%),
+        radial-gradient(circle at 48% 10%, rgba(255,255,255,0.95) 0 9%, rgba(255,255,255,0) 24%),
+        radial-gradient(circle at 78% 17%, rgba(255,255,255,0.94) 0 10%, rgba(255,255,255,0) 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.97) 22%, #ffffff 66%, rgba(244,244,244,0.98) 100%);
+      box-shadow:
+        0 -8px 18px rgba(255,255,255,0.34),
+        0 0 28px rgba(255,255,255,0.16),
+        inset 0 10px 16px rgba(255,255,255,0.58);
+      filter: brightness(1.04) blur(0.35px);
+      transform: scaleX(0.94);
+      transition:
+        top 0.14s linear,
+        height 0.58s cubic-bezier(0.2, 0.78, 0.18, 1),
+        opacity 0.12s linear,
+        transform 0.58s cubic-bezier(0.2, 0.78, 0.18, 1);
+    }
+
+    #fight-mercy-wave::before {
+      content: "";
+      position: absolute;
+      left: -2%;
+      right: -2%;
+      top: -16px;
+      height: 26px;
+      border-radius: 55% 45% 0 0 / 100% 100% 0 0;
+      background:
+        radial-gradient(circle at 12% 88%, #ffffff 0 20px, rgba(255,255,255,0) 21px),
+        radial-gradient(circle at 34% 100%, #ffffff 0 18px, rgba(255,255,255,0) 19px),
+        radial-gradient(circle at 57% 86%, #ffffff 0 24px, rgba(255,255,255,0) 25px),
+        radial-gradient(circle at 80% 100%, #ffffff 0 19px, rgba(255,255,255,0) 20px),
+        radial-gradient(circle at 95% 88%, rgba(255,255,255,0.96) 0 14px, rgba(255,255,255,0) 15px);
+      opacity: 0.98;
+    }
+
+    #fight-mercy-wave.active {
+      top: 58%;
+      height: 46%;
+      opacity: 1;
+    }
+
+    #fight-mercy-wave.engulf {
+      top: -8%;
+      height: 126%;
+      transform: scaleX(1.03);
+    }
+
     #fight-soul {
       position: absolute;
       width: 20px;
@@ -1314,7 +1454,7 @@
       left: 0;
       top: 0;
       display: none;
-      z-index: 2;
+      z-index: 3;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 30'%3E%3Cpath fill='%23ff2b2b' d='M23.6 0c-3.4 0-6.4 2-7.6 5.1C14.8 2 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4 0 17.5 16 30 16 30s16-12.5 16-21.6C32 3.8 28.2 0 23.6 0z'/%3E%3C/svg%3E") center/contain no-repeat;
       filter: drop-shadow(0 0 6px rgba(255, 43, 43, 0.45));
     }
@@ -1418,10 +1558,20 @@
 
     .fight-bullet {
       position: absolute;
-      width: 12px;
+      width: 56px;
       height: 12px;
-      border-radius: 0;
-      background: #fff;
+      border-radius: 999px 82% 98% 999px / 999px 70% 98% 999px;
+      background:
+        radial-gradient(circle at 20% 34%, rgba(255,255,255,0.98) 0 14%, rgba(255,255,255,0.42) 15%, rgba(255,255,255,0) 28%),
+        radial-gradient(circle at 58% 52%, rgba(255,255,255,0.94) 0 20%, rgba(255,255,255,0.18) 21%, rgba(255,255,255,0) 44%),
+        linear-gradient(90deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.78) 24%, #ffffff 56%, rgba(255,255,255,0.94) 82%, rgba(255,255,255,0.04) 100%);
+      box-shadow:
+        0 0 14px rgba(255,255,255,0.78),
+        0 0 26px rgba(255,255,255,0.18),
+        inset 0 0 10px rgba(255,255,255,0.96);
+      opacity: 0.99;
+      filter: brightness(1.15) saturate(0) blur(0.22px);
+      transform-origin: center center;
     }
 
     #fight-dialogue,
@@ -1900,9 +2050,10 @@
       font-size: 18px;
       color: #0fdfaf;
       max-width: 500px;
-      margin-bottom: 40px;
+      margin: 0 auto 40px;
       line-height: 1.6;
       opacity: 0.9;
+      text-align: center;
     }
 
     #death-actions {
@@ -2028,21 +2179,28 @@
   <!-- Start Screen -->
   <div id="start-screen">
     <div id="start-content">
-      <div id="start-title">PIECAS NAKTIS</div>
-      <div id="start-subtitle">PIE KLĀVA</div>
+      <div id="start-title">FIVE NIGHTS</div>
+      <div id="start-subtitle">AT KLAVS</div>
       <div id="start-text">
-        Jūs tikko tikāt pieņemti darbā "Klāva pieskatīšana".
-        Jūsu darbs ir sēdēt ofisā un uzraudzīt video kameras.
-        Pārdzīvojiet piecas naktis bez notikumiem (if you know what i mean)... 
+        You have just been hired for "Klāvs supervision".
+        Your job is to sit in the office and monitor the video cameras.
+        Survive five nights without incidents (if you know what I mean)...
       </div>
       <div id="start-actions">
-        <button id="btn-start">SĀKT SPĒLI</button>
+        <button id="btn-start">START GAME</button>
         <button id="btn-bonus-shift">BONUS SHIFT</button>
         <button id="btn-nightmare-shift">NIGHTMARE SHIFT</button>
         <button id="btn-fight-klavs">FIGHT KLĀVS</button>
         <button id="btn-how-to">How to play</button>
         <button id="btn-settings">Settings</button>
       </div>
+    </div>
+    <div id="start-redeem">
+      <div id="start-redeem-row">
+        <button id="btn-redeem" type="button">redeem</button>
+        <input id="redeem-input" type="text" autocomplete="off" spellcheck="false" placeholder="enter code">
+      </div>
+      <div id="redeem-status" aria-live="polite"></div>
     </div>
   </div>
 
@@ -2227,6 +2385,7 @@ Tu esi brīvs... Pagaidām...</div>
         </div>
         <div id="fight-console">
           <div id="fight-arena">
+            <div id="fight-mercy-wave"></div>
             <div id="fight-soul"></div>
           </div>
           <div id="fight-dialogue">Klāvs blocks the way.</div>
@@ -2307,6 +2466,7 @@ Tu esi brīvs... Pagaidām...</div>
     let klavsMovePressure = 0;
     let klavsKillIntent = 0;
     let adminAuthorized = false;
+    let redeemAdminAuthorized = false;
     let adminAccessChecking = true;
     let infinitePowerEnabled = false;
     let freezeKlavsEnabled = false;
@@ -2969,6 +3129,9 @@ Tu esi brīvs... Pagaidām...</div>
     const startTitleEl = document.getElementById("start-title");
     const startSubtitleEl = document.getElementById("start-subtitle");
     const startTextEl = document.getElementById("start-text");
+    const btnRedeem = document.getElementById("btn-redeem");
+    const redeemInputEl = document.getElementById("redeem-input");
+    const redeemStatusEl = document.getElementById("redeem-status");
     const btnHowTo = document.getElementById("btn-how-to");
     const btnSettings = document.getElementById("btn-settings");
     const howToModal = document.getElementById("how-to-modal");
@@ -3111,6 +3274,7 @@ Tu esi brīvs... Pagaidām...</div>
     const fightPlayerHpFillEl = document.getElementById("fight-player-hp-fill");
     const fightPlayerReadoutEl = document.getElementById("fight-player-readout");
     const fightArenaEl = document.getElementById("fight-arena");
+    const fightMercyWaveEl = document.getElementById("fight-mercy-wave");
     const fightSoulEl = document.getElementById("fight-soul");
     const fightEndOverlayEl = document.getElementById("fight-end-overlay");
     const fightEndHeartEl = document.getElementById("fight-end-heart");
@@ -3904,13 +4068,16 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     let gameSettings = loadSettings();
-    let currentLanguage = translations[localStorage.getItem("pnpk-language")] ? localStorage.getItem("pnpk-language") : "lv";
+    let currentLanguage = translations[localStorage.getItem("pnpk-language")] ? localStorage.getItem("pnpk-language") : "en";
     let screenMessageState = { key: "officeIdle", params: {} };
     let deathMessageState = null;
     const logEntries = [];
     let bonusShiftUnlocked = localStorage.getItem(BONUS_SHIFT_UNLOCK_KEY) === "true";
     let nightmareShiftUnlocked = localStorage.getItem(NIGHTMARE_SHIFT_UNLOCK_KEY) === "true";
     let fightKlavsUnlocked = localStorage.getItem(FIGHT_KLAVS_UNLOCK_KEY) === "true";
+    let redeemBonusShiftUnlocked = false;
+    let redeemNightmareShiftUnlocked = false;
+    let redeemFightKlavsUnlocked = false;
     let bonusMode = false;
     let nightmareMode = false;
     let currentRunStartNight = 1;
@@ -3975,6 +4142,7 @@ Tu esi brīvs... Pagaidām...</div>
         pizzaResult: "The cold pizza is awful, but it steadies you.",
         spareFail: "Klāvs is not ready to back down.",
         spareSuccess: "You lower your guard. Klāvs lunges the moment you try to spare him.",
+        spareFlood: "A massive white liquid surge floods the whole box. There is nowhere to dodge.",
         betrayalLoseMessage: "Klāvs takes your mercy as a chance to kill you.",
         dustMessage: "Klāvs turns to dust.",
         deathScreenTitle: "YOU CANNOT GIVE UP JUST YET...",
@@ -4026,6 +4194,7 @@ Tu esi brīvs... Pagaidām...</div>
         pizzaResult: "Pica ir auksta un briesmīga, bet palīdz saņemties.",
         spareFail: "Klāvs vēl nav gatavs atkāpties.",
         spareSuccess: "Tu nolaid sargu. Tiklīdz mēģini viņu saudzēt, Klāvs metas virsū.",
+        spareFlood: "Milzīga balta šķidruma straume appludina visu lauku. No tās nevar izvairīties.",
         betrayalLoseMessage: "Klāvs izmanto tavu žēlastību, lai tevi nogalinātu.",
         dustMessage: "Klāvs pārvēršas putekļos.",
         deathScreenTitle: "TU VĒL NEDRĪKSTI PADOTIES...",
@@ -4229,40 +4398,103 @@ Tu esi brīvs... Pagaidām...</div>
       return NIGHTMARE_SHIFT_LABELS[currentLanguage] || NIGHTMARE_SHIFT_LABELS.default;
     }
 
+    function hasAdminAccess() {
+      return adminAuthorized || redeemAdminAuthorized;
+    }
+
+    function hasBonusShiftAccess() {
+      return bonusShiftUnlocked || redeemBonusShiftUnlocked;
+    }
+
+    function hasNightmareShiftAccess() {
+      return nightmareShiftUnlocked || redeemNightmareShiftUnlocked;
+    }
+
+    function hasFightKlavsAccess() {
+      return fightKlavsUnlocked || redeemFightKlavsUnlocked;
+    }
+
     function renderBonusShiftButton() {
       if (btnBonusShift) {
         btnBonusShift.textContent = getBonusShiftLabel();
-        btnBonusShift.style.display = bonusShiftUnlocked ? "inline-block" : "none";
+        btnBonusShift.style.display = hasBonusShiftAccess() ? "inline-block" : "none";
       }
       if (btnNightmareShift) {
         btnNightmareShift.textContent = getNightmareShiftLabel();
-        btnNightmareShift.style.display = nightmareShiftUnlocked ? "inline-block" : "none";
+        btnNightmareShift.style.display = hasNightmareShiftAccess() ? "inline-block" : "none";
       }
       if (btnFightKlavs) {
         btnFightKlavs.textContent = getFightKlavsLabel();
-        btnFightKlavs.style.display = fightKlavsUnlocked ? "inline-block" : "none";
+        btnFightKlavs.style.display = hasFightKlavsAccess() ? "inline-block" : "none";
       }
     }
 
-    function unlockBonusShift() {
-      if (bonusShiftUnlocked) return;
-      bonusShiftUnlocked = true;
-      localStorage.setItem(BONUS_SHIFT_UNLOCK_KEY, "true");
+    function unlockBonusShift(save = true) {
+      if (save) {
+        if (bonusShiftUnlocked) return;
+        bonusShiftUnlocked = true;
+        localStorage.setItem(BONUS_SHIFT_UNLOCK_KEY, "true");
+      } else {
+        if (hasBonusShiftAccess()) return;
+        redeemBonusShiftUnlocked = true;
+      }
       renderBonusShiftButton();
     }
 
-    function unlockNightmareShift() {
-      if (nightmareShiftUnlocked) return;
-      nightmareShiftUnlocked = true;
-      localStorage.setItem(NIGHTMARE_SHIFT_UNLOCK_KEY, "true");
+    function unlockNightmareShift(save = true) {
+      if (save) {
+        if (nightmareShiftUnlocked) return;
+        nightmareShiftUnlocked = true;
+        localStorage.setItem(NIGHTMARE_SHIFT_UNLOCK_KEY, "true");
+      } else {
+        if (hasNightmareShiftAccess()) return;
+        redeemNightmareShiftUnlocked = true;
+      }
       renderBonusShiftButton();
     }
 
-    function unlockFightKlavs() {
-      if (fightKlavsUnlocked) return;
-      fightKlavsUnlocked = true;
-      localStorage.setItem(FIGHT_KLAVS_UNLOCK_KEY, "true");
+    function unlockFightKlavs(save = true) {
+      if (save) {
+        if (fightKlavsUnlocked) return;
+        fightKlavsUnlocked = true;
+        localStorage.setItem(FIGHT_KLAVS_UNLOCK_KEY, "true");
+      } else {
+        if (hasFightKlavsAccess()) return;
+        redeemFightKlavsUnlocked = true;
+      }
       renderBonusShiftButton();
+    }
+
+    function setRedeemStatus(text, state = "") {
+      if (!redeemStatusEl) return;
+      redeemStatusEl.textContent = text;
+      redeemStatusEl.className = state ? state : "";
+      if (state) {
+        redeemStatusEl.classList.add(state);
+      }
+    }
+
+    function redeemStartCode() {
+      if (!redeemInputEl) return;
+      const code = redeemInputEl.value.trim().replace(/[\s_-]+/g, "").toUpperCase();
+      if (!code) {
+        setRedeemStatus("incorect code", "error");
+        return;
+      }
+
+      if (code === "FINAMONIS") {
+        const alreadyActive = redeemAdminAuthorized && hasBonusShiftAccess() && hasNightmareShiftAccess() && hasFightKlavsAccess();
+        redeemAdminAuthorized = true;
+        unlockBonusShift(false);
+        unlockNightmareShift(false);
+        unlockFightKlavs(false);
+        redeemInputEl.value = "";
+        renderAdminPanel();
+        setRedeemStatus(alreadyActive ? "session already unlocked" : "admin and extras unlocked for this session", alreadyActive ? "error" : "success");
+        return;
+      }
+
+      setRedeemStatus("incorect code", "error");
     }
 
     function getRunEndNight() {
@@ -4479,6 +4711,9 @@ Tu esi brīvs... Pagaidām...</div>
       fightEndHeartEl.classList.remove("breaking");
       fightEnemyPortraitEl.classList.remove("dusting");
       fightEnemyDustEl.innerHTML = "";
+      if (fightMercyWaveEl) {
+        fightMercyWaveEl.classList.remove("active", "engulf");
+      }
     }
 
     function clearFightBullets() {
@@ -4488,6 +4723,14 @@ Tu esi brīvs... Pagaidām...</div>
         }
       });
       fightBullets = [];
+    }
+
+    function removeFightBullet(bullet) {
+      if (!bullet) return;
+      bullet.removed = true;
+      if (bullet.el && bullet.el.parentNode) {
+        bullet.el.parentNode.removeChild(bullet.el);
+      }
     }
 
     function stopFightAttackMeter() {
@@ -4603,7 +4846,7 @@ Tu esi brīvs... Pagaidām...</div>
 
       clearFightSelections();
       fightSubactionsEl.classList.toggle("has-options", showOptions);
-      fightSoulEl.style.display = fightPhase === "enemy-turn" ? "block" : "none";
+      fightSoulEl.style.display = (fightPhase === "enemy-turn" || fightPhase === "mercy-trap") ? "block" : "none";
 
       if (fightEnded) {
         if (!fightDeathScreenVisible) return;
@@ -4741,7 +4984,7 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     function renderFightPanels() {
-      const showActionMenu = !fightEnded && fightPhase !== "dust-sequence" && fightPhase !== "death-sequence";
+      const showActionMenu = !fightEnded && fightPhase !== "dust-sequence" && fightPhase !== "death-sequence" && fightPhase !== "mercy-trap";
       fightAttackWrapEl.style.display = fightPhase === "attack" ? "block" : "none";
       fightActionsEl.style.display = showActionMenu ? "grid" : "none";
       fightFooterEl.style.display = "none";
@@ -4822,6 +5065,46 @@ Tu esi brīvs... Pagaidām...</div>
       }, 3120);
     }
 
+    function startFightMercyTrapSequence() {
+      if (fightEnded) return;
+      fightPhase = "mercy-trap";
+      fightSubmenu = "";
+      fightKeys.clear();
+      stopFightAttackMeter();
+      stopFightEnemyTurn();
+      clearFightSubactions();
+      clearFightSequenceTimeouts();
+      if (fightMercyWaveEl) {
+        fightMercyWaveEl.classList.remove("active", "engulf");
+      }
+      renderFightPanels();
+      setFightSoulPosition(
+        (fightArenaEl.clientWidth - (fightSoulEl.offsetWidth || 20)) / 2,
+        (fightArenaEl.clientHeight - (fightSoulEl.offsetHeight || 18)) / 2
+      );
+      fightSoulEl.style.display = "block";
+      setFightDialogue("spareSuccess");
+
+      queueFightSequence(() => {
+        setFightDialogue("spareFlood");
+        if (!fightMercyWaveEl) return;
+        void fightMercyWaveEl.offsetWidth;
+        fightMercyWaveEl.classList.add("active");
+      }, 220);
+
+      queueFightSequence(() => {
+        if (fightMercyWaveEl) {
+          fightMercyWaveEl.classList.add("engulf");
+        }
+      }, 360);
+
+      queueFightSequence(() => {
+        fightPlayerHp = 0;
+        renderFightStats();
+        startFightDeathSequence("betrayalLoseMessage");
+      }, 1140);
+    }
+
     function showFightDeathScreen(messageKey = "loseMessage") {
       fightDeathScreenVisible = true;
       fightDeathCauseKey = messageKey;
@@ -4865,12 +5148,17 @@ Tu esi brīvs... Pagaidām...</div>
     function spawnFightBullet(x, y, vx, vy, size = 12) {
       const bulletEl = document.createElement("div");
       bulletEl.className = "fight-bullet";
-      bulletEl.style.width = `${size}px`;
-      bulletEl.style.height = `${size}px`;
-      bulletEl.style.left = `${x}px`;
-      bulletEl.style.top = `${y}px`;
+      const speed = Math.hypot(vx, vy);
+      const width = Math.max(size * 3.4, Math.min(84, size * 4.1 + speed * 0.035));
+      const height = Math.max(8, Math.min(14, size * 0.82));
+      const angle = Math.atan2(vy, vx);
+      bulletEl.style.width = `${width}px`;
+      bulletEl.style.height = `${height}px`;
+      bulletEl.style.left = `${x - width / 2}px`;
+      bulletEl.style.top = `${y - height / 2}px`;
+      bulletEl.style.transform = `rotate(${angle}rad)`;
       fightArenaEl.appendChild(bulletEl);
-      const bullet = { x, y, vx, vy, size, el: bulletEl, hit: false };
+      const bullet = { x, y, vx, vy, size, width, height, angle, el: bulletEl, hit: false, removed: false };
       fightBullets.push(bullet);
       return bullet;
     }
@@ -4949,29 +5237,52 @@ Tu esi brīvs... Pagaidām...</div>
         const soulHeight = fightSoulEl.offsetHeight || 16;
         const soulCenterX = fightSoulX + soulWidth / 2;
         const soulCenterY = fightSoulY + soulHeight / 2;
+        const nextBullets = [];
+        let playerDied = false;
+
         fightBullets.forEach(bullet => {
+          if (bullet.removed || playerDied) {
+            removeFightBullet(bullet);
+            return;
+          }
+
           bullet.x += bullet.vx * dt;
           bullet.y += bullet.vy * dt;
-          bullet.el.style.left = `${bullet.x}px`;
-          bullet.el.style.top = `${bullet.y}px`;
+          bullet.el.style.left = `${bullet.x - bullet.width / 2}px`;
+          bullet.el.style.top = `${bullet.y - bullet.height / 2}px`;
+
+          const offscreenPadding = Math.max(bullet.width, bullet.height) + 24;
+          if (
+            bullet.x < -offscreenPadding ||
+            bullet.x > fightArenaEl.clientWidth + offscreenPadding ||
+            bullet.y < -offscreenPadding ||
+            bullet.y > fightArenaEl.clientHeight + offscreenPadding
+          ) {
+            removeFightBullet(bullet);
+            return;
+          }
 
           if (!bullet.hit) {
-            const bulletCenterX = bullet.x + bullet.size / 2;
-            const bulletCenterY = bullet.y + bullet.size / 2;
-            const overlapX = Math.abs(bulletCenterX - soulCenterX) < bullet.size / 2 + soulWidth * 0.32;
-            const overlapY = Math.abs(bulletCenterY - soulCenterY) < bullet.size / 2 + soulHeight * 0.28;
+            const overlapX = Math.abs(bullet.x - soulCenterX) < bullet.width * 0.34 + soulWidth * 0.24;
+            const overlapY = Math.abs(bullet.y - soulCenterY) < bullet.height * 0.6 + soulHeight * 0.26;
             if (overlapX && overlapY) {
               bullet.hit = true;
-              bullet.el.style.opacity = "0.3";
-              fightPlayerHp = Math.max(0, fightPlayerHp - 2);
+              removeFightBullet(bullet);
+              fightPlayerHp = Math.max(0, fightPlayerHp - 3);
               renderFightStats();
               if (fightPlayerHp <= 0) {
+                playerDied = true;
                 startFightDeathSequence();
-                return;
               }
+              return;
             }
           }
+
+          nextBullets.push(bullet);
         });
+
+        fightBullets = nextBullets;
+        if (playerDied) return;
 
         if (timestamp >= fightEnemyTurnUntil) {
           stopFightEnemyTurn();
@@ -5149,10 +5460,7 @@ Tu esi brīvs... Pagaidām...</div>
       clearFightSubactions();
       clearFightSequenceTimeouts();
       renderFightPanels();
-      setFightDialogue("spareSuccess");
-      queueFightSequence(() => {
-        startFightDeathSequence("betrayalLoseMessage");
-      }, 700);
+      startFightMercyTrapSequence();
     }
 
     function showFightMercyMenu() {
@@ -5187,6 +5495,7 @@ Tu esi brīvs... Pagaidām...</div>
       fightItems = { drink: 2, flash: 1, pizza: 1 };
       clearFightSubactions();
       fightArenaEl.innerHTML = "";
+      fightArenaEl.appendChild(fightMercyWaveEl);
       fightArenaEl.appendChild(fightSoulEl);
       setFightSoulPosition((fightArenaEl.clientWidth - 16) / 2, (fightArenaEl.clientHeight - 16) / 2);
       renderFightPanels();
@@ -5194,7 +5503,7 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     function openFightKlavsMode() {
-      if (!fightKlavsUnlocked) return;
+      if (!hasFightKlavsAccess()) return;
       if (timer) {
         clearInterval(timer);
         timer = null;
@@ -5237,13 +5546,15 @@ Tu esi brīvs... Pagaidām...</div>
         ? Array.from(detectedAdminIps).sort().join(", ")
         : getAdminText("adminNoIps");
       const matchedAdminIp = getMatchedAdminIp();
+      const adminUnlocked = hasAdminAccess();
+      const adminSource = matchedAdminIp || (redeemAdminAuthorized ? "redeem code" : getAllowedAdminIpsLabel());
 
-      btnAdmin.style.display = adminAuthorized ? "inline-block" : "none";
+      btnAdmin.style.display = adminUnlocked ? "inline-block" : "none";
       adminTitleEl.textContent = getAdminText("adminTitle");
       adminStatusEl.textContent = adminAccessChecking
-        ? getAdminText("adminStatusChecking")
-        : adminAuthorized
-          ? getAdminText("adminStatusAllowed", { ip: matchedAdminIp || getAllowedAdminIpsLabel() })
+        ? (adminUnlocked ? getAdminText("adminStatusAllowed", { ip: adminSource }) : getAdminText("adminStatusChecking"))
+        : adminUnlocked
+          ? getAdminText("adminStatusAllowed", { ip: adminSource })
           : getAdminText("adminStatusLocked", { ip: getAllowedAdminIpsLabel() });
       adminDetectedEl.textContent = getAdminText("adminDetected", { ips: detectedIpsText });
       btnAdmin.textContent = getAdminText("adminButton");
@@ -5259,7 +5570,7 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     function openAdminModal() {
-      if (!adminAuthorized) return;
+      if (!hasAdminAccess()) return;
       closeHowToModal();
       closeSettingsModal();
       adminModal.classList.add("open");
@@ -5330,7 +5641,7 @@ Tu esi brīvs... Pagaidām...</div>
       adminAuthorized = !!getMatchedAdminIp();
       adminAccessChecking = false;
 
-      if (!adminAuthorized) {
+      if (!hasAdminAccess()) {
         closeAdminModal();
       }
 
@@ -5338,7 +5649,7 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     function adminSkipNight() {
-      if (!adminAuthorized || gameOver) return;
+      if (!hasAdminAccess() || gameOver) return;
 
       if (night >= getRunEndNight()) {
         if (timer) clearInterval(timer);
@@ -5365,7 +5676,7 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     function adminToggleInfinitePower() {
-      if (!adminAuthorized) return;
+      if (!hasAdminAccess()) return;
       infinitePowerEnabled = !infinitePowerEnabled;
       if (infinitePowerEnabled) {
         power = 100;
@@ -5375,19 +5686,19 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     function adminToggleFreezeKlavs() {
-      if (!adminAuthorized) return;
+      if (!hasAdminAccess()) return;
       freezeKlavsEnabled = !freezeKlavsEnabled;
       renderAdminPanel();
     }
 
     function adminFillPower() {
-      if (!adminAuthorized || gameOver) return;
+      if (!hasAdminAccess() || gameOver) return;
       power = 100;
       updateUI();
     }
 
     function adminResetKlavs() {
-      if (!adminAuthorized || gameOver) return;
+      if (!hasAdminAccess() || gameOver) return;
       klavsRoom = 0;
       klavsCooldown = 4;
       klavsMoveTimer = 0;
@@ -5403,21 +5714,21 @@ Tu esi brīvs... Pagaidām...</div>
     }
 
     function adminUnlockBonusShift() {
-      if (!adminAuthorized) return;
+      if (!hasAdminAccess()) return;
       unlockBonusShift();
       renderBonusShiftButton();
       renderAdminPanel();
     }
 
     function adminUnlockNightmareShift() {
-      if (!adminAuthorized) return;
+      if (!hasAdminAccess()) return;
       unlockNightmareShift();
       renderBonusShiftButton();
       renderAdminPanel();
     }
 
     function adminInstantWin() {
-      if (!adminAuthorized || gameOver) return;
+      if (!hasAdminAccess() || gameOver) return;
       if (timer) {
         clearInterval(timer);
       }
@@ -5872,6 +6183,22 @@ Tu esi brīvs... Pagaidām...</div>
       startScreen.style.display = "none";
       start();
     };
+
+    if (btnRedeem && redeemInputEl) {
+      btnRedeem.onclick = () => {
+        playButtonSound();
+        redeemStartCode();
+      };
+
+      redeemInputEl.addEventListener("keydown", event => {
+        event.stopPropagation();
+        if (event.key === "Enter") {
+          event.preventDefault();
+          playButtonSound();
+          redeemStartCode();
+        }
+      });
+    }
 
     btnRestartDeath.onclick = () => {
       playButtonSound();
@@ -6392,7 +6719,7 @@ Tu esi brīvs... Pagaidām...</div>
     };
 
     btnBonusShift.onclick = () => {
-      if (!bonusShiftUnlocked) return;
+      if (!hasBonusShiftAccess()) return;
       playGameStartSound();
       closeHowToModal();
       closeSettingsModal();
@@ -6402,7 +6729,7 @@ Tu esi brīvs... Pagaidām...</div>
     };
 
     btnNightmareShift.onclick = () => {
-      if (!nightmareShiftUnlocked) return;
+      if (!hasNightmareShiftAccess()) return;
       playGameStartSound();
       closeHowToModal();
       closeSettingsModal();
@@ -6412,7 +6739,7 @@ Tu esi brīvs... Pagaidām...</div>
     };
 
     btnFightKlavs.onclick = () => {
-      if (!fightKlavsUnlocked) return;
+      if (!hasFightKlavsAccess()) return;
       playGameStartSound();
       openFightKlavsMode();
     };
@@ -6689,5 +7016,3 @@ Tu esi brīvs... Pagaidām...</div>
   </script>
 </body>
 </html>
-
-
