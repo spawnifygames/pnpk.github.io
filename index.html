@@ -4322,13 +4322,19 @@ Tu esi brīvs... Pagaidām...</div>
     let fightSequenceTimeouts = [];
     const fightKeys = new Set();
 
-    const KLAVS_PHOTO_URLS = [
-      "https://i.ibb.co/j92YLkFb/Whats-App-Image-2026-03-24-at-12-02-29-1.jpg",
-      "https://i.ibb.co/KpgXWk68/Whats-App-Image-2026-03-24-at-12-02-29-3.jpg",
-      "https://i.ibb.co/fd6FXk1N/Whats-App-Image-2026-03-24-at-12-02-29.jpg",
-      "https://i.ibb.co/yBWTbtFD/Whats-App-Image-2026-03-24-at-12-02-30.jpg",
-      "https://i.ibb.co/hRH3kyP6/Whats-App-Image-2026-03-24-at-12-02-29-2.jpg"
+    const KLAVS_PHOTO_SOURCES = [
+      "pnpk-klavs-imgur-1.jpeg",
+      "pnpk-klavs-imgur-2.jpeg",
+      "pnpk-klavs-imgur-3.jpeg",
+      "pnpk-klavs-imgur-4.jpeg",
+      "pnpk-klavs-imgur-5.jpeg"
     ];
+
+    function getKlavsPhotoUrl(index) {
+      const source = KLAVS_PHOTO_SOURCES[index];
+      if (!source) return "";
+      return source;
+    }
 
     const KLAVS_CAMERA_VISUALS = {
       0: { photo: 2, left: "49%", bottom: "8px", width: "104px", height: "142px", position: "center 22%", transform: "translateX(-50%) rotate(-2deg)" },
@@ -4339,17 +4345,17 @@ Tu esi brīvs... Pagaidām...</div>
     };
 
     function getCameraKlavsPhotoUrl() {
-      if (nightmareMode) return KLAVS_PHOTO_URLS[3] || "";
-      if (bonusMode) return KLAVS_PHOTO_URLS[2] || "";
-      return KLAVS_PHOTO_URLS[1] || "";
+      if (nightmareMode) return getKlavsPhotoUrl(3);
+      if (bonusMode) return getKlavsPhotoUrl(2);
+      return getKlavsPhotoUrl(1);
     }
 
     function getJumpscareKlavsPhotoUrl() {
-      return KLAVS_PHOTO_URLS[0] || "";
+      return getKlavsPhotoUrl(0);
     }
 
     function getFightKlavsPhotoUrl() {
-      return KLAVS_PHOTO_URLS[4] || "";
+      return getKlavsPhotoUrl(4);
     }
 
     function applyKlavsImageSet() {
