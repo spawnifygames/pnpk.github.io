@@ -2,10 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Five Nights at Klavs</title>
   <style>
     :root {
       --scene-brightness: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+      overscroll-behavior: none;
     }
 
     body {
@@ -16,11 +28,18 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding-top: 20px;
+      min-height: 100svh;
+      padding: 20px 10px 24px;
+    }
+
+    button,
+    input,
+    select {
+      touch-action: manipulation;
     }
     
     #game {
-      width: 960px;
+      width: min(960px, 100%);
     }
 
     #game,
@@ -77,8 +96,9 @@
 
     #screen {
       position: relative;
-      width: 960px;
-      height: 540px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
       border: 3px solid #0fdfaf;
       background: #000;
       overflow: hidden;
@@ -478,7 +498,7 @@
       padding: 4px 8px;
       background: rgba(0,0,0,0.8);
       border: 1px solid #0fdfaf;
-      max-width: 60%;
+      max-width: min(60%, calc(100% - 20px));
       font-size: 13px;
       z-index: 5;
     }
@@ -488,6 +508,7 @@
       margin-top: 6px;
       display: flex;
       gap: 8px;
+      flex-wrap: wrap;
     }
     #controls button {
       background: #001a14;
@@ -497,6 +518,7 @@
       cursor: pointer;
       font-family: monospace;
       font-size: 13px;
+      min-height: 44px;
     }
     #controls button:hover {
       background: #003326;
@@ -1134,7 +1156,7 @@
     }
 
     #fight-screen {
-      width: 960px;
+      width: min(960px, 100%);
       min-height: 720px;
       display: none;
       position: relative;
@@ -1352,13 +1374,88 @@
       pointer-events: none;
     }
 
+    #fight-enemy-slash {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 28px;
+      height: 148%;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 6;
+      transform: translate(-50%, -50%) scaleY(0.05) scaleX(0.22);
+      background:
+        linear-gradient(180deg,
+          rgba(255,35,35,0) 0%,
+          rgba(255,60,60,0.3) 10%,
+          rgba(255,78,78,0.96) 26%,
+          #ff2626 50%,
+          rgba(255,84,84,0.96) 74%,
+          rgba(255,52,52,0.24) 90%,
+          rgba(255,255,255,0) 100%);
+      box-shadow:
+        0 0 16px rgba(255,42,42,0.95),
+        0 0 38px rgba(255,24,24,0.42),
+        0 0 76px rgba(255,0,0,0.18);
+      filter: blur(0.18px);
+      border-radius: 999px;
+    }
+
+    #fight-enemy-slash::before,
+    #fight-enemy-slash::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    #fight-enemy-slash::before {
+      left: 50%;
+      top: -2%;
+      width: 8px;
+      height: 104%;
+      transform: translateX(-50%);
+      background:
+        linear-gradient(180deg,
+          rgba(255,255,255,0) 0%,
+          rgba(255,255,255,0.85) 18%,
+          #ffffff 50%,
+          rgba(255,255,255,0.85) 82%,
+          rgba(255,255,255,0) 100%);
+      box-shadow:
+        0 0 12px rgba(255,255,255,0.9),
+        0 0 26px rgba(255,120,120,0.32);
+    }
+
+    #fight-enemy-slash::after {
+      left: 50%;
+      top: -5%;
+      width: 60px;
+      height: 112%;
+      transform: translateX(-50%);
+      background:
+        linear-gradient(180deg,
+          rgba(255,0,0,0) 0%,
+          rgba(255,58,58,0.16) 18%,
+          rgba(255,72,72,0.56) 50%,
+          rgba(255,58,58,0.16) 82%,
+          rgba(255,0,0,0) 100%);
+      filter: blur(8px);
+      opacity: 0.95;
+    }
+
+    #fight-enemy-slash.active {
+      animation: fight-finish-slash 0.82s cubic-bezier(0.18, 0.88, 0.22, 1) forwards;
+    }
+
     .fight-dust-particle {
       position: absolute;
       width: 6px;
       height: 6px;
       background: #fff;
       opacity: 0;
-      animation: fight-dust-particle 1.45s linear forwards;
+      animation: fight-dust-particle 2.35s linear forwards;
     }
 
     #fight-enemy-portrait.dusting::before,
@@ -1367,11 +1464,11 @@
     #fight-enemy-portrait.dusting #fight-enemy-mouth,
     #fight-enemy-portrait.dusting #fight-enemy-core::before,
     #fight-enemy-portrait.dusting #fight-enemy-core::after {
-      animation: fight-dust-fade 1.35s linear forwards;
+      animation: fight-dust-fade 2.15s ease-out forwards;
     }
 
     #fight-enemy-portrait.photo-mode.dusting {
-      animation: fight-dust-fade 1.35s linear forwards;
+      animation: fight-dust-fade 2.15s ease-out forwards;
     }
 
     #fight-console {
@@ -1388,6 +1485,7 @@
       border: 4px solid #fff;
       background: #000;
       overflow: hidden;
+      touch-action: none;
     }
 
     #fight-mercy-wave {
@@ -1547,13 +1645,36 @@
 
     @keyframes fight-dust-fade {
       0% { opacity: 1; filter: blur(0); }
-      100% { opacity: 0; filter: blur(8px); }
+      100% { opacity: 0; filter: blur(12px); }
     }
 
     @keyframes fight-dust-particle {
       0% { opacity: 0; transform: translate(0, 0) scale(1); }
       10% { opacity: 1; }
-      100% { opacity: 0; transform: translate(var(--dx, 0), var(--dy, -40px)) scale(0.35); }
+      100% { opacity: 0; transform: translate(var(--dx, 0), var(--dy, -40px)) scale(0.18); }
+    }
+
+    @keyframes fight-finish-slash {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scaleY(0.05) scaleX(0.22);
+      }
+      18% {
+        opacity: 0.95;
+        transform: translate(-50%, -50%) scaleY(0.88) scaleX(0.74);
+      }
+      42% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scaleY(1.18) scaleX(1.08);
+      }
+      68% {
+        opacity: 0.94;
+        transform: translate(-50%, -50%) scaleY(1.3) scaleX(0.92);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scaleY(1.48) scaleX(0.7);
+      }
     }
 
     .fight-bullet {
@@ -1666,10 +1787,10 @@
       font-size: 24px;
       line-height: 1;
       letter-spacing: 0;
-      cursor: default;
+      cursor: pointer;
       padding: 12px 14px 12px 18px;
       transition: none;
-      pointer-events: none;
+      pointer-events: auto;
       user-select: none;
       min-height: 54px;
       text-align: left;
@@ -1996,6 +2117,245 @@
 
       #admin-controls {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      body {
+        padding-top: 74px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      #language-panel {
+        top: 8px;
+        right: 8px;
+        left: 8px;
+        width: auto;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      #title {
+        font-size: 18px;
+      }
+
+      #hud {
+        gap: 8px;
+        flex-wrap: wrap;
+        font-size: 12px;
+      }
+
+      #screen-text {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        max-width: calc(100% - 16px);
+        font-size: 11px;
+      }
+
+      #controls {
+        gap: 6px;
+      }
+
+      #controls button {
+        flex: 1 1 calc(50% - 6px);
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+
+      #log {
+        height: 92px;
+        font-size: 10px;
+      }
+
+      #camera-overlay {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        width: auto;
+        max-width: none;
+        transform: translateY(26px) scale(0.96);
+        transform-origin: bottom center;
+      }
+
+      #camera-overlay.open {
+        transform: translateY(0) scale(1);
+      }
+
+      #camera-feed {
+        height: clamp(132px, 34vw, 180px);
+      }
+
+      #camera-map-fnaf {
+        width: 100%;
+        height: 180px;
+      }
+
+      #start-title {
+        font-size: clamp(38px, 11vw, 64px);
+      }
+
+      #start-subtitle {
+        font-size: clamp(18px, 5.8vw, 24px);
+        margin-bottom: 26px;
+      }
+
+      #start-text {
+        max-width: min(90vw, 560px);
+        margin-bottom: 28px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      #start-actions {
+        width: min(100%, 420px);
+      }
+
+      #btn-start,
+      #btn-bonus-shift,
+      #btn-nightmare-shift,
+      #btn-fight-klavs,
+      #btn-how-to,
+      #btn-settings {
+        flex: 1 1 100%;
+        width: 100%;
+        padding: 14px 18px;
+        font-size: 18px;
+      }
+
+      #start-redeem {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        align-items: stretch;
+      }
+
+      #start-redeem-row {
+        width: 100%;
+      }
+
+      #btn-redeem {
+        flex: 0 0 auto;
+        min-height: 46px;
+      }
+
+      #redeem-input {
+        flex: 1 1 auto;
+        width: auto;
+        min-height: 46px;
+      }
+
+      #fight-screen {
+        min-height: 0;
+        padding: 14px 12px 16px;
+        border-width: 3px;
+      }
+
+      #fight-layout {
+        gap: 10px;
+      }
+
+      #fight-main {
+        gap: 10px;
+      }
+
+      #fight-enemy-stage {
+        gap: 8px;
+      }
+
+      #fight-enemy-portrait.photo-mode {
+        width: min(250px, 78vw);
+        min-height: 250px;
+        flex: 0 0 250px;
+        margin-top: 0;
+      }
+
+      #fight-arena {
+        width: 100%;
+        height: clamp(150px, 38vw, 184px);
+      }
+
+      #fight-dialogue,
+      #fight-attack-wrap,
+      #fight-subactions {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      #fight-player-row,
+      #fight-enemy-name-row {
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      #fight-player-name,
+      #fight-enemy-name {
+        font-size: 26px;
+      }
+
+      #fight-actions {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      #fight-footer {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .fight-action-btn,
+      .fight-subaction-btn {
+        min-height: 52px;
+        font-size: 18px;
+        padding: 10px 12px 10px 14px;
+      }
+
+      .fight-subaction-btn {
+        font-size: 16px;
+      }
+
+      #fight-death-panel {
+        width: min(100%, 540px);
+        padding: 18px 16px 22px;
+      }
+
+      #congrats-box,
+      #super-win-content,
+      #death-content,
+      #how-to-box,
+      #settings-box,
+      #admin-box {
+        width: min(92vw, 700px);
+      }
+    }
+
+    @media (max-width: 520px) {
+      #controls button {
+        flex-basis: 100%;
+      }
+
+      #camera-map-fnaf {
+        height: 166px;
+      }
+
+      #fight-screen {
+        padding: 12px 10px 14px;
+      }
+
+      #fight-enemy-portrait.photo-mode {
+        width: min(220px, 84vw);
+        min-height: 220px;
+        flex-basis: 220px;
+      }
+
+      #fight-actions,
+      #fight-footer {
+        grid-template-columns: 1fr;
+      }
+
+      #fight-player-readout,
+      #fight-enemy-readout {
+        min-width: 0;
+        font-size: 16px;
       }
     }
 
@@ -2380,6 +2740,7 @@ Tu esi brīvs... Pagaidām...</div>
             <div id="fight-enemy-core">
               <div id="fight-enemy-mouth"></div>
             </div>
+            <div id="fight-enemy-slash"></div>
             <div id="fight-enemy-dust"></div>
           </div>
         </div>
@@ -3269,6 +3630,7 @@ Tu esi brīvs... Pagaidām...</div>
     const fightEnemyReadoutEl = document.getElementById("fight-enemy-readout");
     const fightEnemyPortraitEl = document.getElementById("fight-enemy-portrait");
     const fightEnemyCoreEl = document.getElementById("fight-enemy-core");
+    const fightEnemySlashEl = document.getElementById("fight-enemy-slash");
     const fightEnemyDustEl = document.getElementById("fight-enemy-dust");
     const fightPlayerNameEl = document.getElementById("fight-player-name");
     const fightPlayerHpFillEl = document.getElementById("fight-player-hp-fill");
@@ -4320,6 +4682,7 @@ Tu esi brīvs... Pagaidām...</div>
     let fightDeathScreenVisible = false;
     let fightDeathCauseKey = "loseMessage";
     let fightSequenceTimeouts = [];
+    let activeFightArenaPointerId = null;
     const fightKeys = new Set();
 
     const KLAVS_PHOTO_SOURCES = [
@@ -4703,11 +5066,15 @@ Tu esi brīvs... Pagaidām...</div>
 
     function resetFightEffects() {
       clearFightSequenceTimeouts();
+      activeFightArenaPointerId = null;
       fightDeathScreenVisible = false;
       fightDeathCauseKey = "loseMessage";
       fightEndOverlayEl.classList.remove("active", "death-screen");
       fightEndHeartEl.classList.remove("breaking");
       fightEnemyPortraitEl.classList.remove("dusting");
+      if (fightEnemySlashEl) {
+        fightEnemySlashEl.classList.remove("active");
+      }
       fightEnemyDustEl.innerHTML = "";
       if (fightMercyWaveEl) {
         fightMercyWaveEl.classList.remove("active", "engulf");
@@ -4729,6 +5096,14 @@ Tu esi brīvs... Pagaidām...</div>
       if (bullet.el && bullet.el.parentNode) {
         bullet.el.parentNode.removeChild(bullet.el);
       }
+    }
+
+    function moveFightSoulToClientPoint(clientX, clientY) {
+      if (!fightModeActive || fightEnded || fightPhase !== "enemy-turn") return;
+      const rect = fightArenaEl.getBoundingClientRect();
+      const soulWidth = fightSoulEl.offsetWidth || 20;
+      const soulHeight = fightSoulEl.offsetHeight || 18;
+      setFightSoulPosition(clientX - rect.left - soulWidth / 2, clientY - rect.top - soulHeight / 2);
     }
 
     function stopFightAttackMeter() {
@@ -5008,14 +5383,17 @@ Tu esi brīvs... Pagaidām...</div>
       const originX = fightEnemyPortraitEl.clientWidth / 2;
       const originY = fightEnemyPortraitEl.clientHeight / 2;
 
-      for (let i = 0; i < 28; i += 1) {
+      for (let i = 0; i < 38; i += 1) {
         const particle = document.createElement("div");
         particle.className = "fight-dust-particle";
+        const size = 4 + Math.random() * 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
         particle.style.left = `${originX + (Math.random() - 0.5) * 84}px`;
         particle.style.top = `${originY + (Math.random() - 0.5) * 70}px`;
-        particle.style.setProperty("--dx", `${(Math.random() - 0.5) * 160}px`);
-        particle.style.setProperty("--dy", `${-30 - Math.random() * 120}px`);
-        particle.style.animationDelay = `${Math.random() * 0.18}s`;
+        particle.style.setProperty("--dx", `${(Math.random() - 0.5) * 190}px`);
+        particle.style.setProperty("--dy", `${-44 - Math.random() * 150}px`);
+        particle.style.animationDelay = `${Math.random() * 0.28}s`;
         fightEnemyDustEl.appendChild(particle);
       }
     }
@@ -5031,13 +5409,23 @@ Tu esi brīvs... Pagaidām...</div>
       clearFightSubactions();
       clearFightSequenceTimeouts();
       fightEndOverlayEl.classList.remove("active", "death-screen");
-      fightEnemyPortraitEl.classList.add("dusting");
-      spawnFightDustEffect();
       setFightDialogue("dustMessage");
       renderFightPanels();
+
+      if (fightEnemySlashEl) {
+        fightEnemySlashEl.classList.remove("active");
+        void fightEnemySlashEl.offsetWidth;
+        fightEnemySlashEl.classList.add("active");
+      }
+
+      queueFightSequence(() => {
+        fightEnemyPortraitEl.classList.add("dusting");
+        spawnFightDustEffect();
+      }, 180);
+
       queueFightSequence(() => {
         returnToStartScreen();
-      }, 1300);
+      }, 2550);
     }
 
     function startFightDeathSequence(messageKey = "loseMessage") {
@@ -5161,45 +5549,126 @@ Tu esi brīvs... Pagaidām...</div>
       return bullet;
     }
 
+    function spawnFightSideSweep(arenaWidth, arenaHeight, speed, options = {}) {
+      const count = options.count ?? (8 + Math.floor(Math.random() * 4));
+      const stagger = options.stagger ?? 0;
+      const fromLeft = options.fromLeft ?? (Math.random() < 0.5);
+      const verticalDrift = options.verticalDrift ?? (34 + Math.random() * 34);
+
+      for (let i = 0; i < count; i += 1) {
+        const y = 12 + Math.random() * Math.max(12, arenaHeight - 24);
+        const vx = (fromLeft ? 1 : -1) * (speed + Math.random() * 50 + i * stagger);
+        const vy = (Math.random() - 0.5) * verticalDrift;
+        spawnFightBullet(fromLeft ? -22 : arenaWidth + 22, y, vx, vy, 11.2 + Math.random() * 1.1);
+      }
+    }
+
+    function spawnFightRainVolley(arenaWidth, arenaHeight, speed, options = {}) {
+      const count = options.count ?? (9 + Math.floor(Math.random() * 4));
+      const fromTop = options.fromTop ?? (Math.random() < 0.72);
+      const horizontalDrift = options.horizontalDrift ?? (24 + Math.random() * 20);
+
+      for (let i = 0; i < count; i += 1) {
+        const x = 12 + Math.random() * Math.max(12, arenaWidth - 24);
+        const vy = (fromTop ? 1 : -1) * (speed + Math.random() * 46);
+        const vx = (Math.random() - 0.5) * horizontalDrift;
+        spawnFightBullet(x, fromTop ? -22 : arenaHeight + 22, vx, vy, 9.6 + Math.random());
+      }
+    }
+
+    function spawnFightCornerAmbush(arenaWidth, arenaHeight, speed, options = {}) {
+      const count = options.count ?? (7 + Math.floor(Math.random() * 3));
+      const spread = options.spread ?? 118;
+      const corners = [
+        { x: -22, y: -22 },
+        { x: arenaWidth + 22, y: -22 },
+        { x: -22, y: arenaHeight + 22 },
+        { x: arenaWidth + 22, y: arenaHeight + 22 }
+      ];
+
+      for (let i = 0; i < count; i += 1) {
+        const corner = corners[Math.floor(Math.random() * corners.length)];
+        const dx = arenaWidth / 2 - corner.x + (Math.random() - 0.5) * spread;
+        const dy = arenaHeight / 2 - corner.y + (Math.random() - 0.5) * spread;
+        const length = Math.max(1, Math.hypot(dx, dy));
+        const burstSpeed = speed + 42 + Math.random() * 54;
+        spawnFightBullet(corner.x, corner.y, (dx / length) * burstSpeed, (dy / length) * burstSpeed, 10.8 + Math.random() * 1.1);
+      }
+    }
+
+    function spawnFightCrossfire(arenaWidth, arenaHeight, speed, options = {}) {
+      const countPerSide = options.countPerSide ?? (3 + Math.floor(Math.random() * 2));
+      const verticalBand = options.verticalBand ?? (arenaHeight * 0.56);
+      const centerOffset = (arenaHeight - verticalBand) / 2;
+
+      for (let i = 0; i < countPerSide; i += 1) {
+        const lane = centerOffset + (i + 0.5) * (verticalBand / countPerSide);
+        const y = lane + (Math.random() - 0.5) * 12;
+        const x = 16 + Math.random() * Math.max(16, arenaWidth - 32);
+        spawnFightBullet(-22, y, speed + Math.random() * 32, (Math.random() - 0.5) * 18, 11.2);
+        spawnFightBullet(arenaWidth + 22, y, -(speed + Math.random() * 32), (Math.random() - 0.5) * 18, 11.2);
+        if (Math.random() < 0.78) {
+          spawnFightBullet(x, -22, (Math.random() - 0.5) * 20, speed + Math.random() * 32, 9.8);
+        }
+        if (Math.random() < 0.78) {
+          spawnFightBullet(x, arenaHeight + 22, (Math.random() - 0.5) * 20, -(speed + Math.random() * 32), 9.8);
+        }
+      }
+    }
+
+    function spawnFightSnapBurst(arenaWidth, arenaHeight, speed, options = {}) {
+      const clusterCount = options.clusterCount ?? (4 + Math.floor(Math.random() * 3));
+      const targetX = options.targetX ?? (arenaWidth * (0.2 + Math.random() * 0.6));
+      const targetY = options.targetY ?? (arenaHeight * (0.22 + Math.random() * 0.56));
+
+      for (let i = 0; i < clusterCount; i += 1) {
+        const edge = Math.floor(Math.random() * 4);
+        const spawn = edge === 0
+          ? { x: -22, y: Math.random() * arenaHeight }
+          : edge === 1
+            ? { x: arenaWidth + 22, y: Math.random() * arenaHeight }
+            : edge === 2
+              ? { x: Math.random() * arenaWidth, y: -22 }
+              : { x: Math.random() * arenaWidth, y: arenaHeight + 22 };
+        const dx = targetX - spawn.x + (Math.random() - 0.5) * 42;
+        const dy = targetY - spawn.y + (Math.random() - 0.5) * 42;
+        const length = Math.max(1, Math.hypot(dx, dy));
+        const burstSpeed = speed + 48 + Math.random() * 58;
+        spawnFightBullet(spawn.x, spawn.y, (dx / length) * burstSpeed, (dy / length) * burstSpeed, 10.6 + Math.random() * 0.9);
+      }
+    }
+
     function buildFightBullets() {
       clearFightBullets();
       const arenaWidth = fightArenaEl.clientWidth;
       const arenaHeight = fightArenaEl.clientHeight;
       const speedScale = fightFlashTurns > 0 ? 0.86 : 1;
-      const baseSpeed = (122 + fightTurn * 18) * speedScale;
-      const pattern = fightTurn % 3;
+      const baseSpeed = (118 + fightTurn * 16 + Math.random() * 22) * speedScale;
+      const patternPool = [
+        () => spawnFightSideSweep(arenaWidth, arenaHeight, baseSpeed, { stagger: 2.8 }),
+        () => spawnFightRainVolley(arenaWidth, arenaHeight, baseSpeed * 0.96),
+        () => spawnFightCornerAmbush(arenaWidth, arenaHeight, baseSpeed * 0.98),
+        () => spawnFightCrossfire(arenaWidth, arenaHeight, baseSpeed * 0.94),
+        () => spawnFightSnapBurst(arenaWidth, arenaHeight, baseSpeed * 1.03)
+      ];
 
-      if (pattern === 0) {
-        for (let i = 0; i < 14; i++) {
-          const fromLeft = i % 2 === 0;
-          const y = 14 + Math.random() * (arenaHeight - 28);
-          const vx = (fromLeft ? 1 : -1) * (baseSpeed + Math.random() * 60);
-          const vy = (Math.random() - 0.5) * 70;
-          spawnFightBullet(fromLeft ? -18 : arenaWidth + 18, y, vx, vy, 12);
-        }
-      } else if (pattern === 1) {
-        for (let i = 0; i < 16; i++) {
-          const x = 14 + Math.random() * (arenaWidth - 28);
-          const fromTop = i % 3 !== 0;
-          const vy = (fromTop ? 1 : -1) * (baseSpeed + Math.random() * 50);
-          const vx = (Math.random() - 0.5) * 46;
-          spawnFightBullet(x, fromTop ? -18 : arenaHeight + 18, vx, vy, 10);
-        }
-      } else {
-        for (let i = 0; i < 12; i++) {
-          const edge = i % 4;
-          let x = 0;
-          let y = 0;
-          if (edge === 0) { x = -18; y = Math.random() * arenaHeight; }
-          if (edge === 1) { x = arenaWidth + 18; y = Math.random() * arenaHeight; }
-          if (edge === 2) { x = Math.random() * arenaWidth; y = -18; }
-          if (edge === 3) { x = Math.random() * arenaWidth; y = arenaHeight + 18; }
-          const dx = arenaWidth / 2 - x + (Math.random() - 0.5) * 90;
-          const dy = arenaHeight / 2 - y + (Math.random() - 0.5) * 90;
-          const length = Math.max(1, Math.hypot(dx, dy));
-          spawnFightBullet(x, y, (dx / length) * (baseSpeed + 55), (dy / length) * (baseSpeed + 55), 12);
+      const duration = 2700 + Math.random() * 900 + Math.min(520, fightTurn * 70);
+      const burstCount = 2 + Math.floor(Math.random() * 2) + (fightTurn >= 5 ? 1 : 0);
+      const chosenPatterns = [];
+      while (chosenPatterns.length < burstCount) {
+        const nextPattern = patternPool[Math.floor(Math.random() * patternPool.length)];
+        if (chosenPatterns.length === 0 || nextPattern !== chosenPatterns[chosenPatterns.length - 1] || Math.random() < 0.35) {
+          chosenPatterns.push(nextPattern);
         }
       }
+
+      const bursts = chosenPatterns.map((spawnPattern, index) => ({
+        at: index === 0 ? 0 : 440 + index * (320 + Math.random() * 240),
+        fire: spawnPattern
+      }));
+
+      bursts[0].fire();
+      return { duration, bursts };
     }
 
     function startFightEnemyTurn() {
@@ -5212,8 +5681,10 @@ Tu esi brīvs... Pagaidām...</div>
         (fightArenaEl.clientWidth - (fightSoulEl.offsetWidth || 20)) / 2,
         (fightArenaEl.clientHeight - (fightSoulEl.offsetHeight || 18)) / 2
       );
-      buildFightBullets();
-      fightEnemyTurnUntil = performance.now() + 3200;
+      const attackPlan = buildFightBullets();
+      const turnStartedAt = performance.now();
+      const pendingBursts = (attackPlan && attackPlan.bursts ? attackPlan.bursts.slice(1) : []).sort((a, b) => a.at - b.at);
+      fightEnemyTurnUntil = turnStartedAt + (attackPlan && attackPlan.duration ? attackPlan.duration : 3200);
       fightLastEnemyFrame = 0;
 
       const step = (timestamp) => {
@@ -5221,6 +5692,14 @@ Tu esi brīvs... Pagaidām...</div>
         if (!fightLastEnemyFrame) fightLastEnemyFrame = timestamp;
         const dt = Math.min(0.032, (timestamp - fightLastEnemyFrame) / 1000);
         fightLastEnemyFrame = timestamp;
+        const elapsed = timestamp - turnStartedAt;
+
+        while (pendingBursts.length && elapsed >= pendingBursts[0].at) {
+          const burst = pendingBursts.shift();
+          if (burst && typeof burst.fire === "function") {
+            burst.fire();
+          }
+        }
 
         const soulSpeed = 145;
         let nextX = fightSoulX;
@@ -6832,6 +7311,49 @@ Tu esi brīvs... Pagaidām...</div>
       playButtonSound();
       returnToStartScreen();
     };
+
+    fightArenaEl.addEventListener("pointerdown", event => {
+      if (fightPhase === "attack" && !fightEnded) {
+        event.preventDefault();
+        resolveFightAttack();
+        return;
+      }
+
+      if (fightPhase !== "enemy-turn" || fightEnded) return;
+      activeFightArenaPointerId = event.pointerId;
+      try {
+        fightArenaEl.setPointerCapture(event.pointerId);
+      } catch (error) {
+        // Ignore capture issues on browsers that do not support it here.
+      }
+      event.preventDefault();
+      moveFightSoulToClientPoint(event.clientX, event.clientY);
+    });
+
+    fightArenaEl.addEventListener("pointermove", event => {
+      if (fightPhase !== "enemy-turn" || fightEnded) return;
+      const draggingMouse = event.pointerType === "mouse" && (event.buttons & 1) === 1;
+      const activePointer = activeFightArenaPointerId !== null && activeFightArenaPointerId === event.pointerId;
+      const touchLikePointer = event.pointerType !== "mouse";
+      if (!draggingMouse && !activePointer && !touchLikePointer) return;
+      if (activeFightArenaPointerId !== null && activeFightArenaPointerId !== event.pointerId && !draggingMouse) return;
+      event.preventDefault();
+      moveFightSoulToClientPoint(event.clientX, event.clientY);
+    });
+
+    ["pointerup", "pointercancel", "pointerleave"].forEach(type => {
+      fightArenaEl.addEventListener(type, event => {
+        if (activeFightArenaPointerId === event.pointerId) {
+          activeFightArenaPointerId = null;
+        }
+      });
+    });
+
+    fightAttackWrapEl.addEventListener("pointerdown", event => {
+      if (fightPhase !== "attack" || fightEnded) return;
+      event.preventDefault();
+      resolveFightAttack();
+    });
 
     btnNextNight.onclick = () => {
       congratsScreen.style.display = "none";
