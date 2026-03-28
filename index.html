@@ -4322,20 +4322,20 @@ Tu esi brīvs... Pagaidām...</div>
     let fightSequenceTimeouts = [];
     const fightKeys = new Set();
 
-    function toFileUrl(path) {
-      const normalized = String(path || "").replace(/\\/g, "/");
-      const parts = normalized.split("/");
-      if (!parts.length) return "";
-      const drive = parts.shift();
-      return `file:///${drive}/${parts.map(part => encodeURIComponent(part)).join("/")}`;
+    function toAssetUrl(filename) {
+      try {
+        return new URL(String(filename || ""), window.location.href).href;
+      } catch (error) {
+        return String(filename || "");
+      }
     }
 
     const KLAVS_PHOTO_URLS = [
-      toFileUrl("C:\\Users\\user\\Downloads\\WhatsApp Image 2026-03-24 at 12.02.29 (1).jpeg"),
-      toFileUrl("C:\\Users\\user\\Downloads\\WhatsApp Image 2026-03-24 at 12.02.29 (3).jpeg"),
-      toFileUrl("C:\\Users\\user\\Downloads\\WhatsApp Image 2026-03-24 at 12.02.30.jpeg"),
-      toFileUrl("C:\\Users\\user\\Downloads\\WhatsApp Image 2026-03-24 at 12.02.29.jpeg"),
-      toFileUrl("C:\\Users\\user\\Downloads\\WhatsApp Image 2026-03-24 at 12.02.29 (2).jpeg")
+      toAssetUrl("pnpk-klavs-1.jpeg"),
+      toAssetUrl("pnpk-klavs-2.jpeg"),
+      toAssetUrl("pnpk-klavs-3.jpeg"),
+      toAssetUrl("pnpk-klavs-4.jpeg"),
+      toAssetUrl("pnpk-klavs-5.jpeg")
     ];
 
     const KLAVS_CAMERA_VISUALS = {
