@@ -7534,6 +7534,26 @@ Tu esi brīvs... Pagaidām...</div>
 
     // Start screen is shown by default, game starts when player clicks the button
   </script>
-  <audio id="bgm" src="Piecas Naktis pie Klāva.mp3" autoplay loop style="display:none;"></audio>
+
+const bgm = document.getElementById("bgm");
+
+function applyBgmVolume() {
+  if (bgm) bgm.volume = (gameSettings?.volume ?? 70) / 100;
+}
+
+applyBgmVolume();
+
+settingsVolumeEl.addEventListener("input", () => {
+  applyBgmVolume();
+});
+
+document.addEventListener("click", () => {
+  if (bgm && bgm.paused) bgm.play().catch(() => {});
+}, { once: true });
+
+document.addEventListener("keydown", () => {
+  if (bgm && bgm.paused) bgm.play().catch(() => {});
+}, { once: true });
+  
 </body>
 </html>
